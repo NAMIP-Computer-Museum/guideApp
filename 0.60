@@ -1,0 +1,26 @@
+Usage: index <command> [options]
+
+Options:
+  --version                                  Print CLI version
+  --verbose                                  Increase logging verbosity
+  -h, --help                                 output usage information
+
+Commands:
+  init [options] <projectName>               Initialize a new React Native project named <projectName> in a directory of the same name.
+  doctor [options]                           [EXPERIMENTAL] Diagnose and fix common Node.js, iOS, Android & React Native issues.
+  start [options]                            starts the webserver
+  bundle [options]                           builds the javascript bundle for offline use
+  ram-bundle [options]                       builds javascript as a "Random Access Module" bundle for offline use
+  link [options] [packageName]               links assets and optionally native modules
+  unlink [options] <packageName>             unlink native dependency
+  install <packageName>                      install and link native dependencies
+  uninstall <packageName>                    uninstall and unlink native dependencies
+  upgrade [version]                          Upgrade your app's template files to the specified or latest npm version using `rn-diff-purge` project. Only valid semver versions are allowed.
+  info                                       Get relevant version info about OS, toolchain and libraries
+  config                                     Print CLI configuration
+  doctor [options]                           [EXPERIMENTAL] Diagnose and fix common Node.js, iOS, Android & React Native issues.
+  profile-hermes [options] [destinationDir]  Pull and convert a Hermes tracing profile to Chrome tracing profile, then store it in the directory <destinationDir> of the local machine
+  log-ios                                    starts iOS device syslog tail
+  run-ios [options]                          builds your app and starts it on iOS simulator
+  log-android                                starts logkitty
+  run-android [options]                      builds your app and starts it on a connected Android emulator or device
