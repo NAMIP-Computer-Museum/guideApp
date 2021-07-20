@@ -4,7 +4,7 @@ import {StyleSheet, Text, View ,Pressable,ImageBackground} from 'react-native';
 import {IconButton} from 'react-native-paper'
 import i18n from '../Language/Translate'
 
-//Test bonjour
+//Alors bonjour
 
 class Acceuil extends React.Component{
   render(){
