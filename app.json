@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "EssaiApp",
-    "slug": "EssaiApp",
+    "name": "guideApp",
+    "slug": "guideApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
