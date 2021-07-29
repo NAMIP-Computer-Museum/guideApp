@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet, Text, View ,Pressable,ImageBackground} from 'react-native';
-import {IconButton} from 'react-native-paper'
+import {StyleSheet, Text, View ,Pressable,ImageBackground,TouchableHighlight,Image} from 'react-native';
+//import {IconButton} from 'react-native-paper'
 import i18n from '../Language/Translate'
 
 //Alors bonjour
@@ -14,10 +14,14 @@ class Acceuil extends React.Component{
     }
 
     return (
-        <ImageBackground style={styles.image} source = {require('./fond.jpg')}>
+        <ImageBackground style={styles.ImageBackground} source = {require('../assets/accueil/fond.jpg')}>
         <View style={styles.main_top}>
-          <IconButton style={styles.icon} size={30} color='white' icon={require('./fr.png')} onPress={() => {changeLangue("fr-FR")}}/>
-          <IconButton style={styles.icon} size={30} color='white' icon={require('./en.png')} onPress={() => {changeLangue("en")}}/>
+          <TouchableHighlight style = {styles.icon} onPress={() => {changeLangue("fr-FR")}}>
+            <Image style={styles.image} source = {require('../assets/accueil/france.png')}/>
+          </TouchableHighlight>
+          <TouchableHighlight style = {styles.icon} onPress={() => {changeLangue("en")}}>
+            <Image style={styles.image} source = {require('../assets/accueil/united-kingdom.png')}/>
+          </TouchableHighlight>
           <Text style={styles.text}>{i18n.t('acceuilTitre')} </Text>
         </View>
         <View style = {styles.main_bottom}>
@@ -34,14 +38,19 @@ class Acceuil extends React.Component{
 }
 
 const styles = StyleSheet.create({
-  image:{
+  ImageBackground:{
     flex : 1,
   },
   main_top:{
     flex : 1
   },
   icon:{
-    top : 30,
+    top : 40,
+    left: 10
+  },
+  image:{
+    width:40,
+    height:40
   },
   text:{
     fontSize : 40,

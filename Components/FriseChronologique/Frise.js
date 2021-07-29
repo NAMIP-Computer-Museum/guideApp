@@ -32,7 +32,7 @@ class Frise extends React.Component{
         await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}SQLite`, { intermediates: true });
       } catch(err) { Sentry.captureException(err) }
     };
-    await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/Ordinateur.db")).uri,
+    await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/Ordinateur.db")).uri,
     `${FileSystem.documentDirectory}SQLite/ordinateur.db`);
     db = SQLite.openDatabase("ordinateur.db")
 
