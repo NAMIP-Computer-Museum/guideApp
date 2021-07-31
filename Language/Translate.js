@@ -3,15 +3,17 @@ import i18n from 'i18n-js'
 i18n.translations = {
   "fr-FR" : {
     acceuilTitre : "Exposition Micro-Ordinateur NAM-IP",
-    acceuilBoutonFrise : "Frise Chronologique",
-    acceuilBoutonVideo : "Video",
-    friseTexte :  "Frise Chronologique",
+    acceuilBoutonFrise : "Ligne du temps",
+    acceuilBoutonVideo : "Videos",
+    acceuilBoutonQRCode : "Lire QRCode",
+    friseTexte :  "Ligne du Temps",
     listeVideoTexte : "Liste de Vidéos"
   },
   "en" : {
     acceuilTitre : "NAM-IP MicroComputer Exposure",
     acceuilBoutonFrise : "Timeline",
-    acceuilBoutonVideo : "Video",
+    acceuilBoutonVideo : "Videos",
+    acceuilBoutonQRCode : "QRCode Scan",
     friseTexte : "Timeline",
     listeVideoTexte : "Video List"
   }

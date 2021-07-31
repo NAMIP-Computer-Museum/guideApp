@@ -4,11 +4,10 @@ import { StyleSheet, Text, View ,Pressable,Image,TouchableOpacity} from 'react-n
 import Timeline from 'react-native-timeline-flatlist'
 import * as FileSystem from 'expo-file-system'
 import {Asset} from 'expo-asset'
-
-import ordinateur from '../../Data/DonneesOrdinateur/DonneesOrdiFr.js'
-import computer from '../../Data//DonneesOrdinateur/DonneesOrdiEn.js'
-import i18n from '../../Language/Translate'
 import * as SQLite from 'expo-sqlite'
+//import ordinateur from '../../Data/DonneesOrdinateur/DonneesOrdiFr.js'
+//import computer from '../../Data//DonneesOrdinateur/DonneesOrdiEn.js'
+import i18n from '../../Language/Translate'
 
 let db;
 
@@ -34,14 +33,13 @@ class Frise extends React.Component{
     };
     await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/Ordinateur.db")).uri,
     `${FileSystem.documentDirectory}SQLite/ordinateur.db`);
-    db = SQLite.openDatabase("ordinateur.db")
-
-    let requete
+    db = SQLite.openDatabase("ordinateur.db");
+    let requete;
     if(this.testLocale() === 'EN'){
-      requete = 'Select * from ordinateurEN'
+      requete = 'Select * from ordinateurEN';
     }
     else{
-      requete = 'Select * from ordinateurFR'
+      requete = 'Select * from ordinateurFR';
     }
     db.transaction((tx) => {
         tx.executeSql(requete,null,
@@ -68,7 +66,7 @@ class Frise extends React.Component{
         desc = (
           <View style={styles.main_content}>
             <Image source={{uri: rowData.imageUrl}} style={styles.image}/>
-            <Text style={[styles.description]}>{rowData.description}</Text>
+            <Text style={[styles.description]} numberOfLines = {5}>{rowData.description}</Text>
         </View>
       )
       return (
@@ -148,7 +146,7 @@ const styles = StyleSheet.create({
     flex:1,
     paddingTop : 50,
     paddingBottom :50,
-    borderRadius : 10
+    borderRadius : 25
   }
 })
 

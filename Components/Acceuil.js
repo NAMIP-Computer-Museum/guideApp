@@ -1,10 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet, Text, View ,Pressable,ImageBackground,TouchableHighlight,Image} from 'react-native';
-//import {IconButton} from 'react-native-paper'
 import i18n from '../Language/Translate'
 
-//Alors bonjour
 
 class Acceuil extends React.Component{
   render(){
@@ -30,6 +28,9 @@ class Acceuil extends React.Component{
           </Pressable>
           <Pressable style={styles.button_Video} onPress = {() => {this.props.navigation.navigate("ListeVideo")}}>
             <Text style={styles.text_button}> {i18n.t('acceuilBoutonVideo')} </Text>
+          </Pressable>
+          <Pressable style={styles.button_QRCode} onPress = {() => {this.props.navigation.navigate("QRCodeScan")}}>
+            <Text style={styles.text_button}> {i18n.t('acceuilBoutonQRCode')} </Text>
           </Pressable>
         </View>
         </ImageBackground>
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     width : 200,
     height : 50,
     top : 100,
-    marginVertical : 10,
+    marginVertical : 5,
     alignSelf : 'center',
     justifyContent : 'center',
     alignItems : 'center'
@@ -81,6 +82,18 @@ const styles = StyleSheet.create({
     width : 200,
     height : 50,
     top:100,
+    marginVertical : 5,
+    alignSelf : 'center',
+    justifyContent : 'center',
+    alignItems : 'center'
+  },
+  button_QRCode:{
+    backgroundColor : 'white',
+    borderRadius : 6,
+    width : 200,
+    height : 50,
+    top:100,
+    marginVertical : 5,
     alignSelf : 'center',
     justifyContent : 'center',
     alignItems : 'center'

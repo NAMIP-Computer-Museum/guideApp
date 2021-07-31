@@ -6,6 +6,7 @@ import Detail from '../Components/FriseChronologique/Detail'
 import AfficheImage from '../Components/FriseChronologique/AfficheImage'
 import ListeVideo from '../Components/Video/ListeVideo'
 import AfficheVideo from '../Components/Video/AfficheVideo'
+import QRCode from '../Components/QRCode/QRCodeScan'
 import i18n from '../Language/Translate'
 
 
@@ -42,6 +43,12 @@ const Navigation = createStackNavigator({
     },
     AfficheVideo:{
       screen : AfficheVideo,
+      navigationOptions:{
+        title : ""
+      }
+    },
+    QRCodeScan:{
+      screen : QRCode,
       navigationOptions:{
         title : ""
       }
