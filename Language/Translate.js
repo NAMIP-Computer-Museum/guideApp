@@ -7,7 +7,11 @@ i18n.translations = {
     acceuilBoutonVideo : "Videos",
     acceuilBoutonQRCode : "Lire QRCode",
     friseTexte :  "Ligne du Temps",
-    listeVideoTexte : "Liste de Vidéos"
+    listeVideoTexte : "Liste de Vidéos",
+    permissionCamera : "Autorisation d'utiliser la caméra",
+    refusCamera : "Refus de la Caméra",
+    erreurScan : "Aucun ID reconnu",
+    scanAgain : "Rescanner"
   },
   "en" : {
     acceuilTitre : "NAM-IP MicroComputer Exposure",
@@ -15,7 +19,11 @@ i18n.translations = {
     acceuilBoutonVideo : "Videos",
     acceuilBoutonQRCode : "QRCode Scan",
     friseTexte : "Timeline",
-    listeVideoTexte : "Video List"
+    listeVideoTexte : "Video List",
+    permissionCamera : "Requesting for camera permission",
+    refusCamera : "No access to camera",
+    erreurScan : "No ID match",
+    scanAgain : "Scan Again"
   }
 }
 

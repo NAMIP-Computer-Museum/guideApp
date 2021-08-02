@@ -1,31 +1,53 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet,View} from 'react-native'
+import {StyleSheet,View,Dimensions} from 'react-native'
 import {Video} from 'expo-av'
-import VideoPlayer from 'expo-video-player'
+import * as ScreenOrientation from 'expo-screen-orientation'
+
+
 class AfficheVideo extends React.Component{
   render(){
     //console.log(this.props.navigation.state.params.videoUrl)
     const videoURL = this.props.navigation.state.params.videoUrl
     return(
       <View style={styles.main}>
-      <VideoPlayer
-        videoProps={{
-          shouldPlay: true,
-          timeVisible : true,
-          resizeMode: Video.RESIZE_MODE_CONTAIN,
-          source:{uri:videoURL}
-        }}
+      <Video
+        source = {{uri : videoURL}}
+        //ref = {videoRef}
+        shouldPlay
+        style = {styles.video}
+        resizeMode="contain"
+        useNativeControls
+        isLooping
+        onFullscreenUpdate={onFullscreenUpdate}
       />
       </View>
     )
   }
 }
 
+const onFullscreenUpdate = async ({fullscreenUpdate}: VideoFullscreenUpdateEvent) => {
+    switch (fullscreenUpdate) {
+        case Video.FULLSCREEN_UPDATE_PLAYER_DID_PRESENT:
+            await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE)
+            break;
+        case Video.FULLSCREEN_UPDATE_PLAYER_WILL_DISMISS:
+            await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT)
+            break;
+    }
+}
+
 const styles = StyleSheet.create({
   main:{
     flex:1,
-    justifyContent:'center'
+    backgroundColor : 'black',
+    justifyContent:'center',
+    alignItems : 'center'
+  },
+  video:{
+    flex:1,
+    height:"100%",
+    width : "100%"
   }
 })
 

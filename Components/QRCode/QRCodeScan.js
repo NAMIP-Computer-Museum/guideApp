@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button,Pressable } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as FileSystem from 'expo-file-system'
 import {Asset} from 'expo-asset'
@@ -55,7 +55,7 @@ export default function QRCode({navigation:{ navigate }}) {
               navigate("Detail",{dataOrdinateur : tableau[0]})
             }
             else{
-              alert("Aucun ID reconnue")
+              alert(i18n.t("erreurScan"))
             }
           },
           (tx,error)=>{
@@ -66,10 +66,10 @@ export default function QRCode({navigation:{ navigate }}) {
   }
 
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return <Text>{i18n.t("permissionCamera")}</Text>;
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return <Text>{i18n.t("refusCamera")}</Text>;
   }
 
   return (
@@ -78,7 +78,9 @@ export default function QRCode({navigation:{ navigate }}) {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+      {scanned && <Pressable style={styles.button_Scan} onPress = {() => setScanned(false)}>
+                    <Text style={styles.text_button}> {i18n.t("scanAgain")} </Text>
+                  </Pressable>}
     </View>
   );
 }
@@ -89,4 +91,20 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
   },
+  button_Scan:{
+    backgroundColor : 'white',
+    borderRadius : 6,
+    width : 200,
+    height : 50,
+    //top : 100,
+    marginVertical : 5,
+    alignSelf : 'center',
+    justifyContent : 'center',
+    alignItems : 'center'
+  },
+  text_button:{
+    textAlign : 'center',
+    fontSize : 20,
+    fontWeight : 'bold'
+  }
 });
