@@ -24,13 +24,17 @@ class ListeVideo extends React.Component{
     render(){
       return (
         <View style={styles.main}>
-          <Text style={styles.text}>{i18n.t('listeVideoTexte')}</Text>
-          <FlatList
-              style = {styles.flatlist}
-              data={this.testLocale()}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem= {({item}) => <VideoItem video={item} lireVideo = {this.lireVideo}/>}
-          />
+          <View style = {styles.titre}>
+            <Text style={styles.text}>{i18n.t('listeVideoTexte')}</Text>
+          </View>
+          <View style = {styles.flatlist}>
+            <FlatList
+              //style = {styles.flatlist}
+                data={this.testLocale()}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem= {({item}) => <VideoItem video={item} lireVideo = {this.lireVideo}/>}
+            />
+          </View>
         </View>
       )
     }
@@ -40,15 +44,22 @@ const styles = StyleSheet.create({
   main:{
     flex: 1
     },
+  titre:{
+    flex : 1,
+    justifyContent : 'center',
+    alignItems : 'center',
+    borderWidth : 2,
+    borderColor : 'black'
+  },
   text:{
-    flex:0.1,
     textAlign : 'center',
-    backgroundColor : 'black',
-    color : 'white',
+    color : 'black',
     fontWeight: 'bold',
-    fontSize : 40,
-    paddingTop : 10,
-    paddingBottom : 15
+    fontSize : 30,
+    margin : 5,
+  },
+  flatlist:{
+    flex : 9
   }
 })
 

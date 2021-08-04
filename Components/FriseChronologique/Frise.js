@@ -19,6 +19,16 @@ class Frise extends React.Component{
     }
     this.fetchOrdinateur = this.fetchOrdinateur.bind(this)
     this.fetchOrdinateur()
+    this.colorPicker = this.colorPicker.bind(this)
+  }
+
+  testLocale(){
+    if(i18n.locale === 'en'){
+      //console.log(computer)
+      return ('EN')
+    }
+    return ('FR')
+    //console.log(ordinateur)
   }
 
   fetchOrdinateur = async() =>{
@@ -47,7 +57,8 @@ class Frise extends React.Component{
             var taille = results.rows.length
             let tableau = []
             for(let i=0;i<taille;i++){
-              tableau.push(results.rows.item(i))
+              const data = this.colorPicker(results.rows.item(i))
+              tableau.push(data)
             }
             //console.log(tableau)
             this.setState({data : tableau})
@@ -77,30 +88,55 @@ class Frise extends React.Component{
     )
   }
 
-  testLocale(){
-    if(i18n.locale === 'en'){
-      //console.log(computer)
-      return ('EN')
-    }
-    return ('FR')
-    //console.log(ordinateur)
-  }
-
     onEventPress = (data) => {
       //console.log(data)
       this.props.navigation.navigate("Detail",{dataOrdinateur: data})
     }
+
+    colorPicker = (data) => {
+      const date = parseInt(data.time);
+      if(date <= 1980){
+        data['lineColor'] = 'rgb(47,250,141)'
+        data['circleColor'] = 'rgb(47,250,141)'
+      }
+      else if(date > 1980 && date <= 1990){
+        data['lineColor'] = 'rgb(248,50,185)'
+        data['circleColor'] = 'rgb(248,50,185)'
+      }
+      else if (date > 1990){
+        data['lineColor'] = 'rgb(250,190,27)'
+        data['circleColor'] = 'rgb(250,190,27)'
+      }
+      return data;
+    }
+
     render(){
       return(
         //console.log(this.state.data),
-        <View style={styles.main}>
-          <Text style={styles.text}>{i18n.t('friseTexte')}</Text>
-          <Timeline style={styles.timeline}
+        <View style = {styles.main}>
+          <View style = {styles.titre}>
+            <Text style = {styles.text}>{i18n.t('friseTexte')}</Text>
+          </View>
+          <View style = {styles.legende}>
+            <View style = {styles.sousLegende}>
+              <Image style = {styles.imageLegende} source={require('../../assets/Frise/ordinateur.png')}/>
+              <Text style = {styles.textLegende1}>Phase 1</Text>
+            </View>
+            <View style = {styles.sousLegende}>
+              <Image style = {styles.imageLegende} source={require('../../assets/Frise/ordinateur.png')}/>
+              <Text style = {styles.textLegende2}>Phase 2</Text>
+            </View>
+            <View style = {styles.sousLegende}>
+              <Image style = {styles.imageLegende} source={require('../../assets/Frise/ordinateur.png')}/>
+              <Text style = {styles.textLegende3}>Phase 3</Text>
+            </View>
+          </View>
+          <Timeline style = {styles.timeline}
             timeStyle = {styles.time}
-            separator={true}
-            data={this.state.data}
+            separator = {true}
+            data = {this.state.data}
             onEventPress = {this.onEventPress}
-            renderDetail={this.renderDetail}
+            renderDetail = {this.renderDetail}
             />
         </View>
       )
@@ -108,25 +144,64 @@ class Frise extends React.Component{
 }
 
 const styles = StyleSheet.create({
+  //Page Entiere
   main:{
     flex: 1
   },
+  //Titre
+  titre:{
+    flex : 1,
+    justifyContent : 'center',
+    alignItems : 'center',
+    borderWidth : 2,
+    borderColor : 'black'
+  },
   text:{
-    flex:1,
+    //flex:1,
     textAlign : 'center',
-    backgroundColor : 'black',
-    color : 'white',
+    color : 'black',
     fontWeight: 'bold',
-    fontSize : 40,
-    paddingTop : 10
+    fontSize : 30,
+    margin : 5,
+  },
+  //Legende
+  legende:{
+    flex:1,
+    flexDirection: 'row',
+    alignItems : 'center',
+    justifyContent : 'center',
+  },
+  sousLegende:{
+    flex: 1,
+    flexDirection: 'row',
+    alignItems : 'center',
+    justifyContent : 'center'
+  },
+  imageLegende : {
+    width : 20,
+    height : 20,
+    margin : 5
+  },
+  textLegende1:{
+    color : 'rgb(47,250,141)',
+    fontWeight : 'bold',
+  },
+  textLegende2:{
+    color : 'rgb(248,50,185)',
+    fontWeight : 'bold',
+  },
+  textLegende3:{
+    color : 'rgb(250,190,27)',
+    fontWeight : 'bold',
+  },
+  //Ligne du temps
+  timeline:{
+    flex:9,
+    paddingTop : 10,
   },
   main_content:{
     flex:1,
     flexDirection: 'row'
-  },
-  timeline:{
-    flex:9,
-    paddingTop:30,
   },
   title:{
     paddingBottom : 15,
