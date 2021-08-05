@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button,Pressable } from 'react-native';
+import {View, Text, StyleSheet, Button,Pressable,Image} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as FileSystem from 'expo-file-system'
 import {Asset} from 'expo-asset'
@@ -78,13 +78,22 @@ export default function QRCode({navigation:{ navigate }}) {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
-      {scanned && <Pressable style={styles.button_Scan} onPress = {() => setScanned(false)}>
-                    <Text style={styles.text_button}> {i18n.t("scanAgain")} </Text>
-                  </Pressable>}
+      <View style={styles.layerTop}/>
+        <View style={styles.layerCenter}>
+          <View style={styles.layerLeft} />
+          <View style={styles.focused} >
+          {scanned && <Pressable style={styles.button_Scan} onPress = {() => setScanned(false)}>
+                      <Text style={styles.text_button}> {i18n.t("scanAgain")} </Text>
+                      </Pressable>}
+          </View>
+          <View style={styles.layerRight} />
+        </View>
+      <View style={styles.layerBottom} />
     </View>
   );
 }
 
+const opacity = 'rgba(0, 0, 0, .9)';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -100,11 +109,36 @@ const styles = StyleSheet.create({
     marginVertical : 5,
     alignSelf : 'center',
     justifyContent : 'center',
-    alignItems : 'center'
+    alignSelf : 'center'
   },
   text_button:{
     textAlign : 'center',
     fontSize : 20,
-    fontWeight : 'bold'
-  }
+    fontWeight : 'bold',
+  },
+  layerTop: {
+    flex: 2,
+    backgroundColor: opacity,
+  },
+  layerCenter: {
+    flex: 2,
+    flexDirection: 'row',
+  },
+  layerLeft: {
+    flex: 2,
+    backgroundColor: opacity
+  },
+  focused: {
+    flex: 10,
+    justifyContent : 'center',
+    alignItems : 'center'
+  },
+  layerRight: {
+    flex: 2,
+    backgroundColor: opacity
+  },
+  layerBottom: {
+    flex: 2,
+    backgroundColor: opacity
+  },
 });

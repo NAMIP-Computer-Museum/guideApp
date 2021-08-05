@@ -7,6 +7,7 @@ import AfficheImage from '../Components/FriseChronologique/AfficheImage'
 import ListeVideo from '../Components/Video/ListeVideo'
 import AfficheVideo from '../Components/Video/AfficheVideo'
 import QRCode from '../Components/QRCode/QRCodeScan'
+import Contact from '../Components/Contact/Contact.js'
 
 
 const Navigation = createStackNavigator({
@@ -48,6 +49,12 @@ const Navigation = createStackNavigator({
     },
     QRCodeScan:{
       screen : QRCode,
+      navigationOptions:{
+        title : ""
+      }
+    },
+    Contact:{
+        screen : Contact,
       navigationOptions:{
         title : ""
       }

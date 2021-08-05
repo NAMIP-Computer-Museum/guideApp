@@ -32,6 +32,9 @@ class Acceuil extends React.Component{
           <Pressable style={styles.button_QRCode} onPress = {() => {this.props.navigation.navigate("QRCodeScan")}}>
             <Text style={styles.text_button}> {i18n.t('acceuilBoutonQRCode')} </Text>
           </Pressable>
+          <Pressable style={styles.button_Contact} onPress = {() => {this.props.navigation.navigate("Contact")}}>
+            <Text style={styles.text_button}> {i18n.t('acceuilBoutonContact')} </Text>
+          </Pressable>
         </View>
         </ImageBackground>
     )
@@ -88,6 +91,17 @@ const styles = StyleSheet.create({
     alignItems : 'center'
   },
   button_QRCode:{
+    backgroundColor : 'white',
+    borderRadius : 6,
+    width : 200,
+    height : 50,
+    top:100,
+    marginVertical : 5,
+    alignSelf : 'center',
+    justifyContent : 'center',
+    alignItems : 'center'
+  },
+  button_Contact:{
     backgroundColor : 'white',
     borderRadius : 6,
     width : 200,
