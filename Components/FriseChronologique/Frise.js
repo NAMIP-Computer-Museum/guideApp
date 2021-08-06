@@ -41,7 +41,7 @@ class Frise extends React.Component{
         await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}SQLite`, { intermediates: true });
       } catch(err) { Sentry.captureException(err) }
     };
-    await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/Ordinateur.db")).uri,
+    await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/sqlite.db")).uri,
     `${FileSystem.documentDirectory}SQLite/ordinateur.db`);
     db = SQLite.openDatabase("ordinateur.db");
     let requete;
@@ -49,7 +49,7 @@ class Frise extends React.Component{
       requete = 'Select * from ordinateurEN';
     }
     else{
-      requete = 'Select * from ordinateurFR';
+      requete = "SELECT 'No' as id,type,annee as 'time',nom as title FROM Test WHERE type LIKE 'Micro' and LENGTH(annee) != 0 ORDER BY annee ASC";
     }
     db.transaction((tx) => {
         tx.executeSql(requete,null,

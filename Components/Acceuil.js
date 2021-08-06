@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet, Text, View ,Pressable,ImageBackground,TouchableHighlight,Image} from 'react-native';
+import {StyleSheet, Text, View ,Pressable,ImageBackground,TouchableHighlight,Image,Dimensions} from 'react-native';
 import i18n from '../Language/Translate'
 
 
@@ -12,7 +12,7 @@ class Acceuil extends React.Component{
     }
 
     return (
-        <ImageBackground style={styles.ImageBackground} source = {require('../assets/accueil/fond.jpg')}>
+        <ImageBackground style={styles.ImageBackground} source = {require('../assets/accueil/affiche.png')}>
         <View style={styles.main_top}>
           <TouchableHighlight style = {styles.icon} onPress={() => {changeLangue("fr-FR")}}>
             <Image style={styles.image} source = {require('../assets/accueil/france.png')}/>
@@ -20,7 +20,7 @@ class Acceuil extends React.Component{
           <TouchableHighlight style = {styles.icon} onPress={() => {changeLangue("en")}}>
             <Image style={styles.image} source = {require('../assets/accueil/united-kingdom.png')}/>
           </TouchableHighlight>
-          <Text style={styles.text}>{i18n.t('acceuilTitre')} </Text>
+          <Text style={styles.text}>{i18n.t('acceuilTitre')}</Text>
         </View>
         <View style = {styles.main_bottom}>
           <Pressable style={styles.button_Frise} onPress = {() => {this.props.navigation.navigate("Frise")}}>
@@ -44,6 +44,9 @@ class Acceuil extends React.Component{
 const styles = StyleSheet.create({
   ImageBackground:{
     flex : 1,
+    resizeMode : 'contain',
+    height : '100%',
+    width : '100%'
   },
   main_top:{
     flex : 1
