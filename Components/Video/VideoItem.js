@@ -7,45 +7,60 @@ class VideoItem extends React.Component{
     const video = this.props.video
     const lireVideo = this.props.lireVideo
     return(
+      <View>
       <TouchableOpacity style = {styles.main} onPress={() => lireVideo(video.videoURL)}>
-        <Image style = {styles.image} source = {require('./playCircle.png')}/>
-        <View style = {styles.textuel}>
-          <Text style = {styles.titre}>{video.title}</Text>
-          <Text style = {styles.description} numberOfLines={2}>{video.description}</Text>
+        <View style = {styles.left}>
+          <Image style = {styles.image} source = {require('./playCircle.png')}/>
+        </View>
+        <View style = {styles.right}>
+          <Text style = {styles.titre} numberOfLines={1}>{video.title}</Text>
+          <Text style = {styles.description} numberOfLines={3}>{video.description}</Text>
         </View>
       </TouchableOpacity>
+      <View style={styles.ligne}/>
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
   main:{
-    paddingTop:10,
-    paddingBottom:10,
+    flex : 1,
     margin:5,
     height:100,
     flexDirection:'row'
   },
-  image:{
-    width:100,
-    height:90,
-    margin:5
+  left:{
+    flex : 1,
+    margin : 5,
+    alignItems : 'center'
   },
-  textuel:{
-    flex:1,
-    margin:5
+  image:{
+    width:90,
+    height:90,
+  },
+  right:{
+    flex:3,
+    margin:5,
   },
   titre:{
     flex:1,
     fontWeight:'bold',
     fontSize:18,
-    paddingBottom:5
+    marginRight : 10
   },
   description:{
     flex:2,
     fontSize:15,
-    color:'gray'
-  }
+    color:'gray',
+    marginRight : 10
+  },
+  ligne:{
+    borderWidth: 0.7,
+    borderColor: 'lightgray',
+    marginLeft : 30,
+    marginRight : 30,
+  },
 })
 
 export default VideoItem
