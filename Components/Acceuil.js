@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet, Text, View ,Pressable,ImageBackground,TouchableHighlight,Image,Dimensions} from 'react-native';
+import {StyleSheet, Text, View ,Pressable,ImageBackground,TouchableOpacity,Image} from 'react-native';
 import i18n from '../Language/Translate'
 
 
@@ -14,12 +14,12 @@ class Acceuil extends React.Component{
     return (
         <ImageBackground style={styles.ImageBackground} resizeMode = 'contain' source = {require('../assets/accueil/affiche.png')}>
         <View style={styles.main_top}>
-          <TouchableHighlight style = {styles.icon} onPress={() => {changeLangue("fr-FR")}}>
+          <TouchableOpacity style = {styles.icon} onPress={() => {changeLangue("fr-FR")}}>
             <Image style={styles.image} source = {require('../assets/accueil/france.png')}/>
-          </TouchableHighlight>
-          <TouchableHighlight style = {styles.icon} onPress={() => {changeLangue("en")}}>
+          </TouchableOpacity>
+          <TouchableOpacity style = {styles.icon} onPress={() => {changeLangue("en")}}>
             <Image style={styles.image} source = {require('../assets/accueil/united-kingdom.png')}/>
-          </TouchableHighlight>
+          </TouchableOpacity>
           <Text style={styles.text}></Text>
         </View>
         <View style = {styles.main_bottom}>

@@ -13,7 +13,6 @@ class AfficheVideo extends React.Component{
       <View style={styles.main}>
       <Video
         source = {{uri : videoURL}}
-        //ref = {videoRef}
         shouldPlay
         style = {styles.video}
         resizeMode="contain"

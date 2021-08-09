@@ -93,7 +93,7 @@ export default function QRCode({navigation:{ navigate }}) {
   );
 }
 
-const opacity = 'rgba(0, 0, 0, .9)';
+const opacity = 'rgba(0, 0, 0, .95)';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
     borderRadius : 6,
     width : 200,
     height : 50,
-    //top : 100,
     marginVertical : 5,
     alignSelf : 'center',
     justifyContent : 'center',
