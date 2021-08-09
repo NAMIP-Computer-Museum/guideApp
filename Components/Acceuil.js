@@ -12,7 +12,7 @@ class Acceuil extends React.Component{
     }
 
     return (
-        <ImageBackground style={styles.ImageBackground} source = {require('../assets/accueil/affiche.png')}>
+        <ImageBackground style={styles.ImageBackground} resizeMode = 'contain' source = {require('../assets/accueil/affiche.png')}>
         <View style={styles.main_top}>
           <TouchableHighlight style = {styles.icon} onPress={() => {changeLangue("fr-FR")}}>
             <Image style={styles.image} source = {require('../assets/accueil/france.png')}/>
@@ -20,7 +20,7 @@ class Acceuil extends React.Component{
           <TouchableHighlight style = {styles.icon} onPress={() => {changeLangue("en")}}>
             <Image style={styles.image} source = {require('../assets/accueil/united-kingdom.png')}/>
           </TouchableHighlight>
-          <Text style={styles.text}>{i18n.t('acceuilTitre')}</Text>
+          <Text style={styles.text}></Text>
         </View>
         <View style = {styles.main_bottom}>
           <Pressable style={styles.button_Frise} onPress = {() => {this.props.navigation.navigate("Frise")}}>
@@ -44,9 +44,8 @@ class Acceuil extends React.Component{
 const styles = StyleSheet.create({
   ImageBackground:{
     flex : 1,
-    resizeMode : 'contain',
-    height : '100%',
-    width : '100%'
+    backgroundColor : 'black'
+
   },
   main_top:{
     flex : 1
@@ -73,10 +72,9 @@ const styles = StyleSheet.create({
   },
   button_Frise:{
     backgroundColor : 'white',
-    borderRadius : 6,
+    borderRadius : 10,
     width : 200,
     height : 50,
-    top : 100,
     marginVertical : 5,
     alignSelf : 'center',
     justifyContent : 'center',
@@ -84,10 +82,9 @@ const styles = StyleSheet.create({
   },
   button_Video:{
     backgroundColor : 'white',
-    borderRadius : 6,
+    borderRadius : 10,
     width : 200,
     height : 50,
-    top:100,
     marginVertical : 5,
     alignSelf : 'center',
     justifyContent : 'center',
@@ -95,10 +92,9 @@ const styles = StyleSheet.create({
   },
   button_QRCode:{
     backgroundColor : 'white',
-    borderRadius : 6,
+    borderRadius : 10,
     width : 200,
     height : 50,
-    top:100,
     marginVertical : 5,
     alignSelf : 'center',
     justifyContent : 'center',
@@ -106,10 +102,9 @@ const styles = StyleSheet.create({
   },
   button_Contact:{
     backgroundColor : 'white',
-    borderRadius : 6,
+    borderRadius : 10,
     width : 200,
     height : 50,
-    top:100,
     marginVertical : 5,
     alignSelf : 'center',
     justifyContent : 'center',

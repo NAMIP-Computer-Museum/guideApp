@@ -33,15 +33,15 @@ export default function QRCode({navigation:{ navigate }}) {
         await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}SQLite`, { intermediates: true });
       } catch(err) { Sentry.captureException(err) }
     };
-    await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/Ordinateur.db")).uri,
+    await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/sqlite.db")).uri,
     `${FileSystem.documentDirectory}SQLite/ordinateur.db`);
     db = SQLite.openDatabase("ordinateur.db")
     let requete
     if(i18n.locale === 'en'){
-      requete = 'Select * from ordinateurEN Where id = ?'
+      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS FROM Test WHERE id = ?"
     }
     else{
-      requete = 'Select * from ordinateurFR Where id = ?'
+      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS FROM Test WHERE id = ?"
     }
     db.transaction((tx) => {
         tx.executeSql(requete,[id],

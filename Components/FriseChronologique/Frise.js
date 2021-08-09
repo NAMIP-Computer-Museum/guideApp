@@ -49,7 +49,8 @@ class Frise extends React.Component{
       requete = 'Select * from ordinateurEN';
     }
     else{
-      requete = "SELECT 'No' as id,type,annee as 'time',nom as title FROM Test WHERE type LIKE 'Micro' and LENGTH(annee) != 0 ORDER BY annee ASC";
+      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS FROM Test "+ 
+      "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 ORDER BY annee ASC,title ASC";
     }
     db.transaction((tx) => {
         tx.executeSql(requete,null,
