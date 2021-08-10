@@ -15,7 +15,7 @@
     },
     "assetBundlePatterns": [
       "**/*",
-      "assets/**"
+      "assets/**",
     ],
     "ios": {
       "supportsTablet": true
@@ -24,7 +24,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package" : "be.namip.guideapp",
+      "versionCode" : 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -17,9 +17,9 @@ class Frise extends React.Component{
     this.state={
       data:[]
     }
-    this.fetchOrdinateur = this.fetchOrdinateur.bind(this)
+    //this.fetchOrdinateur = this.fetchOrdinateur.bind(this)
     this.fetchOrdinateur()
-    this.colorPicker = this.colorPicker.bind(this)
+    //this.colorPicker = this.colorPicker.bind(this)
   }
 
   testLocale(){
@@ -49,7 +49,7 @@ class Frise extends React.Component{
       requete = 'Select * from ordinateurEN';
     }
     else{
-      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS FROM Test "+ 
+      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS FROM Test "+
       "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 ORDER BY annee ASC,title ASC";
     }
     db.transaction((tx) => {

@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     marginRight : 10
   },
   ligne:{
-    borderWidth: 0.7,
+    borderWidth: 1,
     borderColor: 'lightgray',
     marginLeft : 30,
     marginRight : 30,

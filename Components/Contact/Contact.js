@@ -1,27 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet,Platform} from 'react-native'
-import {WebView} from 'react-native-webview'
+import {StyleSheet,Platform,Dimensions} from 'react-native'
+//import {WebView} from 'react-native-webview'
+import RenderHtml from 'react-native-render-html';
+import {Asset} from 'expo-asset'
 
-const index =
-`<html>
-  <body>
-    <h1><center>Contact NAM-IP</center></h1>
-    <img src = "../../assets/icon.png">
-    <a href = https://www.google.fr/>Site Internet</a>
-  </body>
-</html>`
 
-/*const index = Platform.OS === 'ios' ? require('../../assets/index.html') :
-{uri : 'file:///android_asset/index.html'}*/
+const index = Asset.fromModule(require('../../assets/index.html')).uri
+
+//console.log(index2)
 
 class Contact extends React.Component{
   render(){
     return(
-      <WebView
+      <RenderHtml
+        contentWidth = {Dimensions.get('window').width}
         style = {styles.main}
-        originWhitelist={['*']}
-        source={{html : index}}
+        source={{uri : index}}
       />
     )
   }
