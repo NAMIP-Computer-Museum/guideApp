@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View ,Pressable,Image,TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View,Image,TouchableOpacity} from 'react-native';
 import Timeline from 'react-native-timeline-flatlist'
 import * as FileSystem from 'expo-file-system'
 import {Asset} from 'expo-asset'
@@ -17,21 +17,70 @@ class Frise extends React.Component{
     this.state={
       data:[]
     }
-    //this.fetchOrdinateur = this.fetchOrdinateur.bind(this)
-    this.fetchOrdinateur()
-    //this.colorPicker = this.colorPicker.bind(this)
+    this.fetchOrdinateur('All')
   }
 
-  testLocale(){
-    if(i18n.locale === 'en'){
-      //console.log(computer)
-      return ('EN')
+  colorPicker = (data) => {
+    const date = parseInt(data.time);
+    if(date <= 1980){
+      data['lineColor'] = 'rgb(47,250,141)'
+      data['circleColor'] = 'rgb(47,250,141)'
     }
-    return ('FR')
-    //console.log(ordinateur)
+    else if(date > 1980 && date <= 1990){
+      data['lineColor'] = 'rgb(248,50,185)'
+      data['circleColor'] = 'rgb(248,50,185)'
+    }
+    else if (date > 1990){
+      data['lineColor'] = 'rgb(250,190,27)'
+      data['circleColor'] = 'rgb(250,190,27)'
+    }
+    return data;
   }
 
-  fetchOrdinateur = async() =>{
+  fetchRequete = (affichage) =>{
+      let requete;
+      if(i18n.locale === 'en'){
+          switch(affichage){
+            case 'All':
+              requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
+              "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 ORDER BY annee ASC,title ASC"
+              break;
+            case 'Phase 1':
+              requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
+              "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee <= 1980 ORDER BY annee ASC,title ASC"
+              break;
+            case 'Phase 2':
+              requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
+              "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee > 1980 and annee <= 1990 ORDER BY annee ASC,title ASC"
+              break;
+            case 'Phase 3':
+              requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
+              "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee > 1990 ORDER BY annee ASC,title ASC"
+          }
+      }
+      else{
+        switch(affichage){
+          case 'All':
+            requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
+            "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 ORDER BY annee ASC,title ASC"
+            break;
+          case 'Phase 1':
+            requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
+            "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee <= 1980 ORDER BY annee ASC,title ASC"
+            break;
+          case 'Phase 2':
+            requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
+            "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee > 1980 and annee <= 1990 ORDER BY annee ASC,title ASC"
+            break;
+          case 'Phase 3':
+            requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
+            "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee > 1990 ORDER BY annee ASC,title ASC"
+        }
+      }
+      return requete;
+  }
+
+  fetchOrdinateur = async(affichage) =>{
     let dirInfo;
     try {
       dirInfo = await FileSystem.getInfoAsync(`${FileSystem.documentDirectory}SQLite`);
@@ -44,14 +93,7 @@ class Frise extends React.Component{
     await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/sqlite.db")).uri,
     `${FileSystem.documentDirectory}SQLite/ordinateur.db`);
     db = SQLite.openDatabase("ordinateur.db");
-    let requete;
-    if(this.testLocale() === 'EN'){
-      requete = 'Select * from ordinateurEN';
-    }
-    else{
-      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS FROM Test "+
-      "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 ORDER BY annee ASC,title ASC";
-    }
+    let requete = this.fetchRequete(affichage)
     db.transaction((tx) => {
         tx.executeSql(requete,null,
           (tx,results)=>{
@@ -78,7 +120,7 @@ class Frise extends React.Component{
         desc = (
           <View style={styles.main_content}>
             <Image source={{uri: rowData.imageUrl}} style={styles.image}/>
-            <Text style={[styles.description]} numberOfLines = {5}>{rowData.description}</Text>
+            <Text style={[styles.description]}>{rowData.description}</Text>
         </View>
       )
       return (
@@ -94,23 +136,6 @@ class Frise extends React.Component{
       this.props.navigation.navigate("Detail",{dataOrdinateur: data})
     }
 
-    colorPicker = (data) => {
-      const date = parseInt(data.time);
-      if(date <= 1980){
-        data['lineColor'] = 'rgb(47,250,141)'
-        data['circleColor'] = 'rgb(47,250,141)'
-      }
-      else if(date > 1980 && date <= 1990){
-        data['lineColor'] = 'rgb(248,50,185)'
-        data['circleColor'] = 'rgb(248,50,185)'
-      }
-      else if (date > 1990){
-        data['lineColor'] = 'rgb(250,190,27)'
-        data['circleColor'] = 'rgb(250,190,27)'
-      }
-      return data;
-    }
-
     render(){
       return(
         //console.log(this.state.data),
@@ -119,25 +144,29 @@ class Frise extends React.Component{
             <Text style = {styles.text}>{i18n.t('friseTexte')}</Text>
           </View>
           <View style = {styles.legende}>
-            <View style = {styles.sousLegende}>
+            <TouchableOpacity style = {styles.sousLegende} onPress = {() => {this.fetchOrdinateur('All')}}>
+              <Image style = {styles.imageLegende} source={require('../../assets/Frise/ordinateur.png')}/>
+              <Text style = {styles.textLegende0}>{i18n.t('button1Frise')}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style = {styles.sousLegende} onPress = {() => {this.fetchOrdinateur('Phase 1')}}>
               <Image style = {styles.imageLegende} source={require('../../assets/Frise/ordinateur.png')}/>
               <Text style = {styles.textLegende1}>Phase 1</Text>
-            </View>
-            <View style = {styles.sousLegende}>
+            </TouchableOpacity>
+            <TouchableOpacity style = {styles.sousLegende} onPress = {() => {this.fetchOrdinateur('Phase 2')}}>
               <Image style = {styles.imageLegende} source={require('../../assets/Frise/ordinateur.png')}/>
               <Text style = {styles.textLegende2}>Phase 2</Text>
-            </View>
-            <View style = {styles.sousLegende}>
+            </TouchableOpacity>
+            <TouchableOpacity style = {styles.sousLegende} onPress = {() => {this.fetchOrdinateur('Phase 3')}}>
               <Image style = {styles.imageLegende} source={require('../../assets/Frise/ordinateur.png')}/>
               <Text style = {styles.textLegende3}>Phase 3</Text>
-            </View>
+            </TouchableOpacity>
           </View>
           <Timeline style = {styles.timeline}
             timeStyle = {styles.time}
             separator = {true}
             data = {this.state.data}
             onEventPress = {this.onEventPress}
-            renderDetail = {this.renderDetail}
+            //renderDetail = {this.renderDetail}
             />
         </View>
       )
@@ -169,19 +198,25 @@ const styles = StyleSheet.create({
   legende:{
     flex:1,
     flexDirection: 'row',
-    alignItems : 'center',
-    justifyContent : 'center',
   },
   sousLegende:{
     flex: 1,
     flexDirection: 'row',
     alignItems : 'center',
+    borderBottomWidth : 2,
+    borderRightWidth : 2,
+    borderLeftWidth : 2,
+    borderColor : 'black',
     justifyContent : 'center'
   },
   imageLegende : {
     width : 20,
     height : 20,
     margin : 5
+  },
+  textLegende0:{
+    color : 'black',
+    fontWeight : 'bold',
   },
   textLegende1:{
     color : 'rgb(47,250,141)',
@@ -198,7 +233,7 @@ const styles = StyleSheet.create({
   //Ligne du temps
   timeline:{
     flex:9,
-    paddingTop : 10,
+    marginTop : 5,
   },
   main_content:{
     flex:1,

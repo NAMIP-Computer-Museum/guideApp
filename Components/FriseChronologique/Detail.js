@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View,Image,TouchableOpacity,ImageBackground} from 'react-native';
+import { StyleSheet, Text, View,ScrollView,Image,TouchableOpacity,ImageBackground} from 'react-native';
 
 class Detail extends React.Component{
   render(){
-    //console.log(this.props.navigation.state.params.dataOrdinateur)
+    console.log(this.props.navigation.state.params.dataOrdinateur)
     const ordinateur = this.props.navigation.state.params.dataOrdinateur
     return(
       <View style = {styles.main}>
