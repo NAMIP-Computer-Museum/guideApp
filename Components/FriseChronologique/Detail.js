@@ -4,7 +4,6 @@ import { StyleSheet, Text, View,ScrollView,Image,TouchableOpacity,ImageBackgroun
 
 class Detail extends React.Component{
   render(){
-    //console.log(this.props.navigation.state.params.dataOrdinateur)
     const ordinateur = this.props.navigation.state.params.dataOrdinateur
     return(
       <View style = {styles.main}>

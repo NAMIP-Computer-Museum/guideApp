@@ -8,7 +8,6 @@ import {Asset} from 'expo-asset'
 
 const index = Asset.fromModule(require('../../assets/index.html')).uri
 
-//console.log(index2)
 
 class Contact extends React.Component{
   render(){

@@ -10,7 +10,7 @@ class VideoItem extends React.Component{
       <View>
       <TouchableOpacity style = {styles.main} onPress={() => lireVideo(video.videoURL)}>
         <View style = {styles.left}>
-          <Image style = {styles.image} source = {require('./playCircle.png')}/>
+          <Image style = {styles.image} source = {require('../../assets/Video/playCircle.png')}/>
         </View>
         <View style = {styles.right}>
           <Text style = {styles.titre} numberOfLines={1}>{video.title}</Text>

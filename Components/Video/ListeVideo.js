@@ -9,15 +9,12 @@ import i18n from '../../Language/Translate'
 class ListeVideo extends React.Component{
   testLocale(){
     if(i18n.locale === 'en'){
-      //console.log(listeEn)
       return (listeEn)
     }
     return (listeFr)
-    //console.log(listeFr)
   }
 
   lireVideo = (videoUrl) =>{
-    //console.log(videoUrl)
     this.props.navigation.navigate("AfficheVideo",{videoUrl : videoUrl})
   }
 
@@ -29,7 +26,6 @@ class ListeVideo extends React.Component{
           </View>
           <View style = {styles.flatlist}>
             <FlatList
-              //style = {styles.flatlist}
                 data={this.testLocale()}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem= {({item}) => <VideoItem video={item} lireVideo = {this.lireVideo}/>}

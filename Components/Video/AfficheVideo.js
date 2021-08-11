@@ -9,14 +9,10 @@ import YoutubePlayer from 'react-native-youtube-iframe'
 
 class AfficheVideo extends React.Component{
   render(){
-    //console.log(this.props.navigation.state.params.videoUrl)
     const videoURL = this.props.navigation.state.params.videoUrl
     if(videoURL.includes("youtu.be") || videoURL.includes("youtube")){
-      //console.log("youtube")
       const split = videoURL.split("=");
-      //console.log(split)
       const id = split[1];
-      console.log(id);
       return(
         <View style={styles.main}>
           <YoutubePlayer
@@ -36,7 +32,6 @@ class AfficheVideo extends React.Component{
       )
     }
     else{
-      //console.log("non youtube")
       return(
         <View style={styles.main}>
           <Video

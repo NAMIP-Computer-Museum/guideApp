@@ -21,7 +21,6 @@ export default function QRCode({navigation:{ navigate }}) {
 
   const handleBarCodeScanned = async({ type, data }) => {
     setScanned(true);
-    //navigate("Detail",{dataOrdinateur: data})
     const pieces = data.split("-");
     const id = parseInt(pieces[2]);
     let dirInfo;

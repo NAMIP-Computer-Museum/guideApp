@@ -103,7 +103,6 @@ class Frise extends React.Component{
               const data = this.colorPicker(results.rows.item(i))
               tableau.push(data)
             }
-            //console.log(tableau)
             this.setState({data : tableau})
           },
           (tx,error)=>{
@@ -132,13 +131,11 @@ class Frise extends React.Component{
   }
 
     onEventPress = (data) => {
-      //console.log(data)
       this.props.navigation.navigate("Detail",{dataOrdinateur: data})
     }
 
     render(){
       return(
-        //console.log(this.state.data),
         <View style = {styles.main}>
           <View style = {styles.titre}>
             <Text style = {styles.text}>{i18n.t('friseTexte')}</Text>

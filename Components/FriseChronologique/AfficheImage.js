@@ -5,7 +5,6 @@ import ImageZoom from 'react-native-image-pan-zoom'
 
 class AfficheImage extends React.Component{
   render(){
-    //console.log(this.props.navigation)
     const image = this.props.navigation.state.params
     return (
       <View style = {styles.main}>

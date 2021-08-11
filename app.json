@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "guideApp",
-    "slug": "guideApp",
+    "name": "Guide Nam-IP",
+    "slug": "Guide Nam-IP",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/computer.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
