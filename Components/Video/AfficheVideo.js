@@ -3,25 +3,54 @@ import React from 'react';
 import {StyleSheet,View,Dimensions} from 'react-native'
 import {Video} from 'expo-av'
 import * as ScreenOrientation from 'expo-screen-orientation'
+import YoutubePlayer from 'react-native-youtube-iframe'
+
 
 
 class AfficheVideo extends React.Component{
   render(){
     //console.log(this.props.navigation.state.params.videoUrl)
     const videoURL = this.props.navigation.state.params.videoUrl
-    return(
-      <View style={styles.main}>
-      <Video
-        source = {{uri : videoURL}}
-        shouldPlay
-        style = {styles.video}
-        resizeMode="contain"
-        useNativeControls
-        isLooping
-        onFullscreenUpdate={onFullscreenUpdate}
-      />
-      </View>
-    )
+    if(videoURL.includes("youtu.be") || videoURL.includes("youtube")){
+      //console.log("youtube")
+      const split = videoURL.split("=");
+      //console.log(split)
+      const id = split[1];
+      console.log(id);
+      return(
+        <View style={styles.main}>
+          <YoutubePlayer
+            play = {true}
+            videoId = {id}
+            width = {"100%"}
+            height = {"100%"}
+            webViewStyle = {{
+              flex : 1,
+              marginTop : Dimensions.get('window').height/3,
+              height : '100%',
+              width : '100%',
+              alignSelf : 'center'
+            }}
+          />
+        </View>
+      )
+    }
+    else{
+      //console.log("non youtube")
+      return(
+        <View style={styles.main}>
+          <Video
+            source = {{uri : videoURL}}
+            shouldPlay
+            style = {styles.video}
+            resizeMode="contain"
+            useNativeControls
+            isLooping
+            onFullscreenUpdate={onFullscreenUpdate}
+          />
+        </View>
+      )
+  }
   }
 }
 

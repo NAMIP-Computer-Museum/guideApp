@@ -10,6 +10,6 @@ export default data = [
     id:2,
     title:"Jeux vidéo des années 90",
     description:"Une compilation des jeux vidéos les plus en vogues des années 90",
-    videoURL:"https://youtu.be/8byVZ8_D3ZA"
+    videoURL:"https://www.youtube.com/watch?v=8byVZ8_D3ZA"
   }
 ]
