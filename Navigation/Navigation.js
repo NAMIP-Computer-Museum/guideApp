@@ -1,6 +1,6 @@
 import {createAppContainer} from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
-import Acceuil from '../Components/Acceuil'
+import Accueil from '../Components/Accueil'
 import Frise from '../Components/FriseChronologique/Frise'
 import Detail from '../Components/FriseChronologique/Detail'
 import AfficheImage from '../Components/FriseChronologique/AfficheImage'
@@ -12,7 +12,7 @@ import Contact from '../Components/Contact/Contact.js'
 
 const Navigation = createStackNavigator({
     Accueil:{
-      screen: Acceuil,
+      screen: Accueil,
       navigationOptions:{
         headerShown : false
       }
