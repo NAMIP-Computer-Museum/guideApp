@@ -32,7 +32,7 @@ class Acceuil extends React.Component{
           <Pressable style={styles.button_QRCode} onPress = {() => {this.props.navigation.navigate("QRCodeScan")}}>
             <Text style={styles.text_button}> {i18n.t('acceuilBoutonQRCode')} </Text>
           </Pressable>
-          <Pressable style={styles.button_Contact} onPress = {() => {this.props.navigation.navigate("Contact")}}>
+          <Pressable style={styles.button_Contact} onPress = {() => {this.props.navigation.navigate("APropos")}}>
             <Text style={styles.text_button}> {i18n.t('acceuilBoutonContact')} </Text>
           </Pressable>
         </View>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   icon:{
     top : 40,
-    left: 10,
+    marginLeft: 10,
     width:40,
     height:40
   },

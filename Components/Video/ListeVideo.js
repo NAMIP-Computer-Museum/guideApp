@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet, Text, View,FlatList} from 'react-native';
-import VideoItem from './VideoItem'
+import VideoItem from './VideoItem Liste'
 import listeFr from '../../Data/DonneesVideos/VideoFr'
 import listeEn from '../../Data/DonneesVideos/VideoEn'
 import i18n from '../../Language/Translate'

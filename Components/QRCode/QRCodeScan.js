@@ -37,10 +37,10 @@ export default function QRCode({navigation:{ navigate }}) {
     db = SQLite.openDatabase("ordinateur.db")
     let requete
     if(i18n.locale === 'en'){
-      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS FROM Test WHERE id = ?"
+      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS FROM Ordinateur WHERE id = ?"
     }
     else{
-      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS FROM Test WHERE id = ?"
+      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS FROM Ordinateur WHERE id = ?"
     }
     db.transaction((tx) => {
         tx.executeSql(requete,[id],
