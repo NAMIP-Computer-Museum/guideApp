@@ -24,7 +24,9 @@ class Contact extends React.Component{
 const styles = StyleSheet.create({
     main : {
       flex : 1,
-    }
+      borderBottomWidth : 2,
+      borderColor : 'white'
+    },
 })
 
 export default Contact

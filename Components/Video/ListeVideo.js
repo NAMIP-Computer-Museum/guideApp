@@ -38,18 +38,19 @@ class ListeVideo extends React.Component{
 
 const styles = StyleSheet.create({
   main:{
-    flex: 1
+    flex: 1,
+    backgroundColor : 'black'
     },
   titre:{
     flex : 1,
     justifyContent : 'center',
     alignItems : 'center',
     borderWidth : 2,
-    borderColor : 'black'
+    borderColor : 'white'
   },
   text:{
     textAlign : 'center',
-    color : 'black',
+    color : 'white',
     fontWeight: 'bold',
     fontSize : 30,
     margin : 5,

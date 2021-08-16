@@ -20,43 +20,71 @@ const Navigation = createStackNavigator({
     Frise:{
       screen : Ligne,
       navigationOptions:{
-        title : ""
+        title : "",
+        headerStyle:{
+          backgroundColor: 'black'
+        },
+        headerTintColor:'white'
       }
     },
     Detail:{
       screen : Detail,
       navigationOptions:{
-        title : ""
+        title : "",
+        headerStyle:{
+          backgroundColor: 'black'
+        },
+        headerTintColor:'white'
       }
     },
     Image:{
       screen : AfficheImage,
       navigationOptions:{
-        title : ""
+        title : "",
+        headerStyle:{
+          backgroundColor: 'black'
+        },
+        headerTintColor:'white'
       }
     },
     ListeVideo:{
       screen : ListeVideo,
       navigationOptions:{
-        title : ""
+        title : "",
+        headerStyle:{
+          backgroundColor: 'black'
+        },
+        headerTintColor:'white'
       }
     },
     AfficheVideo:{
       screen : AfficheVideo,
       navigationOptions:{
-        title : ""
+        title : "",
+        headerStyle:{
+          backgroundColor: 'black'
+        },
+        headerTintColor:'white'
       }
     },
     QRCodeScan:{
       screen : QRCode,
       navigationOptions:{
-        title : ""
+        title : "",
+        headerStyle:{
+          backgroundColor: 'black'
+        },
+        headerTintColor:'white'
       }
     },
     APropos:{
         screen : APropos,
       navigationOptions:{
-        title : ""
+        title : "",
+        headerStyle:{
+          backgroundColor: 'black'
+        },
+        headerTintColor:'white'
       }
     }
 })

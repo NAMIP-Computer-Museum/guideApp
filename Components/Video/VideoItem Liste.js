@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
   image:{
     width:90,
     height:90,
+    tintColor : 'white'
   },
   right:{
     flex:3,
@@ -46,18 +47,19 @@ const styles = StyleSheet.create({
   titre:{
     flex:1,
     fontWeight:'bold',
+    color : 'white',
     fontSize:18,
     marginRight : 10
   },
   description:{
     flex:2,
     fontSize:15,
-    color:'gray',
+    color:'lightgray',
     marginRight : 10
   },
   ligne:{
     borderWidth: 1,
-    borderColor: 'lightgray',
+    borderColor: 'white',
     marginLeft : 30,
     marginRight : 30,
   },

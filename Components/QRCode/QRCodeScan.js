@@ -37,10 +37,10 @@ export default function QRCode({navigation:{ navigate }}) {
     db = SQLite.openDatabase("ordinateur.db")
     let requete
     if(i18n.locale === 'en'){
-      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS FROM Ordinateur WHERE id = ?"
+      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur WHERE id = ? and type LIKE 'Micro'"
     }
     else{
-      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS FROM Ordinateur WHERE id = ?"
+      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur WHERE id = ? and type LIKE 'Micro'"
     }
     db.transaction((tx) => {
         tx.executeSql(requete,[id],
@@ -73,6 +73,7 @@ export default function QRCode({navigation:{ navigate }}) {
 
   return (
     <View style={styles.container}>
+    <View style={styles.ligne}/>
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
@@ -138,5 +139,9 @@ const styles = StyleSheet.create({
   layerBottom: {
     flex: 2,
     backgroundColor: opacity
+  },
+  ligne:{
+    borderWidth:1,
+    borderColor:'white',
   },
 });

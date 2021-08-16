@@ -1,15 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View,ScrollView,Image,TouchableOpacity,ImageBackground} from 'react-native';
+import {StyleSheet, Text, View,ScrollView,Image,TouchableOpacity,ImageBackground} from 'react-native';
+import images from '../../assets/database/Images/images.js'
 
 class Detail extends React.Component{
   render(){
     const ordinateur = this.props.navigation.state.params.dataOrdinateur
     return(
       <View style = {styles.main}>
+          <View style={styles.ligne}/>
           <View style = {styles.photo}>
-            <ImageBackground style = {styles.image} resizeMode = 'contain' source = {{uri : ordinateur.imageUrl}}>
-              <TouchableOpacity style={styles.zoom} onPress = {() => {this.props.navigation.navigate("Image",{imageURL: ordinateur.imageUrl})}}>
+            <ImageBackground style = {styles.image} resizeMode = 'contain' source = {images[ordinateur.id]}>
+              <TouchableOpacity style={styles.zoom} onPress = {() => {this.props.navigation.navigate("Image",{id : ordinateur.id})}}>
                 <Image style={styles.iconZoom} source = {require('../../assets/Detail/zoom.png')}/>
               </TouchableOpacity>
             </ImageBackground>
@@ -47,7 +49,9 @@ class Detail extends React.Component{
             </View>
           </View>
           <View style={styles.ligne}/>
-          <Text style = {styles.description}>{ordinateur.overview}</Text>
+          <View style = {styles.scroll}>
+            <Text style = {styles.description}>{ordinateur.description}</Text>
+          </View>
       </View>
     )
   }
@@ -55,7 +59,8 @@ class Detail extends React.Component{
 
 const styles = StyleSheet.create({
   main:{
-    flex:1
+    flex:1,
+    backgroundColor : 'black'
   },
   photo:{
     flex:4,
@@ -74,6 +79,7 @@ const styles = StyleSheet.create({
     flex : 1,
     width : 40,
     height : 40,
+    tintColor : 'white'
   },
   titre:{
     flex:1,
@@ -82,6 +88,7 @@ const styles = StyleSheet.create({
     fontWeight : 'bold',
     textDecorationLine : 'underline',
     fontStyle : 'italic',
+    color : 'white'
   },
   legende:{
     flex:1,
@@ -95,23 +102,29 @@ const styles = StyleSheet.create({
   icon:{
     width : 20,
     height : 20,
-    margin : 5
+    margin : 5,
+    tintColor : 'white'
   },
   text:{
     fontSize : 20,
     fontWeight : 'bold',
+    color:'white',
     marginLeft : 2
+  },
+  scroll:{
+    flex:8
+  },
+  description:{
+    flex:1,
+    fontSize : 20,
+    marginVertical : 10,
+    marginHorizontal : 5,
+    color : 'white'
   },
   ligne:{
     borderWidth:1,
-    borderColor:'gray',
+    borderColor:'white',
   },
-  description:{
-    flex:8,
-    fontSize : 20,
-    marginTop : 10
-
-  }
 })
 
 export default Detail
