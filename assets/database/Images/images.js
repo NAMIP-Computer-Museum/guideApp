@@ -1,4 +1,23 @@
 export default images = {
+    31 : require("./AcornBBC.jpg"),
+    55 : require("./Altair8800.jpg"),
     70 : require("./Amiga500.jpg"),
-    45 : require("./AmstradCPC464.png")
+    45 : require("./AmstradCPC464.jpg"),
+    33 : require("./AppleIIplus.jpg"),
+    32 : require("./AppleiMAC.jpg"),
+    56 : require("./AppleMacintosh.jpg"),
+    28 : require("./ATARI400.jpg"),
+    18 : require("./CBMPET2001.jpg"),
+    66 : require("./Commodore64.jpg"),
+    23 : require("./DAI.jpg"),
+    21 : require("./IBMPCAT.jpg"),
+    38 : require("./ORICATMOS.jpg"),
+    71 : require("./R2EMicralNMaquette.jpg"),
+    53 : require("./SinclairQL.jpg"),
+    9  : require("./SinclairZX81.jpg"),
+    6  : require("./SinclairZXSpectrum.jpg"),
+    26 : require("./ThomsonMO5.jpg"),
+    12 : require("./TI994A.jpg"),
+    41 : require("./TRS80M1.jpg"),
+    37 : require("./TRS80M3.jpg")
 }
