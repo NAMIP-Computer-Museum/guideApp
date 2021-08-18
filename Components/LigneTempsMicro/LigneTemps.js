@@ -118,7 +118,7 @@ class Frise extends React.Component{
         desc = (
           <View style={styles.main_content}>
             <Image source={images[rowData.id]} style={styles.image}/>
-            <Text style={[styles.description]}>{rowData.description}</Text>
+            <Text style={[styles.description]} numberOfLines={6}>{rowData.description}</Text>
         </View>
       )
       return (

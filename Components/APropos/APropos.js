@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet,Platform,Dimensions} from 'react-native'
-//import {WebView} from 'react-native-webview'
 import RenderHtml from 'react-native-render-html';
 import {Asset} from 'expo-asset'
 
@@ -23,9 +22,7 @@ class Contact extends React.Component{
 
 const styles = StyleSheet.create({
     main : {
-      flex : 1,
-      borderBottomWidth : 2,
-      borderColor : 'white'
+      flex : 1
     },
 })
 
