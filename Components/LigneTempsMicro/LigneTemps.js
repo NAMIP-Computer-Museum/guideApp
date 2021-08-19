@@ -3,6 +3,7 @@ import React from 'react';
 import {StyleSheet, Text, View,Image,TouchableOpacity} from 'react-native';
 import Timeline from 'react-native-timeline-flatlist'
 import {Picker} from '@react-native-picker/picker'
+import CheckBox from '@react-native-community/checkbox'
 import * as FileSystem from 'expo-file-system'
 import {Asset} from 'expo-asset'
 import * as SQLite from 'expo-sqlite'
@@ -16,28 +17,19 @@ class Frise extends React.Component{
     super(props)
     this.state={
       data:[],
+      //date
       pickerValue : 'tout',
       dateBasse : 0,
       dateHaute : 2021,
+      //type
+      isMicro : true,
+      Micro : 'Micro',
+      isUI : false,
+      Ui : 'notUI',
+      isOS : false,
+      Os : 'notOS'
     }
     this.fetchOrdinateur()
-  }
-
-  colorPicker = (data) => {
-    const date = parseInt(data.time);
-    if(date <= 1980){
-      data['lineColor'] = 'rgb(47,250,141)'
-      data['circleColor'] = 'rgb(47,250,141)'
-    }
-    else if(date > 1980 && date <= 1990){
-      data['lineColor'] = 'rgb(248,50,185)'
-      data['circleColor'] = 'rgb(248,50,185)'
-    }
-    else if (date > 1990){
-      data['lineColor'] = 'rgb(250,190,27)'
-      data['circleColor'] = 'rgb(250,190,27)'
-    }
-    return data;
   }
 
   setDate = () =>{
@@ -72,9 +64,9 @@ class Frise extends React.Component{
     `${FileSystem.documentDirectory}SQLite/ordinateur.db`);
     db = SQLite.openDatabase("ordinateur.db");
     let requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,Pays,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
-                  "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee > ? and annee <= ? ORDER BY annee ASC,title ASC"
+                  "WHERE annee > ? and annee <= ? and length(annee) != 0 and type LIKE ? or type like ? or type like ? ORDER BY annee ASC,title ASC"
     db.transaction((tx) => {
-        tx.executeSql(requete,[this.state.dateBasse,this.state.dateHaute],
+        tx.executeSql(requete,[this.state.dateBasse,this.state.dateHaute,this.state.Micro,this.state.Os,this.state.Ui],
           (tx,results)=>{
             var taille = results.rows.length
             let tableau = []
@@ -89,6 +81,23 @@ class Frise extends React.Component{
           }
         )
       })
+    }
+
+    colorPicker = (data) => {
+      const date = parseInt(data.time);
+      if(date <= 1980){
+        data['lineColor'] = 'rgb(47,250,141)'
+        data['circleColor'] = 'rgb(47,250,141)'
+      }
+      else if(date > 1980 && date <= 1990){
+        data['lineColor'] = 'rgb(248,50,185)'
+        data['circleColor'] = 'rgb(248,50,185)'
+      }
+      else if (date > 1990){
+        data['lineColor'] = 'rgb(250,190,27)'
+        data['circleColor'] = 'rgb(250,190,27)'
+      }
+      return data;
     }
 
     renderDetail(rowData,sectionID, rowID){
@@ -126,11 +135,26 @@ class Frise extends React.Component{
               selectedValue={this.state.pickerValue}
               onValueChange={(itemValue,itemIndex) => this.setState({pickerValue : itemValue},() => {this.setDate()})}
             >
-              <Picker.Item label="Frise Entiere" color='lightgray' value='tout'/>
+              <Picker.Item label={i18n.t('Picker1')} color='lightgray' value='tout'/>
               <Picker.Item label="Phase 1" color='rgb(47,250,141)' value='p1'/>
               <Picker.Item label="Phase 2" color='rgb(248,50,185)' value='p2'/>
               <Picker.Item label="Phase 3" color='rgb(250,190,27)' value='p3'/>
             </Picker>
+            <CheckBox
+              value={this.state.isMicro}
+              onValueChange={(newValue) => this.setState({isMicro : newValue,Micro : this.state.isMicro ? 'notMicro' : 'Micro'},() => {this.fetchOrdinateur()})}
+            />
+            <Text style={styles.CheckText}>MICRO</Text>
+            <CheckBox
+              value={this.state.isOS}
+              onValueChange={(newValue) => this.setState({isOS : newValue,Os : this.state.isOS ? 'notOS' : 'OS'},() => {this.fetchOrdinateur()})}
+            />
+            <Text style={styles.CheckText}>OS</Text>
+            <CheckBox
+              value={this.state.isUI}
+              onValueChange={(newValue) => this.setState({isUI : newValue,Ui : this.state.isUi ? 'notUI' : 'UI'},() => {this.fetchOrdinateur()})}
+            />
+            <Text style={styles.CheckText}>UI</Text>
           </View>
           <Timeline style = {styles.timeline}
             timeStyle = {styles.time}
@@ -168,7 +192,8 @@ const styles = StyleSheet.create({
   //Legende
   legende:{
     flex:1,
-    justifyContent : 'center',
+    flexDirection: 'row',
+    alignItems : 'center',
     borderBottomWidth : 2,
     borderLeftWidth : 2,
     borderRightWidth : 2,
@@ -177,6 +202,13 @@ const styles = StyleSheet.create({
   picker:{
     height : 50,
     width : 110,
+  },
+  CheckText:{
+    color:'white',
+    fontWeight:'bold',
+    fontSize : 18,
+    marginRight : 15,
+    marginLeft : 2
   },
   //Ligne du temps
   timeline:{
