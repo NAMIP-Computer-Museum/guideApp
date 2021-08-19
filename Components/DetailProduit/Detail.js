@@ -24,11 +24,15 @@ class Detail extends React.Component{
               <Text style = {styles.text}>{ordinateur.time}</Text>
             </View>
             <View style = {styles.item}>
-              <Image style = {styles.icon} source = {require('../../assets/Detail/fabricant.png')}/>
-              <Text style = {styles.text}>{ordinateur.Fabricant}</Text>
+              <Image style = {styles.icon} source = {require('../../assets/Detail/country.png')}/>
+              <Text style = {styles.text}>{ordinateur.Pays}</Text>
             </View>
           </View>
           <View style = {styles.legende}>
+            <View style = {styles.item}>
+              <Image style = {styles.icon} source = {require('../../assets/Detail/fabricant.png')}/>
+              <Text style = {styles.text}>{ordinateur.Fabricant}</Text>
+            </View>
             <View style = {styles.item}>
               <Image style = {styles.icon} source = {require('../../assets/Detail/os.png')}/>
               <Text style = {styles.text}>{ordinateur.OS}</Text>

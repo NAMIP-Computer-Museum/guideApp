@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet, Text, View,Image,TouchableOpacity} from 'react-native';
 import Timeline from 'react-native-timeline-flatlist'
+import {Picker} from '@react-native-picker/picker'
 import * as FileSystem from 'expo-file-system'
 import {Asset} from 'expo-asset'
 import * as SQLite from 'expo-sqlite'
@@ -14,9 +15,12 @@ class Frise extends React.Component{
   constructor(props){
     super(props)
     this.state={
-      data:[]
+      data:[],
+      pickerValue : 'tout',
+      dateBasse : 0,
+      dateHaute : 2021,
     }
-    this.fetchOrdinateur('All')
+    this.fetchOrdinateur()
   }
 
   colorPicker = (data) => {
@@ -36,50 +40,25 @@ class Frise extends React.Component{
     return data;
   }
 
-  fetchRequete = (affichage) =>{
-      let requete;
-      if(i18n.locale === 'en'){
-          switch(affichage){
-            case 'All':
-              requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
-              "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 ORDER BY annee ASC,title ASC"
-              break;
-            case 'Phase 1':
-              requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
-              "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee <= 1980 ORDER BY annee ASC,title ASC"
-              break;
-            case 'Phase 2':
-              requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
-              "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee > 1980 and annee <= 1990 ORDER BY annee ASC,title ASC"
-              break;
-            case 'Phase 3':
-              requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
-              "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee > 1990 ORDER BY annee ASC,title ASC"
-          }
-      }
-      else{
-        switch(affichage){
-          case 'All':
-            requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
-            "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 ORDER BY annee ASC,title ASC"
-            break;
-          case 'Phase 1':
-            requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
-            "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee <= 1980 ORDER BY annee ASC,title ASC"
-            break;
-          case 'Phase 2':
-            requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
-            "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee > 1980 and annee <= 1990 ORDER BY annee ASC,title ASC"
-            break;
-          case 'Phase 3':
-            requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
-            "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee > 1990 ORDER BY annee ASC,title ASC"
-        }
-      }
-      return requete;
+  setDate = () =>{
+    switch(this.state.pickerValue){
+      case 'p1':
+        this.setState({dateBasse:0,dateHaute:1980});
+        break;
+      case 'p2':
+        this.setState({dateBasse:1980,dateHaute:1990});
+        break;
+      case 'p3':
+        this.setState({dateBasse:1990,dateHaute:2021});
+        break;
+      case 'tout':
+        this.setState({dateBasse:0,dateHaute:2021});
+        break;
+    }
+    this.fetchOrdinateur();
   }
 
-  fetchOrdinateur = async(affichage) =>{
+  fetchOrdinateur = async() =>{
     let dirInfo;
     try {
       dirInfo = await FileSystem.getInfoAsync(`${FileSystem.documentDirectory}SQLite`);
@@ -92,9 +71,10 @@ class Frise extends React.Component{
     await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/sqlite.db")).uri,
     `${FileSystem.documentDirectory}SQLite/ordinateur.db`);
     db = SQLite.openDatabase("ordinateur.db");
-    let requete = this.fetchRequete(affichage)
+    let requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,Pays,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
+                  "WHERE type LIKE 'Micro' and LENGTH(annee) != 0 and annee > ? and annee <= ? ORDER BY annee ASC,title ASC"
     db.transaction((tx) => {
-        tx.executeSql(requete,null,
+        tx.executeSql(requete,[this.state.dateBasse,this.state.dateHaute],
           (tx,results)=>{
             var taille = results.rows.length
             let tableau = []
@@ -140,22 +120,17 @@ class Frise extends React.Component{
             <Text style = {styles.text}>{i18n.t('friseTexte')}</Text>
           </View>
           <View style = {styles.legende}>
-            <TouchableOpacity style = {styles.sousLegende} onPress = {() => {this.fetchOrdinateur('All')}}>
-              <Image style = {styles.imageLegende} source={require('../../assets/Frise/ordinateur.png')}/>
-              <Text style = {styles.textLegende0}>{i18n.t('button1Frise')}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style = {styles.sousLegende} onPress = {() => {this.fetchOrdinateur('Phase 1')}}>
-              <Image style = {styles.imageLegende} source={require('../../assets/Frise/ordinateur.png')}/>
-              <Text style = {styles.textLegende1}>Phase 1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style = {styles.sousLegende} onPress = {() => {this.fetchOrdinateur('Phase 2')}}>
-              <Image style = {styles.imageLegende} source={require('../../assets/Frise/ordinateur.png')}/>
-              <Text style = {styles.textLegende2}>Phase 2</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style = {styles.sousLegende} onPress = {() => {this.fetchOrdinateur('Phase 3')}}>
-              <Image style = {styles.imageLegende} source={require('../../assets/Frise/ordinateur.png')}/>
-              <Text style = {styles.textLegende3}>Phase 3</Text>
-            </TouchableOpacity>
+            <Picker
+              style = {styles.picker}
+              dropdownIconColor = 'white'
+              selectedValue={this.state.pickerValue}
+              onValueChange={(itemValue,itemIndex) => this.setState({pickerValue : itemValue},() => {this.setDate()})}
+            >
+              <Picker.Item label="Frise Entiere" color='lightgray' value='tout'/>
+              <Picker.Item label="Phase 1" color='rgb(47,250,141)' value='p1'/>
+              <Picker.Item label="Phase 2" color='rgb(248,50,185)' value='p2'/>
+              <Picker.Item label="Phase 3" color='rgb(250,190,27)' value='p3'/>
+            </Picker>
           </View>
           <Timeline style = {styles.timeline}
             timeStyle = {styles.time}
@@ -193,39 +168,15 @@ const styles = StyleSheet.create({
   //Legende
   legende:{
     flex:1,
-    flexDirection: 'row',
-  },
-  sousLegende:{
-    flex: 1,
-    flexDirection: 'row',
-    alignItems : 'center',
+    justifyContent : 'center',
     borderBottomWidth : 2,
-    borderRightWidth : 2,
     borderLeftWidth : 2,
-    borderColor : 'white',
-    justifyContent : 'center'
+    borderRightWidth : 2,
+    borderColor : 'white'
   },
-  imageLegende : {
-    width : 20,
-    height : 20,
-    margin : 5,
-    tintColor : 'white'
-  },
-  textLegende0:{
-    color : 'white',
-    fontWeight : 'bold',
-  },
-  textLegende1:{
-    color : 'rgb(47,250,141)',
-    fontWeight : 'bold',
-  },
-  textLegende2:{
-    color : 'rgb(248,50,185)',
-    fontWeight : 'bold',
-  },
-  textLegende3:{
-    color : 'rgb(250,190,27)',
-    fontWeight : 'bold',
+  picker:{
+    height : 50,
+    width : 110,
   },
   //Ligne du temps
   timeline:{
