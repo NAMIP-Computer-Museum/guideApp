@@ -4,7 +4,7 @@
     "slug": "guideApp",
     "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/computer.png",
+    "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

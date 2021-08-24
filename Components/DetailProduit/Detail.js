@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet, Text, View,ScrollView,Image,TouchableOpacity,ImageBackground} from 'react-native';
+import Legende from './Legende.js'
 import images from '../../assets/database/Images/images.js'
+
 
 class Detail extends React.Component{
   render(){
@@ -18,40 +20,7 @@ class Detail extends React.Component{
           </View>
           <View style={styles.ligne}/>
           <Text style = {styles.titre}>{ordinateur.title}</Text>
-          <View style = {styles.legende}>
-            <View style = {styles.item}>
-              <Image style = {styles.icon} source = {require('../../assets/Detail/annual.png')}/>
-              <Text style = {styles.text}>{ordinateur.time}</Text>
-            </View>
-            <View style = {styles.item}>
-              <Image style = {styles.icon} source = {require('../../assets/Detail/country.png')}/>
-              <Text style = {styles.text}>{ordinateur.Pays}</Text>
-            </View>
-          </View>
-          <View style = {styles.legende}>
-            <View style = {styles.item}>
-              <Image style = {styles.icon} source = {require('../../assets/Detail/fabricant.png')}/>
-              <Text style = {styles.text}>{ordinateur.Fabricant}</Text>
-            </View>
-            <View style = {styles.item}>
-              <Image style = {styles.icon} source = {require('../../assets/Detail/os.png')}/>
-              <Text style = {styles.text}>{ordinateur.OS}</Text>
-            </View>
-          </View>
-          <View style = {styles.legende}>
-            <View style = {styles.item}>
-              <Image style = {styles.icon} source = {require('../../assets/Detail/cpu.png')}/>
-              <Text style = {styles.text}>{ordinateur.CPU}</Text>
-            </View>
-            <View style = {styles.item}>
-              <Image style = {styles.icon} source = {require('../../assets/Detail/ram.png')}/>
-              <Text style = {styles.text}>{ordinateur.RAM}</Text>
-            </View>
-            <View style = {styles.item}>
-              <Image style = {styles.icon} source = {require('../../assets/Detail/rom.png')}/>
-              <Text style = {styles.text}>{ordinateur.ROM}</Text>
-            </View>
-          </View>
+          <Legende id = {ordinateur.id} type={ordinateur.TYPE} time = {ordinateur.time}/>
           <View style={styles.ligne}/>
           <View style = {styles.scroll}>
             <Text style = {styles.description}>{ordinateur.description}</Text>
@@ -93,27 +62,6 @@ const styles = StyleSheet.create({
     textDecorationLine : 'underline',
     fontStyle : 'italic',
     color : 'white'
-  },
-  legende:{
-    flex:1,
-    flexDirection: 'row',
-  },
-  item:{
-    margin : 5,
-    flexDirection: 'row',
-    alignItems : 'center',
-  },
-  icon:{
-    width : 20,
-    height : 20,
-    margin : 5,
-    tintColor : 'white'
-  },
-  text:{
-    fontSize : 20,
-    fontWeight : 'bold',
-    color:'white',
-    marginLeft : 2
   },
   scroll:{
     flex:8

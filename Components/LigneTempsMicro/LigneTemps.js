@@ -24,10 +24,12 @@ class Frise extends React.Component{
       //type
       isMicro : true,
       Micro : 'Micro',
-      isUI : false,
-      Ui : 'notUI',
+      isIHM : false,
+      Ihm : 'notIHM',
       isOS : false,
-      Os : 'notOS'
+      Os : 'notOS',
+      isCPU : false,
+      Cpu : 'notCPU'
     }
     this.fetchOrdinateur()
   }
@@ -60,13 +62,14 @@ class Frise extends React.Component{
         await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}SQLite`, { intermediates: true });
       } catch(err) { Sentry.captureException(err) }
     };
-    await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/sqlite.db")).uri,
-    `${FileSystem.documentDirectory}SQLite/ordinateur.db`);
-    db = SQLite.openDatabase("ordinateur.db");
-    let requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,Pays,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur "+
-                  "WHERE annee > ? and annee <= ? and length(annee) != 0 and type LIKE ? or type like ? or type like ? ORDER BY annee ASC,title ASC"
+    await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/NAMIP.db")).uri,
+    `${FileSystem.documentDirectory}SQLite/NAMIP.db`);
+    db = SQLite.openDatabase("NAMIP.db");
+    let requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescFR as description FROM GENERAL "+
+                  "WHERE Annee > ? and Annee <= ? and TYPE REGEXP '"+this.state.Micro+"|"+
+                  this.state.Os+"|"+this.state.Ihm+"|"+this.state.Cpu+"' ORDER BY Annee ASC,Nom ASC"
     db.transaction((tx) => {
-        tx.executeSql(requete,[this.state.dateBasse,this.state.dateHaute,this.state.Micro,this.state.Os,this.state.Ui],
+        tx.executeSql(requete,[this.state.dateBasse,this.state.dateHaute],
           (tx,results)=>{
             var taille = results.rows.length
             let tableau = []
@@ -119,7 +122,12 @@ class Frise extends React.Component{
   }
 
     onEventPress = (data) => {
-      this.props.navigation.navigate("Detail",{dataOrdinateur: data})
+      if(data.TYPE === 'Micro'){
+        this.props.navigation.navigate("Detail",{dataOrdinateur: data})
+      }
+      else if(data.TYPE === 'CPU'){
+        this.props.navigation.navigate("Detail",{dataOrdinateur: data})
+      }
     }
 
     render(){
@@ -151,10 +159,15 @@ class Frise extends React.Component{
             />
             <Text style={styles.CheckText}>OS</Text>
             <CheckBox
-              value={this.state.isUI}
-              onValueChange={(newValue) => this.setState({isUI : newValue,Ui : this.state.isUi ? 'notUI' : 'UI'},() => {this.fetchOrdinateur()})}
+              value={this.state.isIHM}
+              onValueChange={(newValue) => this.setState({isIHM : newValue,Ihm : this.state.isIHM ? 'notIHM' : 'IHM'},() => {this.fetchOrdinateur()})}
             />
-            <Text style={styles.CheckText}>UI</Text>
+            <Text style={styles.CheckText}>IHM</Text>
+            <CheckBox
+              value={this.state.isCPU}
+              onValueChange={(newValue) => this.setState({isCPU : newValue,Cpu : this.state.isCPU ? 'notCPU' : 'CPU'},() => {this.fetchOrdinateur()})}
+            />
+            <Text style={styles.CheckText}>CPU</Text>
           </View>
           <Timeline style = {styles.timeline}
             timeStyle = {styles.time}
@@ -206,7 +219,7 @@ const styles = StyleSheet.create({
   CheckText:{
     color:'white',
     fontWeight:'bold',
-    fontSize : 18,
+    fontSize : 12,
     marginRight : 15,
     marginLeft : 2
   },

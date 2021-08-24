@@ -32,16 +32,11 @@ export default function QRCode({navigation:{ navigate }}) {
         await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}SQLite`, { intermediates: true });
       } catch(err) { Sentry.captureException(err) }
     };
-    await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/sqlite.db")).uri,
-    `${FileSystem.documentDirectory}SQLite/ordinateur.db`);
-    db = SQLite.openDatabase("ordinateur.db")
-    let requete
-    if(i18n.locale === 'en'){
-      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur WHERE id = ? and type LIKE 'Micro'"
-    }
-    else{
-      requete = "SELECT No as id,type,annee as 'time',nom as title,Fabricant,CPU,RAM,ROM,OS,Descourte as description FROM Ordinateur WHERE id = ? and type LIKE 'Micro'"
-    }
+    await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/NAMIP.db")).uri,
+    `${FileSystem.documentDirectory}SQLite/NAMIP.db`);
+    db = SQLite.openDatabase("NAMIP.db")
+    let requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescFR as description FROM GENERAL "+
+                  "WHERE ID = ? AND TYPE REGEXP 'Micro|CPU'"
     db.transaction((tx) => {
         tx.executeSql(requete,[id],
           (tx,results)=>{
