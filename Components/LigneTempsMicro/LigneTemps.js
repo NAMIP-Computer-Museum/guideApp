@@ -36,14 +36,17 @@ class Frise extends React.Component{
 
   setDate = () =>{
     switch(this.state.pickerValue){
+      case 'debut':
+        this.setState({dateBasse:0,dateHaute:1973});
+        break;
       case 'p1':
-        this.setState({dateBasse:0,dateHaute:1980});
+        this.setState({dateBasse:1973,dateHaute:1977});
         break;
       case 'p2':
-        this.setState({dateBasse:1980,dateHaute:1990});
+        this.setState({dateBasse:1977,dateHaute:1992});
         break;
       case 'p3':
-        this.setState({dateBasse:1990,dateHaute:2021});
+        this.setState({dateBasse:1992,dateHaute:2021});
         break;
       case 'tout':
         this.setState({dateBasse:0,dateHaute:2021});
@@ -66,7 +69,7 @@ class Frise extends React.Component{
     `${FileSystem.documentDirectory}SQLite/NAMIP.db`);
     db = SQLite.openDatabase("NAMIP.db");
     let requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescFR as description FROM GENERAL "+
-                  "WHERE Annee > ? and Annee <= ? and TYPE REGEXP '"+this.state.Micro+"|"+
+                  "WHERE Annee >= ? and Annee < ? and TYPE REGEXP '"+this.state.Micro+"|"+
                   this.state.Os+"|"+this.state.Ihm+"|"+this.state.Cpu+"' ORDER BY Annee ASC,Nom ASC"
     db.transaction((tx) => {
         tx.executeSql(requete,[this.state.dateBasse,this.state.dateHaute],
@@ -88,15 +91,19 @@ class Frise extends React.Component{
 
     colorPicker = (data) => {
       const date = parseInt(data.time);
-      if(date <= 1980){
+      if(date < 1973){
+        data['lineColor'] = 'rgb(29,41,219)'
+        data['circleColor'] = 'rgb(29,41,219)'
+      }
+      else if(date >= 1973 && date < 1977){
         data['lineColor'] = 'rgb(47,250,141)'
         data['circleColor'] = 'rgb(47,250,141)'
       }
-      else if(date > 1980 && date <= 1990){
+      else if(date >= 1977 && date < 1992){
         data['lineColor'] = 'rgb(248,50,185)'
         data['circleColor'] = 'rgb(248,50,185)'
       }
-      else if (date > 1990){
+      else if (date >= 1992){
         data['lineColor'] = 'rgb(250,190,27)'
         data['circleColor'] = 'rgb(250,190,27)'
       }
@@ -144,6 +151,7 @@ class Frise extends React.Component{
               onValueChange={(itemValue,itemIndex) => this.setState({pickerValue : itemValue},() => {this.setDate()})}
             >
               <Picker.Item label={i18n.t('Picker1')} color='lightgray' value='tout'/>
+              <Picker.Item label={i18n.t('DebutDev')} color='rgb(29,41,219)' value='debut'/>
               <Picker.Item label="Phase 1" color='rgb(47,250,141)' value='p1'/>
               <Picker.Item label="Phase 2" color='rgb(248,50,185)' value='p2'/>
               <Picker.Item label="Phase 3" color='rgb(250,190,27)' value='p3'/>
