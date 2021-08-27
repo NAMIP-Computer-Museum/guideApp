@@ -11,7 +11,10 @@ export default images = {
     66 : require("./Commodore64.jpg"),
     23 : require("./DAI.jpg"),
     21 : require("./IBMPCAT.jpg"),
+    73 : require("./IBMPCConvertible.jpg"),
+    19 : require("./IBMPS2.jpg"),
     38 : require("./ORICATMOS.jpg"),
+    72 : require("./Osborne1.jpg"),
     71 : require("./R2EMicralNMaquette.jpg"),
     53 : require("./SinclairQL.jpg"),
     9  : require("./SinclairZX81.jpg"),
@@ -19,5 +22,5 @@ export default images = {
     26 : require("./ThomsonMO5.jpg"),
     12 : require("./TI994A.jpg"),
     41 : require("./TRS80M1.jpg"),
-    37 : require("./TRS80M3.jpg")
+    37 : require("./TRS80M3.jpg"),
 }
