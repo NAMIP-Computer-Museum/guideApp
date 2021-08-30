@@ -2,8 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet, Text, View,FlatList} from 'react-native';
 import VideoItem from './VideoItem Liste'
-import listeFr from '../../Data/DonneesVideos/VideoFr'
-import listeEn from '../../Data/DonneesVideos/VideoEn'
+import listeFr from '../../assets/database/Videos/ListeVideosFr.js'
+import listeEn from '../../assets/database/Videos/ListeVideosEn.js'
 import i18n from '../../Language/Translate'
 
 class ListeVideo extends React.Component{

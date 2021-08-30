@@ -1,13 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet, Text, View,ScrollView,Image,TouchableOpacity,ImageBackground} from 'react-native';
+import {StyleSheet, Text, View,Pressable,Image,TouchableOpacity,ImageBackground} from 'react-native';
 import Legende from './Legende.js'
 import images from '../../assets/database/Images/images.js'
-
+import videos from '../../assets/database/Videos/ListeVideosFr.js'
 
 class Detail extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      video:false,
+      dataVideo : []
+    }
+    this.verifVideo();
+  }
+
+  verifVideo = () =>{
+    const ordinateurID = this.props.navigation.state.params.dataOrdinateur.id;
+    for(let i = 0;i<videos.length;i++){
+      if(videos[i].id == ordinateurID){
+        this.state.video = true
+        this.state.dataVideo = videos[i];
+        break;
+      }
+    }
+  }
+
   render(){
-    const ordinateur = this.props.navigation.state.params.dataOrdinateur
+    const ordinateur = this.props.navigation.state.params.dataOrdinateur;
     return(
       <View style = {styles.main}>
           <View style={styles.ligne}/>
@@ -22,9 +42,15 @@ class Detail extends React.Component{
           <Text style = {styles.titre}>{ordinateur.title}</Text>
           <Legende id = {ordinateur.id} type={ordinateur.TYPE} time = {ordinateur.time}/>
           <View style={styles.ligne}/>
-          <View style = {styles.scroll}>
+          <View style = {styles.text}>
             <Text style = {styles.description}>{ordinateur.description}</Text>
           </View>
+          <View style={styles.ligne}/>
+          {this.state.video && <View style={styles.multimedia}>
+            <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("AfficheVideo",{videoUrl : this.state.dataVideo.videoURL})}}>
+              <Text style={styles.text_button}>Video</Text>
+            </Pressable>
+          </View>}
       </View>
     )
   }
@@ -34,6 +60,10 @@ const styles = StyleSheet.create({
   main:{
     flex:1,
     backgroundColor : 'black'
+  },
+  ligne:{
+    borderWidth:1,
+    borderColor:'white',
   },
   photo:{
     flex:4,
@@ -63,7 +93,7 @@ const styles = StyleSheet.create({
     fontStyle : 'italic',
     color : 'white'
   },
-  scroll:{
+  text:{
     flex:8
   },
   description:{
@@ -73,10 +103,25 @@ const styles = StyleSheet.create({
     marginHorizontal : 5,
     color : 'white'
   },
-  ligne:{
-    borderWidth:1,
-    borderColor:'white',
+  multimedia:{
+    flex : 2,
+    justifyContent : 'center'
   },
+  button:{
+    backgroundColor : 'white',
+    borderRadius : 10,
+    width : 200,
+    height : 50,
+    marginVertical : 5,
+    alignSelf : 'center',
+    justifyContent : 'center',
+    alignItems : 'center'
+  },
+  text_button:{
+    textAlign : 'center',
+    fontSize : 20,
+    fontWeight : 'bold'
+  }
 })
 
 export default Detail

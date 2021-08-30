@@ -29,9 +29,6 @@ class Acceuil extends React.Component{
           <Pressable style={styles.button_Video} onPress = {() => {this.props.navigation.navigate("ListeVideo")}}>
             <Text style={styles.text_button}> {i18n.t('acceuilBoutonVideo')} </Text>
           </Pressable>
-          <Pressable style={styles.button_QRCode} onPress = {() => {this.props.navigation.navigate("QRCodeScan")}}>
-            <Text style={styles.text_button}> {i18n.t('acceuilBoutonQRCode')} </Text>
-          </Pressable>
           <Pressable style={styles.button_Contact} onPress = {() => {this.props.navigation.navigate("APropos")}}>
             <Text style={styles.text_button}> {i18n.t('acceuilBoutonContact')} </Text>
           </Pressable>
