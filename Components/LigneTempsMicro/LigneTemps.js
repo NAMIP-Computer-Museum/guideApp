@@ -146,7 +146,9 @@ class Frise extends React.Component{
           <View style = {styles.legende}>
             <Picker
               style = {styles.picker}
+              numberOfLines = {2}
               dropdownIconColor = 'white'
+              mode = 'dropdown'
               selectedValue={this.state.pickerValue}
               onValueChange={(itemValue,itemIndex) => this.setState({pickerValue : itemValue},() => {this.setDate()})}
             >
@@ -156,22 +158,32 @@ class Frise extends React.Component{
               <Picker.Item label="Phase 2" color='rgb(248,50,185)' value='p2'/>
               <Picker.Item label="Phase 3" color='rgb(250,190,27)' value='p3'/>
             </Picker>
+          </View>
+          <View style = {styles.legende}>
             <CheckBox
+              tintColors = {{true : 'white',false : 'lightgray'}}
+              tintColor = {{true : 'white',false : 'lightgray'}}
               value={this.state.isMicro}
               onValueChange={(newValue) => this.setState({isMicro : newValue,Micro : this.state.isMicro ? 'notMicro' : 'Micro'},() => {this.fetchOrdinateur()})}
             />
             <Text style={styles.CheckText}>MICRO</Text>
             <CheckBox
+              tintColors = {{true : 'white',false : 'lightgray'}}
+              tintColor = {{true : 'white',false : 'lightgray'}}
               value={this.state.isOS}
               onValueChange={(newValue) => this.setState({isOS : newValue,Os : this.state.isOS ? 'notOS' : 'OS'},() => {this.fetchOrdinateur()})}
             />
             <Text style={styles.CheckText}>OS</Text>
             <CheckBox
+              tintColors = {{true : 'white',false : 'lightgray'}}
+              tintColor = {{true : 'white',false : 'lightgray'}}
               value={this.state.isIHM}
               onValueChange={(newValue) => this.setState({isIHM : newValue,Ihm : this.state.isIHM ? 'notIHM' : 'IHM'},() => {this.fetchOrdinateur()})}
             />
             <Text style={styles.CheckText}>IHM</Text>
             <CheckBox
+              tintColors = {{true : 'white',false : 'lightgray'}}
+              tintColor = {{true : 'white',false : 'lightgray'}}
               value={this.state.isCPU}
               onValueChange={(newValue) => this.setState({isCPU : newValue,Cpu : this.state.isCPU ? 'notCPU' : 'CPU'},() => {this.fetchOrdinateur()})}
             />
@@ -214,6 +226,7 @@ const styles = StyleSheet.create({
   legende:{
     flex:1,
     flexDirection: 'row',
+    justifyContent : 'center',
     alignItems : 'center',
     borderBottomWidth : 2,
     borderLeftWidth : 2,
@@ -222,7 +235,7 @@ const styles = StyleSheet.create({
   },
   picker:{
     height : 50,
-    width : 110,
+    width : 150
   },
   CheckText:{
     color:'white',
