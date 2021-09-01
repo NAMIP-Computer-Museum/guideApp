@@ -12,7 +12,7 @@ class Acceuil extends React.Component{
     }
 
     return (
-        <ImageBackground style={styles.ImageBackground} resizeMode = 'contain' source = {require('../assets/Accueil/affiche.png')}>
+        <ImageBackground style={styles.ImageBackground} resizeMode = 'contain' source = {require('../assets/Accueil/affiche.jpg')}>
         <View style={styles.main_top}>
           <TouchableOpacity style = {styles.icon} onPress={() => {changeLangue("fr-FR")}}>
             <Image style={styles.image} source = {require('../assets/Accueil/france.png')}/>
@@ -20,17 +20,23 @@ class Acceuil extends React.Component{
           <TouchableOpacity style = {styles.icon} onPress={() => {changeLangue("en")}}>
             <Image style={styles.image} source = {require('../assets/Accueil/united-kingdom.png')}/>
           </TouchableOpacity>
+          <TouchableOpacity style = {styles.icon} onPress={() => {changeLangue("nl-NL")}}>
+            <Image style={styles.image} source = {require('../assets/Accueil/netherlands.png')}/>
+          </TouchableOpacity>
           <Text style={styles.text}></Text>
         </View>
         <View style = {styles.main_bottom}>
+          <Pressable style={styles.button_Frise} onPress = {() => {this.props.navigation.navigate("Introduction")}}>
+            <Text style={styles.text_button}> {i18n.t('accueilBoutonIntro')} </Text>
+          </Pressable>
           <Pressable style={styles.button_Frise} onPress = {() => {this.props.navigation.navigate("Frise")}}>
-            <Text style={styles.text_button}> {i18n.t('acceuilBoutonFrise')} </Text>
+            <Text style={styles.text_button}> {i18n.t('accueilBoutonFrise')} </Text>
           </Pressable>
           <Pressable style={styles.button_Video} onPress = {() => {this.props.navigation.navigate("ListeVideo")}}>
-            <Text style={styles.text_button}> {i18n.t('acceuilBoutonVideo')} </Text>
+            <Text style={styles.text_button}> {i18n.t('accueilBoutonVideo')} </Text>
           </Pressable>
           <Pressable style={styles.button_Contact} onPress = {() => {this.props.navigation.navigate("APropos")}}>
-            <Text style={styles.text_button}> {i18n.t('acceuilBoutonContact')} </Text>
+            <Text style={styles.text_button}> {i18n.t('accueilBoutonContact')} </Text>
           </Pressable>
         </View>
         </ImageBackground>

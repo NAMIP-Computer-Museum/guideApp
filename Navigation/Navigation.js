@@ -7,7 +7,8 @@ import AfficheImage from '../Components/Affichage/AfficheImage'
 import ListeVideo from '../Components/Videos/ListeVideo'
 import AfficheVideo from '../Components/Affichage/AfficheVideo'
 import QRCode from '../Components/QRCode/QRCodeScan'
-import APropos from '../Components/APropos/APropos'
+import APropos from '../Components/Information/APropos'
+import Introduction from '../Components/Information/Introduction'
 
 
 const Navigation = createStackNavigator({
@@ -78,7 +79,17 @@ const Navigation = createStackNavigator({
       }
     },
     APropos:{
-        screen : APropos,
+      screen : APropos,
+      navigationOptions:{
+        title : "",
+        headerStyle:{
+          backgroundColor: 'black'
+        },
+        headerTintColor:'white'
+      }
+    },
+    Introduction:{
+      screen : Introduction,
       navigationOptions:{
         title : "",
         headerStyle:{

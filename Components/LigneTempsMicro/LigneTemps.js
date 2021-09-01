@@ -154,9 +154,9 @@ class Frise extends React.Component{
             >
               <Picker.Item label={i18n.t('Picker1')} color='lightgray' value='tout'/>
               <Picker.Item label={i18n.t('DebutDev')} color='rgb(29,41,219)' value='debut'/>
-              <Picker.Item label="Phase 1" color='rgb(47,250,141)' value='p1'/>
-              <Picker.Item label="Phase 2" color='rgb(248,50,185)' value='p2'/>
-              <Picker.Item label="Phase 3" color='rgb(250,190,27)' value='p3'/>
+              <Picker.Item label={i18n.t('Phase1')} color='rgb(47,250,141)' value='p1'/>
+              <Picker.Item label={i18n.t('Phase2')} color='rgb(248,50,185)' value='p2'/>
+              <Picker.Item label={i18n.t('Phase3')} color='rgb(250,190,27)' value='p3'/>
             </Picker>
           </View>
           <View style = {styles.legende}>
@@ -166,28 +166,28 @@ class Frise extends React.Component{
               value={this.state.isMicro}
               onValueChange={(newValue) => this.setState({isMicro : newValue,Micro : this.state.isMicro ? 'notMicro' : 'Micro'},() => {this.fetchOrdinateur()})}
             />
-            <Text style={styles.CheckText}>MICRO</Text>
+            <Text style={styles.CheckText}>{i18n.t("MicroCheck")}</Text>
             <CheckBox
               tintColors = {{true : 'white',false : 'lightgray'}}
               tintColor = {{true : 'white',false : 'lightgray'}}
               value={this.state.isOS}
               onValueChange={(newValue) => this.setState({isOS : newValue,Os : this.state.isOS ? 'notOS' : 'OS'},() => {this.fetchOrdinateur()})}
             />
-            <Text style={styles.CheckText}>OS</Text>
+            <Text style={styles.CheckText}>{i18n.t("OsCheck")}</Text>
             <CheckBox
               tintColors = {{true : 'white',false : 'lightgray'}}
               tintColor = {{true : 'white',false : 'lightgray'}}
               value={this.state.isIHM}
               onValueChange={(newValue) => this.setState({isIHM : newValue,Ihm : this.state.isIHM ? 'notIHM' : 'IHM'},() => {this.fetchOrdinateur()})}
             />
-            <Text style={styles.CheckText}>IHM</Text>
+            <Text style={styles.CheckText}>{i18n.t("IhmCheck")}</Text>
             <CheckBox
               tintColors = {{true : 'white',false : 'lightgray'}}
               tintColor = {{true : 'white',false : 'lightgray'}}
               value={this.state.isCPU}
               onValueChange={(newValue) => this.setState({isCPU : newValue,Cpu : this.state.isCPU ? 'notCPU' : 'CPU'},() => {this.fetchOrdinateur()})}
             />
-            <Text style={styles.CheckText}>CPU</Text>
+            <Text style={styles.CheckText}>{i18n.t("CpuCheck")}</Text>
           </View>
           <Timeline style = {styles.timeline}
             timeStyle = {styles.time}
