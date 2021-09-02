@@ -42,6 +42,7 @@ class Detail extends React.Component{
           <View style = {styles.text}>
             <Text style = {styles.description}>{ordinateur.description}</Text>
           </View>
+          <View style={styles.ligne}/>
           {this.state.video &&
             <View style={styles.multimedia}>
               <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("AfficheVideo",{videoUrl : this.state.dataVideo.videoURL})}}>
@@ -88,8 +89,6 @@ const styles = StyleSheet.create({
   },
   multimedia:{
     justifyContent : 'center',
-    borderTopWidth : 2,
-    borderColor : 'white'
   },
   button:{
     backgroundColor : 'white',
