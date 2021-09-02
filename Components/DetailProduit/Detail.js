@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet, Text, View,Pressable,Image,TouchableOpacity,ImageBackground} from 'react-native';
+import {StyleSheet,ScrollView, Text, View,Pressable,Image,TouchableOpacity,ImageBackground} from 'react-native';
 import Legende from './Legende.js'
 import images from '../../assets/database/Images/images.js'
 import videos from '../../assets/database/Videos/ListeVideosFr.js'
@@ -30,14 +30,11 @@ class Detail extends React.Component{
     const ordinateur = this.props.navigation.state.params.dataOrdinateur;
     return(
       <View style = {styles.main}>
+        <ScrollView>
           <View style={styles.ligne}/>
-          <View style = {styles.photo}>
-            <ImageBackground style = {styles.image} resizeMode = 'contain' source = {images[ordinateur.id]}>
-              <TouchableOpacity style={styles.zoom} onPress = {() => {this.props.navigation.navigate("Image",{id : ordinateur.id})}}>
-                <Image style={styles.iconZoom} source = {require('../../assets/Detail/zoom.png')}/>
-              </TouchableOpacity>
-            </ImageBackground>
-          </View>
+          <TouchableOpacity style={styles.photo} onPress = {() => {this.props.navigation.navigate("Image",{id : ordinateur.id})}}>
+            <Image style={styles.image} source = {images[ordinateur.id]}/>
+          </TouchableOpacity>
           <View style={styles.ligne}/>
           <Text style = {styles.titre}>{ordinateur.title}</Text>
           <Legende id = {ordinateur.id} type={ordinateur.TYPE} time = {ordinateur.time}/>
@@ -45,12 +42,14 @@ class Detail extends React.Component{
           <View style = {styles.text}>
             <Text style = {styles.description}>{ordinateur.description}</Text>
           </View>
-          <View style={styles.ligne}/>
-          {this.state.video && <View style={styles.multimedia}>
-            <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("AfficheVideo",{videoUrl : this.state.dataVideo.videoURL})}}>
-              <Text style={styles.text_button}>Video</Text>
-            </Pressable>
-          </View>}
+          {this.state.video &&
+            <View style={styles.multimedia}>
+              <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("AfficheVideo",{videoUrl : this.state.dataVideo.videoURL})}}>
+                <Text style={styles.text_button}>Video</Text>
+              </Pressable>
+            </View>
+          }
+        </ScrollView>
       </View>
     )
   }
@@ -66,46 +65,31 @@ const styles = StyleSheet.create({
     borderColor:'white',
   },
   photo:{
-    flex:4,
+    alignItems : 'center',
   },
   image:{
-    flex : 1,
-    justifyContent : 'flex-end'
-  },
-  zoom:{
-    position : 'absolute',
-    width : 40,
-    height : 40,
     margin : 5,
-  },
-  iconZoom:{
-    flex : 1,
-    width : 40,
-    height : 40,
-    tintColor : 'white'
+    resizeMode : 'contain',
+    height : 180
   },
   titre:{
-    flex:1,
     margin : 5,
-    fontSize : 30,
+    fontSize : 25,
     fontWeight : 'bold',
     textDecorationLine : 'underline',
     fontStyle : 'italic',
     color : 'white'
   },
-  text:{
-    flex:8
-  },
   description:{
-    flex:1,
     fontSize : 20,
     marginVertical : 10,
     marginHorizontal : 5,
     color : 'white'
   },
   multimedia:{
-    flex : 2,
-    justifyContent : 'center'
+    justifyContent : 'center',
+    borderTopWidth : 2,
+    borderColor : 'white'
   },
   button:{
     backgroundColor : 'white',

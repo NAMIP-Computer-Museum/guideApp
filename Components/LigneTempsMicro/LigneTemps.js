@@ -29,7 +29,9 @@ class Frise extends React.Component{
       isOS : false,
       Os : 'notOS',
       isCPU : false,
-      Cpu : 'notCPU'
+      Cpu : 'notCPU',
+      isApp : false,
+      App : 'notApp',
     }
     this.fetchOrdinateur()
   }
@@ -70,7 +72,7 @@ class Frise extends React.Component{
     db = SQLite.openDatabase("NAMIP.db");
     let requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescFR as description FROM GENERAL "+
                   "WHERE Annee >= ? and Annee < ? and TYPE REGEXP '"+this.state.Micro+"|"+
-                  this.state.Os+"|"+this.state.Ihm+"|"+this.state.Cpu+"' ORDER BY Annee ASC,Nom ASC"
+                  this.state.Os+"|"+this.state.Ihm+"|"+this.state.Cpu+"|"+this.state.App+"' ORDER BY Annee ASC,Nom ASC"
     db.transaction((tx) => {
         tx.executeSql(requete,[this.state.dateBasse,this.state.dateHaute],
           (tx,results)=>{
@@ -91,21 +93,23 @@ class Frise extends React.Component{
 
     colorPicker = (data) => {
       const date = parseInt(data.time);
-      if(date < 1973){
-        data['lineColor'] = 'rgb(29,41,219)'
-        data['circleColor'] = 'rgb(29,41,219)'
-      }
-      else if(date >= 1973 && date < 1977){
-        data['lineColor'] = 'rgb(47,250,141)'
-        data['circleColor'] = 'rgb(47,250,141)'
-      }
-      else if(date >= 1977 && date < 1992){
-        data['lineColor'] = 'rgb(248,50,185)'
-        data['circleColor'] = 'rgb(248,50,185)'
-      }
-      else if (date >= 1992){
-        data['lineColor'] = 'rgb(250,190,27)'
-        data['circleColor'] = 'rgb(250,190,27)'
+      switch(true){
+        case date < 1973 :
+          data['lineColor'] = 'rgb(29,41,219)'
+          data['circleColor'] = 'rgb(29,41,219)'
+          break;
+        case date >= 1973 && date < 1977 :
+          data['lineColor'] = 'rgb(47,250,141)'
+          data['circleColor'] = 'rgb(47,250,141)'
+          break;
+        case date >= 1977 && date < 1992 :
+          data['lineColor'] = 'rgb(248,50,185)'
+          data['circleColor'] = 'rgb(248,50,185)'
+          break;
+        case date >= 1992 :
+          data['lineColor'] = 'rgb(250,190,27)'
+          data['circleColor'] = 'rgb(250,190,27)'
+          break;
       }
       return data;
     }
@@ -133,6 +137,9 @@ class Frise extends React.Component{
         this.props.navigation.navigate("Detail",{dataOrdinateur: data})
       }
       else if(data.TYPE === 'CPU'){
+        this.props.navigation.navigate("Detail",{dataOrdinateur: data})
+      }
+      else if(data.TYPE === 'APP'){
         this.props.navigation.navigate("Detail",{dataOrdinateur: data})
       }
     }
@@ -188,6 +195,13 @@ class Frise extends React.Component{
               onValueChange={(newValue) => this.setState({isCPU : newValue,Cpu : this.state.isCPU ? 'notCPU' : 'CPU'},() => {this.fetchOrdinateur()})}
             />
             <Text style={styles.CheckText}>{i18n.t("CpuCheck")}</Text>
+            <CheckBox
+              tintColors = {{true : 'white',false : 'lightgray'}}
+              tintColor = {{true : 'white',false : 'lightgray'}}
+              value={this.state.isApp}
+              onValueChange={(newValue) => this.setState({isApp : newValue,App : this.state.isApp ? 'notApp' : 'APP'},() => {this.fetchOrdinateur()})}
+            />
+            <Text style={styles.CheckText}>{i18n.t("AppCheck")}</Text>
           </View>
           <Timeline style = {styles.timeline}
             timeStyle = {styles.time}
