@@ -142,6 +142,9 @@ class Frise extends React.Component{
       else if(data.TYPE === 'APP'){
         this.props.navigation.navigate("Detail",{dataOrdinateur: data})
       }
+      else if(data.TYPE === 'OS'){
+        this.props.navigation.navigate("Detail",{dataOrdinateur: data})
+      }
     }
 
     render(){
