@@ -7,6 +7,7 @@ import listeEn from '../../assets/database/Videos/ListeVideosEn.js'
 import i18n from '../../Language/Translate'
 
 class ListeVideo extends React.Component{
+
   testLocale(){
     if(i18n.locale === 'en'){
       return (listeEn)

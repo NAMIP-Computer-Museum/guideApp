@@ -33,10 +33,10 @@ class Frise extends React.Component{
       isApp : false,
       App : 'notApp',
     }
-    this.fetchOrdinateur()
+    this.fetchDataBD()
   }
 
-  setDate = () =>{
+  setDatePicker = () =>{
     switch(this.state.pickerValue){
       case 'debut':
         this.setState({dateBasse:0,dateHaute:1973});
@@ -54,10 +54,10 @@ class Frise extends React.Component{
         this.setState({dateBasse:0,dateHaute:2021});
         break;
     }
-    this.fetchOrdinateur();
+    this.fetchDataBD();
   }
 
-  fetchOrdinateur = async() =>{
+  fetchDataBD = async() =>{
     let dirInfo;
     try {
       dirInfo = await FileSystem.getInfoAsync(`${FileSystem.documentDirectory}SQLite`);
@@ -79,7 +79,7 @@ class Frise extends React.Component{
             var taille = results.rows.length
             let tableau = []
             for(let i=0;i<taille;i++){
-              const data = this.colorPicker(results.rows.item(i))
+              const data = this.addColorData(results.rows.item(i))
               tableau.push(data)
             }
             this.setState({data : tableau})
@@ -91,7 +91,7 @@ class Frise extends React.Component{
       })
     }
 
-    colorPicker = (data) => {
+    addColorData = (data) => {
       const date = parseInt(data.time);
       switch(true){
         case date < 1973 :
@@ -160,7 +160,7 @@ class Frise extends React.Component{
               dropdownIconColor = 'white'
               mode = 'dropdown'
               selectedValue={this.state.pickerValue}
-              onValueChange={(itemValue,itemIndex) => this.setState({pickerValue : itemValue},() => {this.setDate()})}
+              onValueChange={(itemValue,itemIndex) => this.setState({pickerValue : itemValue},() => {this.setDatePicker()})}
             >
               <Picker.Item label={i18n.t('Picker1')} color='lightgray' value='tout'/>
               <Picker.Item label={i18n.t('DebutDev')} color='rgb(29,41,219)' value='debut'/>
@@ -174,35 +174,35 @@ class Frise extends React.Component{
               tintColors = {{true : 'white',false : 'lightgray'}}
               tintColor = {{true : 'white',false : 'lightgray'}}
               value={this.state.isMicro}
-              onValueChange={(newValue) => this.setState({isMicro : newValue,Micro : this.state.isMicro ? 'notMicro' : 'Micro'},() => {this.fetchOrdinateur()})}
+              onValueChange={(newValue) => this.setState({isMicro : newValue,Micro : this.state.isMicro ? 'notMicro' : 'Micro'},() => {this.fetchDataBD()})}
             />
             <Text style={styles.CheckText}>{i18n.t("MicroCheck")}</Text>
             <CheckBox
               tintColors = {{true : 'white',false : 'lightgray'}}
               tintColor = {{true : 'white',false : 'lightgray'}}
               value={this.state.isOS}
-              onValueChange={(newValue) => this.setState({isOS : newValue,Os : this.state.isOS ? 'notOS' : 'OS'},() => {this.fetchOrdinateur()})}
+              onValueChange={(newValue) => this.setState({isOS : newValue,Os : this.state.isOS ? 'notOS' : 'OS'},() => {this.fetchDataBD()})}
             />
             <Text style={styles.CheckText}>{i18n.t("OsCheck")}</Text>
             <CheckBox
               tintColors = {{true : 'white',false : 'lightgray'}}
               tintColor = {{true : 'white',false : 'lightgray'}}
               value={this.state.isIHM}
-              onValueChange={(newValue) => this.setState({isIHM : newValue,Ihm : this.state.isIHM ? 'notIHM' : 'IHM'},() => {this.fetchOrdinateur()})}
+              onValueChange={(newValue) => this.setState({isIHM : newValue,Ihm : this.state.isIHM ? 'notIHM' : 'IHM'},() => {this.fetchDataBD()})}
             />
             <Text style={styles.CheckText}>{i18n.t("IhmCheck")}</Text>
             <CheckBox
               tintColors = {{true : 'white',false : 'lightgray'}}
               tintColor = {{true : 'white',false : 'lightgray'}}
               value={this.state.isCPU}
-              onValueChange={(newValue) => this.setState({isCPU : newValue,Cpu : this.state.isCPU ? 'notCPU' : 'CPU'},() => {this.fetchOrdinateur()})}
+              onValueChange={(newValue) => this.setState({isCPU : newValue,Cpu : this.state.isCPU ? 'notCPU' : 'CPU'},() => {this.fetchDataBD()})}
             />
             <Text style={styles.CheckText}>{i18n.t("CpuCheck")}</Text>
             <CheckBox
               tintColors = {{true : 'white',false : 'lightgray'}}
               tintColor = {{true : 'white',false : 'lightgray'}}
               value={this.state.isApp}
-              onValueChange={(newValue) => this.setState({isApp : newValue,App : this.state.isApp ? 'notApp' : 'APP'},() => {this.fetchOrdinateur()})}
+              onValueChange={(newValue) => this.setState({isApp : newValue,App : this.state.isApp ? 'notApp' : 'APP'},() => {this.fetchDataBD()})}
             />
             <Text style={styles.CheckText}>{i18n.t("AppCheck")}</Text>
           </View>

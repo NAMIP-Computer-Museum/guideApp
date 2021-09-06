@@ -3,24 +3,31 @@ import React from 'react';
 import {StyleSheet, Text, View ,Pressable,ImageBackground,TouchableOpacity,Image} from 'react-native';
 import i18n from '../Language/Translate'
 
-
 class Acceuil extends React.Component{
-  render(){
-    const changeLangue = (lng) => {
-      i18n.locale = lng
-      this.forceUpdate()
+  constructor(props){
+    super(props)
+    this.state = {
+      locale : "fr-FR"
     }
+  }
 
+  changeLangue = () =>{
+    i18n.locale = this.state.locale;
+    this.forceUpdate()
+  }
+
+
+  render(){
     return (
         <ImageBackground style={styles.ImageBackground} resizeMode = 'contain' source = {require('../assets/Accueil/affiche.jpg')}>
         <View style={styles.main_top}>
-          <TouchableOpacity style = {styles.icon} onPress={() => {changeLangue("fr-FR")}}>
+          <TouchableOpacity style = {styles.icon} onPress={() => {this.setState({locale : "fr-FR"},() => {this.changeLangue()})}}>
             <Image style={styles.image} source = {require('../assets/Accueil/france.png')}/>
           </TouchableOpacity>
-          <TouchableOpacity style = {styles.icon} onPress={() => {changeLangue("en")}}>
+          <TouchableOpacity style = {styles.icon} onPress={() => {this.setState({locale : "en"},() => {this.changeLangue()})}}>
             <Image style={styles.image} source = {require('../assets/Accueil/united-kingdom.png')}/>
           </TouchableOpacity>
-          <TouchableOpacity style = {styles.icon} onPress={() => {changeLangue("nl-NL")}}>
+          <TouchableOpacity style = {styles.icon} onPress={() => {this.setState({locale : "nl-NL"},() => {this.changeLangue()})}}>
             <Image style={styles.image} source = {require('../assets/Accueil/netherlands.png')}/>
           </TouchableOpacity>
           <Text style={styles.text}></Text>

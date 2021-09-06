@@ -11,7 +11,7 @@ class Legende extends React.Component{
     this.state={
       data:[]
     }
-    this.recupData(this.props.type,this.props.id);
+    this.fetchLegendeData(this.props.type,this.props.id);
   }
   render(){
     switch(this.props.type){
@@ -138,7 +138,7 @@ class Legende extends React.Component{
     }
   }
 
-  recupData = async(type,id) =>{
+  fetchLegendeData = async(type,id) =>{
     let requete;
     switch (type) {
       case 'Micro':

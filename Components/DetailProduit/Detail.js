@@ -12,10 +12,10 @@ class Detail extends React.Component{
       video:false,
       dataVideo : []
     }
-    this.verifVideo();
+    this.testDonneeVideo();
   }
 
-  verifVideo = () =>{
+  testDonneeVideo = () =>{
     const ordinateurID = this.props.navigation.state.params.dataOrdinateur.id;
     for(let i = 0;i<videos.length;i++){
       if(videos[i].id == ordinateurID){
