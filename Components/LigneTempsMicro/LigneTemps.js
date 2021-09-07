@@ -17,10 +17,11 @@ class Frise extends React.Component{
     super(props)
     this.state={
       data:[],
-      //date
+      //Aspect Frise
       pickerValue : 'tout',
       dateBasse : 0,
       dateHaute : 2021,
+      isSimple : false,
       //type
       isMicro : true,
       Micro : 'Micro',
@@ -79,7 +80,8 @@ class Frise extends React.Component{
             var taille = results.rows.length
             let tableau = []
             for(let i=0;i<taille;i++){
-              const data = this.addColorData(results.rows.item(i))
+              const data = this.addColorData(results.rows.item(i));
+              data['Simplifie'] = this.state.isSimple;
               tableau.push(data)
             }
             this.setState({data : tableau})
@@ -114,10 +116,10 @@ class Frise extends React.Component{
       return data;
     }
 
-    renderDetail(rowData,sectionID, rowID){
+    renderDetail = (rowData,sectionID, rowID) =>{
       let title = <Text style = {styles.title}>{rowData.title}</Text>
       var desc = null
-      if(rowData.description)
+      if(!rowData.Simplifie)
         desc = (
           <View style={styles.main_content}>
             <Image source={images[rowData.id]} style={styles.image}/>
@@ -153,10 +155,10 @@ class Frise extends React.Component{
           <View style = {styles.titre}>
             <Text style = {styles.text}>{i18n.t('friseTexte')}</Text>
           </View>
-          <View style = {styles.legende}>
+          <View style = {styles.legendeHaut}>
             <Picker
               style = {styles.picker}
-              numberOfLines = {2}
+              numberOfLines = {1}
               dropdownIconColor = 'white'
               mode = 'dropdown'
               selectedValue={this.state.pickerValue}
@@ -168,43 +170,60 @@ class Frise extends React.Component{
               <Picker.Item label={i18n.t('Phase2')} color='rgb(248,50,185)' value='p2'/>
               <Picker.Item label={i18n.t('Phase3')} color='rgb(250,190,27)' value='p3'/>
             </Picker>
+            <CheckBox
+              tintColors = {{true : 'white',false : 'lightgray'}}
+              tintColor = {{true : 'white',false : 'lightgray'}}
+              value={this.state.isSimple}
+              onValueChange={(newValue) => this.setState({isSimple : newValue},() => {this.fetchDataBD()})}
+            />
+            <Text style={styles.CheckText}>{i18n.t("SimpleCheck")}</Text>
           </View>
-          <View style = {styles.legende}>
-            <CheckBox
-              tintColors = {{true : 'white',false : 'lightgray'}}
-              tintColor = {{true : 'white',false : 'lightgray'}}
-              value={this.state.isMicro}
-              onValueChange={(newValue) => this.setState({isMicro : newValue,Micro : this.state.isMicro ? 'notMicro' : 'Micro'},() => {this.fetchDataBD()})}
-            />
-            <Text style={styles.CheckText}>{i18n.t("MicroCheck")}</Text>
-            <CheckBox
-              tintColors = {{true : 'white',false : 'lightgray'}}
-              tintColor = {{true : 'white',false : 'lightgray'}}
-              value={this.state.isOS}
-              onValueChange={(newValue) => this.setState({isOS : newValue,Os : this.state.isOS ? 'notOS' : 'OS'},() => {this.fetchDataBD()})}
-            />
-            <Text style={styles.CheckText}>{i18n.t("OsCheck")}</Text>
-            <CheckBox
-              tintColors = {{true : 'white',false : 'lightgray'}}
-              tintColor = {{true : 'white',false : 'lightgray'}}
-              value={this.state.isIHM}
-              onValueChange={(newValue) => this.setState({isIHM : newValue,Ihm : this.state.isIHM ? 'notIHM' : 'IHM'},() => {this.fetchDataBD()})}
-            />
-            <Text style={styles.CheckText}>{i18n.t("IhmCheck")}</Text>
-            <CheckBox
-              tintColors = {{true : 'white',false : 'lightgray'}}
-              tintColor = {{true : 'white',false : 'lightgray'}}
-              value={this.state.isCPU}
-              onValueChange={(newValue) => this.setState({isCPU : newValue,Cpu : this.state.isCPU ? 'notCPU' : 'CPU'},() => {this.fetchDataBD()})}
-            />
-            <Text style={styles.CheckText}>{i18n.t("CpuCheck")}</Text>
-            <CheckBox
-              tintColors = {{true : 'white',false : 'lightgray'}}
-              tintColor = {{true : 'white',false : 'lightgray'}}
-              value={this.state.isApp}
-              onValueChange={(newValue) => this.setState({isApp : newValue,App : this.state.isApp ? 'notApp' : 'APP'},() => {this.fetchDataBD()})}
-            />
-            <Text style={styles.CheckText}>{i18n.t("AppCheck")}</Text>
+          <View style = {styles.legendeBas}>
+            <View style = {styles.checkbox}>
+              <CheckBox
+                tintColors = {{true : 'white',false : 'lightgray'}}
+                tintColor = {{true : 'white',false : 'lightgray'}}
+                value={this.state.isMicro}
+                onValueChange={(newValue) => this.setState({isMicro : newValue,Micro : this.state.isMicro ? 'notMicro' : 'Micro'},() => {this.fetchDataBD()})}
+              />
+              <Text style={styles.CheckText}>{i18n.t("MicroCheck")}</Text>
+            </View>
+            <View style = {styles.checkbox}>
+              <CheckBox
+                tintColors = {{true : 'white',false : 'lightgray'}}
+                tintColor = {{true : 'white',false : 'lightgray'}}
+                value={this.state.isOS}
+                onValueChange={(newValue) => this.setState({isOS : newValue,Os : this.state.isOS ? 'notOS' : 'OS'},() => {this.fetchDataBD()})}
+              />
+              <Text style={styles.CheckText}>{i18n.t("OsCheck")}</Text>
+            </View>
+            <View style = {styles.checkbox}>
+              <CheckBox
+                tintColors = {{true : 'white',false : 'lightgray'}}
+                tintColor = {{true : 'white',false : 'lightgray'}}
+                value={this.state.isIHM}
+                onValueChange={(newValue) => this.setState({isIHM : newValue,Ihm : this.state.isIHM ? 'notIHM' : 'IHM'},() => {this.fetchDataBD()})}
+              />
+              <Text style={styles.CheckText}>{i18n.t("IhmCheck")}</Text>
+            </View>
+            <View style = {styles.checkbox}>
+              <CheckBox
+                tintColors = {{true : 'white',false : 'lightgray'}}
+                tintColor = {{true : 'white',false : 'lightgray'}}
+                value={this.state.isCPU}
+                onValueChange={(newValue) => this.setState({isCPU : newValue,Cpu : this.state.isCPU ? 'notCPU' : 'CPU'},() => {this.fetchDataBD()})}
+              />
+              <Text style={styles.CheckText}>{i18n.t("CpuCheck")}</Text>
+            </View>
+            <View style = {styles.checkbox}>
+              <CheckBox
+                tintColors = {{true : 'white',false : 'lightgray'}}
+                tintColor = {{true : 'white',false : 'lightgray'}}
+                value={this.state.isApp}
+                onValueChange={(newValue) => this.setState({isApp : newValue,App : this.state.isApp ? 'notApp' : 'APP'},() => {this.fetchDataBD()})}
+              />
+              <Text style={styles.CheckText}>{i18n.t("AppCheck")}</Text>
+            </View>
           </View>
           <Timeline style = {styles.timeline}
             timeStyle = {styles.time}
@@ -240,8 +259,10 @@ const styles = StyleSheet.create({
     margin : 5,
   },
   //Legende
-  legende:{
+  legendeHaut:{
     flex:1,
+    flexWrap : 'wrap',
+    alignContent : 'center',
     flexDirection: 'row',
     justifyContent : 'center',
     alignItems : 'center',
@@ -250,20 +271,39 @@ const styles = StyleSheet.create({
     borderRightWidth : 2,
     borderColor : 'white'
   },
+  legendeBas:{
+    flex:1,
+    flexDirection : 'row',
+    justifyContent : 'center',
+    alignItems : 'center',
+    flexWrap : 'wrap',
+    alignContent : 'center',
+    borderBottomWidth : 2,
+    borderLeftWidth : 2,
+    borderRightWidth : 2,
+    borderColor : 'white'
+  },
+  checkbox:{
+    flex : 1,
+    flexDirection : 'row',
+    justifyContent : 'center',
+    alignItems : 'center',
+    marginLeft : 10
+  },
   picker:{
     height : 50,
-    width : 150
+    width : 130
   },
   CheckText:{
     color:'white',
     fontWeight:'bold',
     fontSize : 12,
     marginRight : 15,
-    marginLeft : 2
+    marginLeft : 2,
   },
   //Ligne du temps
   timeline:{
-    flex:9,
+    flex:8,
     marginTop : 5,
   },
   time:{

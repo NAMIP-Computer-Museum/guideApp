@@ -21,6 +21,8 @@ class Acceuil extends React.Component{
     return (
         <ImageBackground style={styles.ImageBackground} resizeMode = 'contain' source = {require('../assets/Accueil/affiche.jpg')}>
         <View style={styles.main_top}>
+        </View>
+        <View style={styles.main_middle}>
           <TouchableOpacity style = {styles.icon} onPress={() => {this.setState({locale : "fr-FR"},() => {this.changeLangue()})}}>
             <Image style={styles.image} source = {require('../assets/Accueil/france.png')}/>
           </TouchableOpacity>
@@ -30,19 +32,18 @@ class Acceuil extends React.Component{
           <TouchableOpacity style = {styles.icon} onPress={() => {this.setState({locale : "nl-NL"},() => {this.changeLangue()})}}>
             <Image style={styles.image} source = {require('../assets/Accueil/netherlands.png')}/>
           </TouchableOpacity>
-          <Text style={styles.text}></Text>
         </View>
         <View style = {styles.main_bottom}>
-          <Pressable style={styles.button_Frise} onPress = {() => {this.props.navigation.navigate("Introduction")}}>
+          <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("Introduction")}}>
             <Text style={styles.text_button}> {i18n.t('accueilBoutonIntro')} </Text>
           </Pressable>
-          <Pressable style={styles.button_Frise} onPress = {() => {this.props.navigation.navigate("Frise")}}>
+          <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("Frise")}}>
             <Text style={styles.text_button}> {i18n.t('accueilBoutonFrise')} </Text>
           </Pressable>
-          <Pressable style={styles.button_Video} onPress = {() => {this.props.navigation.navigate("ListeVideo")}}>
+          <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("ListeVideo")}}>
             <Text style={styles.text_button}> {i18n.t('accueilBoutonVideo')} </Text>
           </Pressable>
-          <Pressable style={styles.button_Contact} onPress = {() => {this.props.navigation.navigate("APropos")}}>
+          <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("APropos")}}>
             <Text style={styles.text_button}> {i18n.t('accueilBoutonContact')} </Text>
           </Pressable>
         </View>
@@ -58,65 +59,38 @@ const styles = StyleSheet.create({
 
   },
   main_top:{
-    flex : 1
+    flex : 2,
+  },
+  main_middle:{
+    flex : 1,
+    flexDirection : 'row',
+    justifyContent : 'center',
+    alignItems : 'flex-end'
   },
   icon:{
-    top : 40,
-    marginLeft: 10,
-    width:40,
-    height:40
+    marginBottom : 10,
+    marginLeft: 5,
+    width:50,
+    height:35,
+    borderWidth : 3,
+    borderColor : 'white',
+    borderRadius : 25
   },
   image:{
     width:40,
-    height:40
-  },
-  text:{
-    fontSize : 40,
-    top : 50,
-    fontWeight : 'bold',
-    color : 'white',
-    textAlign : 'center',
+    height:30,
+    resizeMode : 'contain'
   },
   main_bottom:{
-    flex : 1,
-  },
-  button_Frise:{
-    backgroundColor : 'white',
-    borderRadius : 10,
-    width : 200,
-    height : 50,
-    marginVertical : 5,
-    alignSelf : 'center',
-    justifyContent : 'center',
+    flex : 3,
     alignItems : 'center'
   },
-  button_Video:{
+  button:{
     backgroundColor : 'white',
     borderRadius : 10,
     width : 200,
     height : 50,
     marginVertical : 5,
-    alignSelf : 'center',
-    justifyContent : 'center',
-    alignItems : 'center'
-  },
-  button_QRCode:{
-    backgroundColor : 'white',
-    borderRadius : 10,
-    width : 200,
-    height : 50,
-    marginVertical : 5,
-    alignSelf : 'center',
-    justifyContent : 'center',
-    alignItems : 'center'
-  },
-  button_Contact:{
-    backgroundColor : 'white',
-    borderRadius : 10,
-    width : 200,
-    height : 50,
-    marginVertical : 5,
-    alignSelf : 'center',
     justifyContent : 'center',
     alignItems : 'center'
   },

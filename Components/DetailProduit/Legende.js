@@ -194,6 +194,7 @@ const styles = StyleSheet.create({
     margin : 5,
     flexDirection: 'row',
     alignItems : 'center',
+    flexWrap : 'wrap',
   },
   icon:{
     width : 20,
