@@ -48,9 +48,7 @@ class QuizComponent extends React.Component{
     if(!this.state.afficheScore){
      return(
       <View style = {styles.main}>
-        <View style = {styles.nombre}>
-          <Text style = {styles.enCours}>{i18n.t("questionQuiz")} : {this.state.indexQuestion+1} / {quiz.length}</Text>
-        </View>
+        <Text style = {styles.enCours}>{i18n.t("questionQuiz")} : {this.state.indexQuestion+1} / {quiz.length}</Text>
         <View style = {styles.question}>
           <MultipleQuestion continue = {this.continue} question = {quiz[this.state.indexQuestion]} score={this.state.score}/>
         </View>
@@ -93,21 +91,16 @@ class QuizComponent extends React.Component{
 const styles = StyleSheet.create({
   main : {
     flex : 1,
-    backgroundColor : 'black'
-  },
-  nombre : {
-    flex : 0.5,
-    alignItems : 'center',
-    marginVertical : 10
+    backgroundColor : 'black',
   },
   enCours: {
+    flex : 0.8,
     color : 'white',
     fontWeight : 'bold',
     fontSize : 20,
     textAlign : 'center',
-    borderBottomWidth : 2,
-    borderBottomColor : 'white',
-    paddingBottom : 5
+    marginTop : 5,
+    textDecorationLine : 'underline'
   },
   question:{
     flex : 10

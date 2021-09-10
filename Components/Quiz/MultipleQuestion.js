@@ -82,33 +82,36 @@ class MultipleQuestion extends React.Component{
 }
 
 const styles = StyleSheet.create({
+  main : {
+    flex : 1
+  },
   question : {
-    margin : 10,
-    alignItems : 'center'
+    alignItems : 'center',
+    marginBottom : 10
   },
   styleQuestion : {
     color : 'white',
     fontWeight : 'bold',
     fontSize : 20,
     textAlign : 'center',
-    borderBottomWidth : 2,
-    borderBottomColor : 'white',
-    paddingBottom : 5
+    textDecorationLine : 'underline'
   },
   image:{
+    flex : 2,
     alignItems : 'center',
     justifyContent : 'center',
-    margin : 5
   },
   images : {
+    flex : 1,
     borderWidth : 2,
     borderColor : 'white',
-    height : 200,
-    width : 300,
+    height : "50%",
+    width : "60%",
     resizeMode : 'contain'
   },
   reponse : {
-    margin : 10
+    margin : 5,
+    flex : 5
   },
   styleTouchable : {
     fontWeight : 'bold',
