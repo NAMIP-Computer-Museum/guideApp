@@ -9,7 +9,7 @@ import AfficheVideo from '../Components/Affichage/AfficheVideo'
 import QRCode from '../Components/QRCode/QRCodeScan'
 import APropos from '../Components/Information/APropos'
 import Introduction from '../Components/Information/Introduction'
-
+import Quiz from '../Components/Quiz/QuizComponent'
 
 const Navigation = createStackNavigator({
     Accueil:{
@@ -94,6 +94,18 @@ const Navigation = createStackNavigator({
         title : "",
         headerStyle:{
           backgroundColor: 'black'
+        },
+        headerTintColor:'white'
+      }
+    },
+    Quiz:{
+      screen : Quiz,
+      navigationOptions:{
+        title : "",
+        headerStyle:{
+          backgroundColor: 'black',
+          borderBottomWidth : 2,
+          borderBottomColor : 'white'
         },
         headerTintColor:'white'
       }

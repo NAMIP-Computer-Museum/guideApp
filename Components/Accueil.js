@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet, Text, View ,Pressable,ImageBackground,TouchableOpacity,Image} from 'react-native';
+import {StyleSheet,ScrollView, Text, View ,Pressable,ImageBackground,TouchableOpacity,Image} from 'react-native';
 import i18n from '../Language/Translate'
 
 class Acceuil extends React.Component{
@@ -43,6 +43,9 @@ class Acceuil extends React.Component{
           <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("ListeVideo")}}>
             <Text style={styles.text_button}> {i18n.t('accueilBoutonVideo')} </Text>
           </Pressable>
+          <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("Quiz")}}>
+            <Text style={styles.text_button}> {i18n.t('accueilBoutonQuiz')} </Text>
+          </Pressable>
           <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("APropos")}}>
             <Text style={styles.text_button}> {i18n.t('accueilBoutonContact')} </Text>
           </Pressable>
@@ -83,13 +86,13 @@ const styles = StyleSheet.create({
   },
   main_bottom:{
     flex : 3,
-    alignItems : 'center'
+    alignItems : 'center',
   },
   button:{
     backgroundColor : 'white',
     borderRadius : 10,
     width : 200,
-    height : 50,
+    height : 45,
     marginVertical : 5,
     justifyContent : 'center',
     alignItems : 'center'
