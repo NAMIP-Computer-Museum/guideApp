@@ -33,6 +33,8 @@ i18n.translations = {
     scoreQuiz : "Score",
     resultatQuiz : "Score Quiz",
     resetQuiz : "Ressayer",
+    reponseWritingQuestion : "Reponse : ",
+    validerReponse : "Valider Reponse",
     TitreApropos : "A Propos",
     DescriptionApropos : "Merci d'avoir visité l'expo pour plus de contact ..."
   },
@@ -68,6 +70,8 @@ i18n.translations = {
     scoreQuiz : "Score",
     resultatQuiz : "Quiz Score",
     resetQuiz : "Reset",
+    reponseWritingQuestion : "Answer : ",
+    validerReponse : "Validate Answer",
     TitreApropos : "About us",
     DescriptionApropos : "Thank you for visiting the expo for more contact ..."
   },
@@ -103,6 +107,8 @@ i18n.translations = {
     scoreQuiz : "Scoren",
     resultatQuiz : "Score Quiz",
     resetQuiz : "Resetten",
+    reponseWritingQuestion : "Antwoord : ",
+    validerReponse : "Bevestig Antwoord",
     TitreApropos : "Over ons",
     DescriptionApropos : "Bedankt voor uw bezoek aan de expo voor meer contact ..."
   }

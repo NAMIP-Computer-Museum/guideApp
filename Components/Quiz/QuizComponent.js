@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet,View,Pressable,Text,Image} from 'react-native';
 import MultipleQuestion from './MultipleQuestion';
+import WritingQuestion from './WritingQuestion';
 import i18n from '../../Language/Translate'
 import quiz from '../../assets/Quiz/quizData';
 
@@ -49,9 +50,16 @@ class QuizComponent extends React.Component{
      return(
       <View style = {styles.main}>
         <Text style = {styles.enCours}>{i18n.t("questionQuiz")} : {this.state.indexQuestion+1} / {quiz.length}</Text>
-        <View style = {styles.question}>
-          <MultipleQuestion continue = {this.continue} question = {quiz[this.state.indexQuestion]} score={this.state.score}/>
-        </View>
+        {quiz[this.state.indexQuestion].questionType === "multiple" &&
+          <View style = {styles.question}>
+            <MultipleQuestion continue = {this.continue} question = {quiz[this.state.indexQuestion]} score={this.state.score}/>
+          </View>
+        }
+        {quiz[this.state.indexQuestion].questionType === "writing" &&
+          <View style = {styles.question}>
+            <WritingQuestion continue = {this.continue} question = {quiz[this.state.indexQuestion]} score={this.state.score}/>
+          </View>
+        }
         {this.state.questionSuivante && !this.state.derniereQuestion &&
           <View style = {styles.continue}>
             <Pressable style={styles.button} onPress = {() => {this.changeQuestion()}}>
