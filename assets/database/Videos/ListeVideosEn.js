@@ -9,7 +9,7 @@ export default data = [
     id:55,
     title:"Video Altaïr 8800",
     description:"Explanation on the creation of the Altaïr 8800",
-    videoURL:"https://www.youtube.com/watch?v=8byVZ8_D3ZA"
+    videoURL: require('./altair01.mp4')
   },
   {
     id : 32,

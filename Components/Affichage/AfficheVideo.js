@@ -5,12 +5,10 @@ import {Video} from 'expo-av'
 import * as ScreenOrientation from 'expo-screen-orientation'
 import YoutubePlayer from 'react-native-youtube-iframe'
 
-
-
 class AfficheVideo extends React.Component{
   render(){
     const videoURL = this.props.navigation.state.params.videoUrl
-    if(videoURL.includes("youtu.be") || videoURL.includes("youtube")){
+    if(typeof videoURL=== 'string' && (videoURL.includes("youtu.be") || videoURL.includes("youtube"))){
       const split = videoURL.split("=");
       const id = split[1];
       return(
@@ -35,7 +33,7 @@ class AfficheVideo extends React.Component{
       return(
         <View style={styles.main}>
           <Video
-            source = {{uri : videoURL}}
+            source = {videoURL}
             shouldPlay
             style = {styles.video}
             resizeMode="contain"
