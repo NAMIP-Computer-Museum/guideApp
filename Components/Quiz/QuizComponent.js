@@ -19,16 +19,17 @@ class QuizComponent extends React.Component{
   }
 
   continue = (score) =>{
-    this.setState({score : score,questionSuivante : true});
+    this.setState({score : score});
+    if(this.state.indexQuestion+1 == quiz.length){
+      this.setState({questionSuivante : false,derniereQuestion : true})
+    }
+    else{
+      this.setState({questionSuivante : true})
+    }
   }
 
-  changeQuestion = () =>{
-    if(this.state.indexQuestion+1 != quiz.length){
-      this.setState({indexQuestion : this.state.indexQuestion+1 , questionSuivante : false})
-    }
-    else if(this.state.indexQuestion+1 == quiz.length){
-      this.setState({derniereQuestion : true,questionSuivante : false})
-    }
+  changeQuestion = async() =>{
+    this.setState({indexQuestion : this.state.indexQuestion+1,questionSuivante:false})
   }
 
   afficheScore = () =>{
@@ -60,7 +61,7 @@ class QuizComponent extends React.Component{
             <WritingQuestion continue = {this.continue} question = {quiz[this.state.indexQuestion]} score={this.state.score}/>
           </View>
         }
-        {this.state.questionSuivante && this.state.derniereQuestion == false &&
+        {this.state.questionSuivante && !this.state.derniereQuestion &&
           <View style = {styles.continue}>
             <Pressable style={styles.button} onPress = {() => {this.changeQuestion()}}>
               <Text style={styles.text_button}>{i18n.t("continueQuiz")}</Text>
