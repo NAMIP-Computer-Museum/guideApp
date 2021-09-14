@@ -9,10 +9,10 @@ import i18n from '../../Language/Translate'
 class ListeVideo extends React.Component{
 
   testLocale(){
-    if(i18n.locale === 'en'){
-      return (listeEn)
+    if(i18n.locale === 'fr-FR'){
+      return (listeFr)
     }
-    return (listeFr)
+    return (listeEn)
   }
 
   lireVideo = (videoUrl) =>{

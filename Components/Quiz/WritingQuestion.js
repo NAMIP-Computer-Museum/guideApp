@@ -10,6 +10,7 @@ class WritingQuestion extends React.Component{
     this.state = {
       image : this.props.question.idImage == undefined ? false : true,
       idQuestion : this.props.question.id,
+      couleurReponse : 'white',
       reponseFinal : null,
       textEcrit : null,
       reponseQuestion : null,
@@ -22,11 +23,11 @@ class WritingQuestion extends React.Component{
   validateAnswer = async() => {
     await this.setState({reponseFinal : this.state.textEcrit,desactiveEditable : false,reponseQuestion : this.props.question.answer},
     () => {
-      if(this.state.reponseFinal == this.state.reponseQuestion){
-        this.setState({score : this.state.score+1});
+      if(this.state.reponseFinal != null && this.state.reponseFinal.toLowerCase() == this.state.reponseQuestion.toLowerCase()){
+        this.setState({score : this.state.score+1,couleurReponse : 'green'});
       }
       else{
-        this.setState({reponseFausse : true})
+        this.setState({reponseFausse : true,couleurReponse : 'red'})
       }
     })
     this.props.continue(this.state.score);
@@ -37,6 +38,7 @@ class WritingQuestion extends React.Component{
       this.setState({
         image : this.props.question.idImage == undefined ? false : true,
         idQuestion : this.props.question.id,
+        couleurReponse : 'white',
         reponseFinal : null,
         textEcrit : null,
         reponseQuestion : null,
@@ -63,7 +65,7 @@ class WritingQuestion extends React.Component{
           <TextInput
             style =
             {{
-              color : this.state.textEcrit == this.state.reponseQuestion ? 'green' : this.state.reponseFausse == true ? 'red' : 'white',
+              color : this.state.couleurReponse,
               fontSize : 20,
               fontWeight : 'bold',
               textDecorationLine : 'underline',

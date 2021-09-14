@@ -27,7 +27,7 @@ class QuizComponent extends React.Component{
       this.setState({indexQuestion : this.state.indexQuestion+1 , questionSuivante : false})
     }
     else if(this.state.indexQuestion+1 == quiz.length){
-      this.setState({derniereQuestion : true})
+      this.setState({derniereQuestion : true,questionSuivante : false})
     }
   }
 
@@ -60,7 +60,7 @@ class QuizComponent extends React.Component{
             <WritingQuestion continue = {this.continue} question = {quiz[this.state.indexQuestion]} score={this.state.score}/>
           </View>
         }
-        {this.state.questionSuivante && !this.state.derniereQuestion &&
+        {this.state.questionSuivante && this.state.derniereQuestion == false &&
           <View style = {styles.continue}>
             <Pressable style={styles.button} onPress = {() => {this.changeQuestion()}}>
               <Text style={styles.text_button}>{i18n.t("continueQuiz")}</Text>
@@ -88,6 +88,9 @@ class QuizComponent extends React.Component{
             <Image style = {styles.image} source = {this.state.score/quiz.length >= 0.5 ? require('../../assets/Quiz/congratulation.png') : require('../../assets/Quiz/fail.png')}/>
             <Pressable style={styles.button} onPress = {() => {this.resetQuiz()}}>
               <Text style={styles.text_button}>{i18n.t("resetQuiz")}</Text>
+            </Pressable>
+            <Pressable style={styles.button} onPress = {() => {this.props.navigation.goBack()}}>
+              <Text style={styles.text_button}>{i18n.t("backAccueil")}</Text>
             </Pressable>
           </View>
         </View>

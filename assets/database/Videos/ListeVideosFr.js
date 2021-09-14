@@ -12,9 +12,27 @@ export default data = [
     videoURL: require('./altair01.mp4')
   },
   {
-    id : 32,
-    title:"Video iMacG3",
-    description : "Présentation du dernier iMac G3 d'Apple",
-    videoURL : "https://www.youtube.com/watch?v=nzbdM_959EE"
-  }
+    id:402,
+    title:"Video Application DBase",
+    description : "Présentation de l'application DBase",
+    videoURL : require('./DBASE.mp4')
+  },
+  {
+    id:401,
+    title:"Video Application Deluxe Paint",
+    description : "Présentation de l'application Deluxe Paint",
+    videoURL : require('./DeluxePaint.mp4')
+  },
+  {
+    id:400,
+    title:"Video Application VisiCalc",
+    description : "Présentation de l'application VisiCalc",
+    videoURL : require('./Visicalc.mp4')
+  },
+  {
+    id:405,
+    title:"Video Application Word",
+    description : "Présentation de l'application Word",
+    videoURL : require('./Word.mp4')
+  },
 ]

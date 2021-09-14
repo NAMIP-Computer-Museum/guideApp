@@ -29,6 +29,21 @@ class AfficheVideo extends React.Component{
         </View>
       )
     }
+    else if (typeof videoURL=== 'string'){
+      return(
+        <View style={styles.main}>
+          <Video
+            source = {{uri : videoURL}}
+            shouldPlay
+            style = {styles.video}
+            resizeMode="contain"
+            useNativeControls
+            isLooping
+            onFullscreenUpdate={onFullscreenUpdate}
+          />
+        </View>
+      )
+    }
     else{
       return(
         <View style={styles.main}>
@@ -43,7 +58,7 @@ class AfficheVideo extends React.Component{
           />
         </View>
       )
-  }
+    }
   }
 }
 
