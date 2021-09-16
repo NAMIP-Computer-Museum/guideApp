@@ -35,4 +35,10 @@ export default data = [
     description : "A presentation of the Word Application",
     videoURL : require('./Word.mp4')
   },
+  {
+    id : 301,
+    title : "Video Mother of All demos",
+    description : "A presentation of the Mother of All demos conference",
+    videoURL : require('./TheMotherofAllDemos.mp4')
+  }
 ]
