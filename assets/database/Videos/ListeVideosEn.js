@@ -3,7 +3,7 @@ export default data = [
     id:71,
     title:"Video Micral N",
     description:"A video that explain the build of Micral",
-    videoURL:"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    videoURL: require('./Micral.mp4')
   },
   {
     id:55,

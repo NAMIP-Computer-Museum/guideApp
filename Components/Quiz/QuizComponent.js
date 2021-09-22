@@ -6,6 +6,8 @@ import WritingQuestion from './WritingQuestion';
 import i18n from '../../Language/Translate'
 import quiz from '../../assets/Quiz/quizData';
 
+let questions;
+
 class QuizComponent extends React.Component{
   constructor(props){
     super(props);
@@ -16,11 +18,23 @@ class QuizComponent extends React.Component{
       questionSuivante : false,
       derniereQuestion : false
     }
+    questions = this.randomQuestions(quiz,3);
+  }
+
+  randomQuestions = (quizData,numberQuestions) =>{
+    const reponse = [];
+    const questions = [...quizData];
+    for(let i = 0;i<numberQuestions;i++){
+      let random = Math.floor(Math.random()*questions.length);
+      reponse.push(questions[random]);
+      questions.splice(random,1);
+    }
+    return reponse;
   }
 
   continue = (score) =>{
     this.setState({score : score});
-    if(this.state.indexQuestion+1 == quiz.length){
+    if(this.state.indexQuestion+1 == questions.length){
       this.setState({questionSuivante : false,derniereQuestion : true})
     }
     else{
@@ -44,21 +58,22 @@ class QuizComponent extends React.Component{
       questionSuivante : false,
       derniereQuestion : false,
     })
+    questions = this.randomQuestions(quiz,3);
   }
 
   render(){
     if(!this.state.afficheScore){
      return(
       <View style = {styles.main}>
-        <Text style = {styles.enCours}>{i18n.t("questionQuiz")} : {this.state.indexQuestion+1} / {quiz.length}</Text>
-        {quiz[this.state.indexQuestion].questionType === "multiple" &&
+        <Text style = {styles.enCours}>{i18n.t("questionQuiz")} : {this.state.indexQuestion+1} / {questions.length}</Text>
+        {questions[this.state.indexQuestion].questionType === "multiple" &&
           <View style = {styles.question}>
-            <MultipleQuestion continue = {this.continue} question = {quiz[this.state.indexQuestion]} score={this.state.score}/>
+            <MultipleQuestion continue = {this.continue} question = {questions[this.state.indexQuestion]} score={this.state.score}/>
           </View>
         }
-        {quiz[this.state.indexQuestion].questionType === "writing" &&
+        {questions[this.state.indexQuestion].questionType === "writing" &&
           <View style = {styles.question}>
-            <WritingQuestion continue = {this.continue} question = {quiz[this.state.indexQuestion]} score={this.state.score}/>
+            <WritingQuestion continue = {this.continue} question = {questions[this.state.indexQuestion]} score={this.state.score}/>
           </View>
         }
         {this.state.questionSuivante && !this.state.derniereQuestion &&
@@ -85,8 +100,8 @@ class QuizComponent extends React.Component{
             <Text style = {styles.text}>{i18n.t("scoreQuiz")}</Text>
           </View>
           <View style = {styles.affiche}>
-            <Text style = {styles.textScore}>{i18n.t("resultatQuiz")} : {this.state.score} / {quiz.length}</Text>
-            <Image style = {styles.image} source = {this.state.score/quiz.length >= 0.5 ? require('../../assets/Quiz/congratulation.png') : require('../../assets/Quiz/fail.png')}/>
+            <Text style = {styles.textScore}>{i18n.t("resultatQuiz")} : {this.state.score} / {questions.length}</Text>
+            <Image style = {styles.image} source = {this.state.score/questions.length >= 0.5 ? require('../../assets/Quiz/congratulation.png') : require('../../assets/Quiz/fail.png')}/>
             <Pressable style={styles.button} onPress = {() => {this.resetQuiz()}}>
               <Text style={styles.text_button}>{i18n.t("resetQuiz")}</Text>
             </Pressable>

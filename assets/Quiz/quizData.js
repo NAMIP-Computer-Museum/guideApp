@@ -26,5 +26,12 @@ export default quiz = [
       question : "En quelle année est sorti l'iMAc G3 ?",
       answer : '1997',
       idImage : 4
+    },
+    {
+      id : 5,
+      questionType : 'multiple',
+      question : "Qui est l'inventeur de la première souris ?",
+      answer : 'Douglas Engelbart',
+      allChoices : ['Steve Jobs','Douglas Engelbart','Bill Gates']
     }
 ]

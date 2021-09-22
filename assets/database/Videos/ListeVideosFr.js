@@ -3,7 +3,7 @@ export default data = [
     id:71,
     title:"Video Micral N",
     description:"Video montrant la création de l'ordinateur français Micral N",
-    videoURL:"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    videoURL: require('./Micral.mp4')
   },
   {
     id:55,
