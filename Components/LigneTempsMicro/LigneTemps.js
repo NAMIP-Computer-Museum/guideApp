@@ -121,9 +121,13 @@ class Frise extends React.Component{
       var desc = null
       if(!rowData.Simplifie)
         desc = (
-          <View style={styles.main_content}>
-            <Image source={images[rowData.id]} style={styles.image}/>
+        <View style={styles.main_content}>
+            <View style = {styles.images_content}>
+              <Image source={images[rowData.id]} style={styles.image}/>
+            </View>
+          <View style = {styles.description_content}>
             <Text style={[styles.description]} numberOfLines={6}>{rowData.description}</Text>
+          </View>
         </View>
       )
       return (
@@ -322,16 +326,22 @@ const styles = StyleSheet.create({
     fontWeight : 'bold',
     color : 'white'
   },
-  description:{
-    color:'lightgray',
+  description_content:{
     flex:2,
     paddingLeft : 10
   },
-  image:{
+  description:{
+    color:'lightgray',
+  },
+  images_content:{
     flex:1,
+    justifyContent : 'center',
+    alignItems : 'center',
     margin : 5,
     borderWidth : 2,
     borderColor : 'white',
+  },
+  image:{
     resizeMode : 'contain',
     height : 100,
     width : 100
