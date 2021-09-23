@@ -337,14 +337,16 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent : 'center',
     alignItems : 'center',
-    margin : 5,
+    padding : 10,
+    height : 105,
+    width : 105,
     borderWidth : 2,
-    borderColor : 'white',
+    borderColor : 'white'
   },
   image:{
     resizeMode : 'contain',
     height : 100,
-    width : 100
+    width : 100,
   }
 })
 

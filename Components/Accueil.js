@@ -7,13 +7,13 @@ class Acceuil extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      locale : "fr-FR"
+      locale : i18n.locale
     }
   }
 
-  changeLangue = () =>{
-    i18n.locale = this.state.locale;
-    this.forceUpdate()
+  changeLangue = (locale) =>{
+    i18n.locale = locale;
+    this.setState({locale : i18n.locale})
   }
 
 
@@ -23,13 +23,13 @@ class Acceuil extends React.Component{
         <View style={styles.main_top}>
         </View>
         <View style={styles.main_middle}>
-          <TouchableOpacity style = {styles.icon} onPress={() => {this.setState({locale : "fr-FR"},() => {this.changeLangue()})}}>
+          <TouchableOpacity style = {styles.icon} onPress={() => {this.changeLangue("fr-FR")}}>
             <Image style={styles.image} source = {require('../assets/Accueil/france.png')}/>
           </TouchableOpacity>
-          <TouchableOpacity style = {styles.icon} onPress={() => {this.setState({locale : "en"},() => {this.changeLangue()})}}>
+          <TouchableOpacity style = {styles.icon} onPress={() => {this.changeLangue("en")}}>
             <Image style={styles.image} source = {require('../assets/Accueil/united-kingdom.png')}/>
           </TouchableOpacity>
-          <TouchableOpacity style = {styles.icon} onPress={() => {this.setState({locale : "nl-NL"},() => {this.changeLangue()})}}>
+          <TouchableOpacity style = {styles.icon} onPress={() => {this.changeLangue("nl-NL")}}>
             <Image style={styles.image} source = {require('../assets/Accueil/netherlands.png')}/>
           </TouchableOpacity>
         </View>
