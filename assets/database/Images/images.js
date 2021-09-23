@@ -39,6 +39,7 @@ export default images = {
     202 : require("./OS/macosSystem1.jpg"),
     201 : require("./OS/msdos.jpg"),
     206 : require("./OS/Os2.jpg"),
+    210 : require("./OS/System7.jpg"),
     207 : require("./OS/win31.jpg"),
     203 : require("./OS/Windows95.jpg"),
     209 : require("./OS/windowsNT.jpg"),
