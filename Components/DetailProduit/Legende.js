@@ -15,7 +15,7 @@ class Legende extends React.Component{
   }
   render(){
     switch(this.props.type){
-      case 'Micro' :
+      case 'MICRO' :
         return(
         <View style = {styles.main}>
           <View style = {styles.legende}>

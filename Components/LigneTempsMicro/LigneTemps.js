@@ -4,6 +4,7 @@ import {StyleSheet, Text, View,Image,TouchableOpacity} from 'react-native';
 import Timeline from 'react-native-timeline-flatlist'
 import {Picker} from '@react-native-picker/picker'
 import CheckBox from '@react-native-community/checkbox'
+import GeneralCheckbox from '../Utilitaires/GeneralCheckbox'
 import * as FileSystem from 'expo-file-system'
 import {Asset} from 'expo-asset'
 import * as SQLite from 'expo-sqlite'
@@ -23,16 +24,7 @@ class Frise extends React.Component{
       dateHaute : 2021,
       isSimple : false,
       //type
-      isMicro : true,
-      Micro : 'Micro',
-      isIHM : false,
-      Ihm : 'notIHM',
-      isOS : false,
-      Os : 'notOS',
-      isCPU : false,
-      Cpu : 'notCPU',
-      isApp : false,
-      App : 'notApp',
+      typeData : ["MICRO"],
     }
     this.fetchDataBD()
   }
@@ -58,6 +50,39 @@ class Frise extends React.Component{
     this.fetchDataBD();
   }
 
+  actualiserType = async(checkValue,typeName) =>{
+    let tableau = [...this.state.typeData];
+    if(checkValue){
+      tableau.push(typeName);
+    }
+    else{
+      let index = tableau.indexOf(typeName);
+      tableau.splice(index,1);
+    }
+    await this.setState({typeData : tableau});
+    this.fetchDataBD();
+  }
+
+  simplifierEtiquette = async(checkValue,name) =>{
+    await this.setState({isSimple : checkValue})
+    this.fetchDataBD();
+  }
+
+  concatenerTypeToString = () =>{
+    let typeString = "";
+    let tableau = [...this.state.typeData]
+    if(tableau.length > 1){
+      for(let i = 0;i<tableau.length-1;i++){
+        typeString += tableau[i]+"|"
+      }
+      typeString += tableau[tableau.length-1];
+    }
+    else if (tableau.length == 1){
+      typeString += tableau[tableau.length-1];
+    }
+    return typeString;
+  }
+
   fetchDataBD = async() =>{
     let dirInfo;
     try {
@@ -71,17 +96,16 @@ class Frise extends React.Component{
     await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/NAMIP.db")).uri,
     `${FileSystem.documentDirectory}SQLite/NAMIP.db`);
     db = SQLite.openDatabase("NAMIP.db");
+    let typeString = this.concatenerTypeToString();
     let requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescFR as description FROM GENERAL "+
-                  "WHERE Annee >= ? and Annee < ? and TYPE REGEXP '"+this.state.Micro+"|"+
-                  this.state.Os+"|"+this.state.Ihm+"|"+this.state.Cpu+"|"+this.state.App+"' ORDER BY Annee ASC,Nom ASC"
+                  "WHERE Annee >= ? and Annee < ? and TYPE REGEXP '"+typeString+"' ORDER BY Annee ASC,Nom ASC"
     db.transaction((tx) => {
         tx.executeSql(requete,[this.state.dateBasse,this.state.dateHaute],
           (tx,results)=>{
             var taille = results.rows.length
             let tableau = []
             for(let i=0;i<taille;i++){
-              const data = this.addColorData(results.rows.item(i));
-              data['Simplifie'] = this.state.isSimple;
+              const data = this.addVisuelData(results.rows.item(i));
               tableau.push(data)
             }
             this.setState({data : tableau})
@@ -93,24 +117,28 @@ class Frise extends React.Component{
       })
     }
 
-    addColorData = (data) => {
+    addVisuelData = (data) => {
       const date = parseInt(data.time);
       switch(true){
         case date < 1973 :
           data['lineColor'] = 'rgb(29,41,219)'
           data['circleColor'] = 'rgb(29,41,219)'
+          data['Simplifie'] = this.state.isSimple;
           break;
         case date >= 1973 && date < 1977 :
           data['lineColor'] = 'rgb(47,250,141)'
           data['circleColor'] = 'rgb(47,250,141)'
+          data['Simplifie'] = this.state.isSimple;
           break;
         case date >= 1977 && date < 1992 :
           data['lineColor'] = 'rgb(248,50,185)'
           data['circleColor'] = 'rgb(248,50,185)'
+          data['Simplifie'] = this.state.isSimple;
           break;
         case date >= 1992 :
           data['lineColor'] = 'rgb(250,190,27)'
           data['circleColor'] = 'rgb(250,190,27)'
+          data['Simplifie'] = this.state.isSimple;
           break;
       }
       return data;
@@ -139,7 +167,7 @@ class Frise extends React.Component{
   }
 
     onEventPress = (data) => {
-      if(data.TYPE === 'Micro'){
+      if(data.TYPE === 'MICRO'){
         this.props.navigation.navigate("Detail",{dataOrdinateur: data})
       }
       else if(data.TYPE === 'CPU'){
@@ -174,60 +202,14 @@ class Frise extends React.Component{
               <Picker.Item label={i18n.t('Phase2')} color='rgb(248,50,185)' value='p2'/>
               <Picker.Item label={i18n.t('Phase3')} color='rgb(250,190,27)' value='p3'/>
             </Picker>
-            <CheckBox
-              tintColors = {{true : 'white',false : 'lightgray'}}
-              tintColor = {{true : 'white',false : 'lightgray'}}
-              value={this.state.isSimple}
-              onValueChange={(newValue) => this.setState({isSimple : newValue},() => {this.fetchDataBD()})}
-            />
-            <Text style={styles.CheckText}>{i18n.t("SimpleCheck")}</Text>
+            <GeneralCheckbox name={i18n.t("SimpleCheck")} value={false} actualiserType={this.simplifierEtiquette}/>
           </View>
           <View style = {styles.legendeBas}>
-            <View style = {styles.checkbox}>
-              <CheckBox
-                tintColors = {{true : 'white',false : 'lightgray'}}
-                tintColor = {{true : 'white',false : 'lightgray'}}
-                value={this.state.isMicro}
-                onValueChange={(newValue) => this.setState({isMicro : newValue,Micro : this.state.isMicro ? 'notMicro' : 'Micro'},() => {this.fetchDataBD()})}
-              />
-              <Text style={styles.CheckText}>{i18n.t("MicroCheck")}</Text>
-            </View>
-            <View style = {styles.checkbox}>
-              <CheckBox
-                tintColors = {{true : 'white',false : 'lightgray'}}
-                tintColor = {{true : 'white',false : 'lightgray'}}
-                value={this.state.isOS}
-                onValueChange={(newValue) => this.setState({isOS : newValue,Os : this.state.isOS ? 'notOS' : 'OS'},() => {this.fetchDataBD()})}
-              />
-              <Text style={styles.CheckText}>{i18n.t("OsCheck")}</Text>
-            </View>
-            <View style = {styles.checkbox}>
-              <CheckBox
-                tintColors = {{true : 'white',false : 'lightgray'}}
-                tintColor = {{true : 'white',false : 'lightgray'}}
-                value={this.state.isIHM}
-                onValueChange={(newValue) => this.setState({isIHM : newValue,Ihm : this.state.isIHM ? 'notIHM' : 'IHM'},() => {this.fetchDataBD()})}
-              />
-              <Text style={styles.CheckText}>{i18n.t("IhmCheck")}</Text>
-            </View>
-            <View style = {styles.checkbox}>
-              <CheckBox
-                tintColors = {{true : 'white',false : 'lightgray'}}
-                tintColor = {{true : 'white',false : 'lightgray'}}
-                value={this.state.isCPU}
-                onValueChange={(newValue) => this.setState({isCPU : newValue,Cpu : this.state.isCPU ? 'notCPU' : 'CPU'},() => {this.fetchDataBD()})}
-              />
-              <Text style={styles.CheckText}>{i18n.t("CpuCheck")}</Text>
-            </View>
-            <View style = {styles.checkbox}>
-              <CheckBox
-                tintColors = {{true : 'white',false : 'lightgray'}}
-                tintColor = {{true : 'white',false : 'lightgray'}}
-                value={this.state.isApp}
-                onValueChange={(newValue) => this.setState({isApp : newValue,App : this.state.isApp ? 'notApp' : 'APP'},() => {this.fetchDataBD()})}
-              />
-              <Text style={styles.CheckText}>{i18n.t("AppCheck")}</Text>
-            </View>
+            <GeneralCheckbox name="MICRO" value={true} actualiserType={this.actualiserType}/>
+            <GeneralCheckbox name="OS" value={false} actualiserType={this.actualiserType}/>
+            <GeneralCheckbox name="CPU" value={false} actualiserType={this.actualiserType}/>
+            <GeneralCheckbox name="IHM" value={false} actualiserType={this.actualiserType}/>
+            <GeneralCheckbox name="APP" value={false} actualiserType={this.actualiserType}/>
           </View>
           <Timeline style = {styles.timeline}
             timeStyle = {styles.time}
@@ -287,23 +269,10 @@ const styles = StyleSheet.create({
     borderRightWidth : 2,
     borderColor : 'white'
   },
-  checkbox:{
-    flex : 1,
-    flexDirection : 'row',
-    justifyContent : 'center',
-    alignItems : 'center',
-    marginLeft : 10
-  },
   picker:{
+    flex : 1,
     height : 50,
-    width : 130
-  },
-  CheckText:{
-    color:'white',
-    fontWeight:'bold',
-    fontSize : 12,
-    marginRight : 15,
-    marginLeft : 2,
+    marginLeft : 10
   },
   //Ligne du temps
   timeline:{
