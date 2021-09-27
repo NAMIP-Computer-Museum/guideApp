@@ -10,7 +10,26 @@ i18n.translations = {
     accueilBoutonContact : "A propos",
     accueilBoutonQuiz : "Quiz",
     TitreIntroduction : "Introduction",
-    DescriptionIntroduction : "Bienvenue sur l'exposition temporaire ...",
+    DescriptionIntroduction : "Cette application a été conçue pour vous guider dans l'exposition temporaire 'micro-ordinateur, még@ révolution'. Elle s'inscrit dans le cycle 'De l’informatique antique à l’informatique quantique'.\n\n"+
+    "L'exposition retrace l’histoire, depuis les années 1970 jusqu'au milieu des années 1990,"+
+    "de l’émergence d’une informatique interactive, personnelle, conviviale et centrée sur l’utilisateur final."+
+    "Celui-ci peut pour la première acquérir son ordinateur individuel,  par contraste avec l'exposition précédente"+
+    "consacrée aux ordinateurs des années 1960 très onéreux et réservés aux organisations qui en ont les moyens.\n\n"+
+    "L'exposition ne se concentre pas uniquement sur l'évolution technique des micro-ordinateurs mais illustre aussi"+
+    "en parallèle, l'émergence des interfaces graphiques utilisateurs et leur intégration dans ces machines grand public.",
+    boutonModeEmploi : 'Mode Emploi',
+    TitreModeEmploi : "Mode Emploi",
+    DescriptionModeEmploi : "L'application est structurée selon une ligne du temps qui suit le parcours de l'exposition.\n"+
+    "Afin de se situer aisément dans une phase ou thématique spécifique, l'exposition permet de filtrer aisément "+
+    "selon une des phase temporelle ou l'ensemble. Pour la période concernée, on peut aussi filtrer sur:\n"+
+    "- les micro-ordinateurs présentés dans l'exposition\n"+
+    "- les micros-processeurs mis en oeuvre\n"+
+    "- les développements des interfaces graphiques\n"+
+    "- les systèmes d'exploitation\n"+
+    "- les applications majeures\n\n"+
+    "Chaque dimension est expliquée via une fiche spécifique illustrée par une photo zoomable et parfois une petite vidéo.\n"+
+    "A terme l'application sera disponible en trois langues avec un sous-titrage correspondants des vidéos diffusées.\n\n"+
+    "Un petit quiz est aussi disponible pour tester vos connaissances.",
     friseTexte :  "Ligne du Temps",
     Picker1 : "Frise Entiere",
     DebutDev : "Début",
@@ -37,7 +56,10 @@ i18n.translations = {
     reponseWritingQuestion : "Reponse : ",
     validerReponse : "Valider Reponse",
     TitreApropos : "A Propos",
-    DescriptionApropos : "Merci d'avoir visité l'expo pour plus de contact ..."
+    DescriptionApropos : "Cette application a été développée par les bénévoles du musée NAM-IP à des fins de support pour la visite."+
+    "Un guide papier plus complet est en vente à la boutique du musée."+
+    "Vos commentaires d'amélioration sont les bienvenus en donnant un retour à la réception."+
+    "(C) 2021 NAM-IP"
   },
   "en" : {
     accueilTitre : "NAM-IP MicroComputer Exposure",
@@ -48,7 +70,26 @@ i18n.translations = {
     accueilBoutonContact : "About us",
     accueilBoutonQuiz : "Quiz",
     TitreIntroduction : "Introduction",
-    DescriptionIntroduction : "Welcome to the temporary exhibition ...",
+    DescriptionIntroduction : "Cette application a été conçue pour vous guider dans l'exposition temporaire 'micro-ordinateur, még@ révolution'. Elle s'inscrit dans le cycle 'De l’informatique antique à l’informatique quantique'.\n\n"+
+    "L'exposition retrace l’histoire, depuis les années 1970 jusqu'au milieu des années 1990,"+
+    "de l’émergence d’une informatique interactive, personnelle, conviviale et centrée sur l’utilisateur final."+
+    "Celui-ci peut pour la première acquérir son ordinateur individuel,  par contraste avec l'exposition précédente"+
+    "consacrée aux ordinateurs des années 1960 très onéreux et réservés aux organisations qui en ont les moyens.\n\n"+
+    "L'exposition ne se concentre pas uniquement sur l'évolution technique des micro-ordinateurs mais illustre aussi"+
+    "en parallèle, l'émergence des interfaces graphiques utilisateurs et leur intégration dans ces machines grand public.",
+    boutonModeEmploi : 'Manual',
+    TitreModeEmploi : "Manual",
+    DescriptionModeEmploi : "L'application est structurée selon une ligne du temps qui suit le parcours de l'exposition.\n"+
+    "Afin de se situer aisément dans une phase ou thématique spécifique, l'exposition permet de filtrer aisément "+
+    "selon une des phase temporelle ou l'ensemble. Pour la période concernée, on peut aussi filtrer sur:\n"+
+    "- les micro-ordinateurs présentés dans l'exposition\n"+
+    "- les micros-processeurs mis en oeuvre\n"+
+    "- les développements des interfaces graphiques\n"+
+    "- les systèmes d'exploitation\n"+
+    "- les applications majeures\n\n"+
+    "Chaque dimension est expliquée via une fiche spécifique illustrée par une photo zoomable et parfois une petite vidéo.\n"+
+    "A terme l'application sera disponible en trois langues avec un sous-titrage correspondants des vidéos diffusées.\n\n"+
+    "Un petit quiz est aussi disponible pour tester vos connaissances.",
     friseTexte : "Timeline",
     Picker1 : "All Timeline",
     DebutDev : "Beginning",
@@ -75,7 +116,10 @@ i18n.translations = {
     reponseWritingQuestion : "Answer : ",
     validerReponse : "Validate Answer",
     TitreApropos : "About us",
-    DescriptionApropos : "Thank you for visiting the expo for more contact ..."
+    DescriptionApropos : "Cette application a été développée par les bénévoles du musée NAM-IP à des fins de support pour la visite."+
+    "Un guide papier plus complet est en vente à la boutique du musée."+
+    "Vos commentaires d'amélioration sont les bienvenus en donnant un retour à la réception."+
+    "(C) 2021 NAM-IP"
   },
   "nl-NL" : {
     accueilTitre : "NAM-IP MicroComputer Blootstelling",
@@ -86,7 +130,26 @@ i18n.translations = {
     accueilBoutonContact : "Over ons",
     accueilBoutonQuiz : "Quiz",
     TitreIntroduction : "Invoering",
-    DescriptionIntroduction : "Welkom bij de tijdelijke tentoonstelling ...",
+    DescriptionIntroduction : "Cette application a été conçue pour vous guider dans l'exposition temporaire 'micro-ordinateur, még@ révolution'. Elle s'inscrit dans le cycle 'De l’informatique antique à l’informatique quantique'.\n\n"+
+    "L'exposition retrace l’histoire, depuis les années 1970 jusqu'au milieu des années 1990,"+
+    "de l’émergence d’une informatique interactive, personnelle, conviviale et centrée sur l’utilisateur final."+
+    "Celui-ci peut pour la première acquérir son ordinateur individuel,  par contraste avec l'exposition précédente"+
+    "consacrée aux ordinateurs des années 1960 très onéreux et réservés aux organisations qui en ont les moyens.\n\n"+
+    "L'exposition ne se concentre pas uniquement sur l'évolution technique des micro-ordinateurs mais illustre aussi"+
+    "en parallèle, l'émergence des interfaces graphiques utilisateurs et leur intégration dans ces machines grand public.",
+    boutonModeEmploi : 'Handmatig',
+    TitreModeEmploi : "Handmatig",
+    DescriptionModeEmploi : "L'application est structurée selon une ligne du temps qui suit le parcours de l'exposition.\n"+
+    "Afin de se situer aisément dans une phase ou thématique spécifique, l'exposition permet de filtrer aisément "+
+    "selon une des phase temporelle ou l'ensemble. Pour la période concernée, on peut aussi filtrer sur:\n"+
+    "- les micro-ordinateurs présentés dans l'exposition\n"+
+    "- les micros-processeurs mis en oeuvre\n"+
+    "- les développements des interfaces graphiques\n"+
+    "- les systèmes d'exploitation\n"+
+    "- les applications majeures\n\n"+
+    "Chaque dimension est expliquée via une fiche spécifique illustrée par une photo zoomable et parfois une petite vidéo.\n"+
+    "A terme l'application sera disponible en trois langues avec un sous-titrage correspondants des vidéos diffusées.\n\n"+
+    "Un petit quiz est aussi disponible pour tester vos connaissances.",
     friseTexte : "Tijdlijn",
     Picker1 : "Alle tijdlijn",
     DebutDev : "Begin",
@@ -113,7 +176,11 @@ i18n.translations = {
     reponseWritingQuestion : "Antwoord : ",
     validerReponse : "Bevestig Antwoord",
     TitreApropos : "Over ons",
-    DescriptionApropos : "Bedankt voor uw bezoek aan de expo voor meer contact ..."
+    DescriptionApropos : "Cette application a été développée par les bénévoles du musée NAM-IP à des fins de support pour la visite."+
+    "Un guide papier plus complet est en vente à la boutique du musée."+
+    "Vos commentaires d'amélioration sont les bienvenus en donnant un retour à la réception."+
+    "(C) 2021 NAM-IP"
+
   }
 }
 

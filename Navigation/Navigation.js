@@ -9,6 +9,7 @@ import AfficheVideo from '../Components/Affichage/AfficheVideo'
 import QRCode from '../Components/QRCode/QRCodeScan'
 import APropos from '../Components/Information/APropos'
 import Introduction from '../Components/Information/Introduction'
+import ModeEmploi from '../Components/Information/ModeEmploi'
 import Quiz from '../Components/Quiz/QuizComponent'
 
 const Navigation = createStackNavigator({
@@ -33,7 +34,9 @@ const Navigation = createStackNavigator({
       navigationOptions:{
         title : "",
         headerStyle:{
-          backgroundColor: 'black'
+          backgroundColor: 'black',
+          borderBottomWidth : 2,
+          borderBottomColor : 'white'
         },
         headerTintColor:'white'
       }
@@ -83,7 +86,9 @@ const Navigation = createStackNavigator({
       navigationOptions:{
         title : "",
         headerStyle:{
-          backgroundColor: 'black'
+          backgroundColor: 'black',
+          borderBottomWidth : 2,
+          borderBottomColor : 'white'
         },
         headerTintColor:'white'
       }
@@ -93,7 +98,21 @@ const Navigation = createStackNavigator({
       navigationOptions:{
         title : "",
         headerStyle:{
-          backgroundColor: 'black'
+          backgroundColor: 'black',
+          borderBottomWidth : 2,
+          borderBottomColor : 'white'
+        },
+        headerTintColor:'white'
+      }
+    },
+    ModeEmploi : {
+      screen : ModeEmploi,
+      navigationOptions:{
+        title : "",
+        headerStyle:{
+          backgroundColor: 'black',
+          borderBottomWidth : 2,
+          borderBottomColor : 'white'
         },
         headerTintColor:'white'
       }

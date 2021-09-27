@@ -5,12 +5,12 @@ import PageSimple from '../Affichage/PageSimple'
 import i18n from '../../Language/Translate'
 
 
-class Contact extends React.Component{
+class ModeEmploi extends React.Component{
   render(){
     return(
       <View style = {styles.main}>
        <ScrollView>
-        <PageSimple titre = {i18n.t("TitreApropos")} id = {2} description = {i18n.t("DescriptionApropos")}/>
+          <PageSimple titre = {i18n.t("TitreModeEmploi")} id = {3} description = {i18n.t("DescriptionModeEmploi")}/>
        </ScrollView>
       </View>
     )
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Contact
+export default ModeEmploi

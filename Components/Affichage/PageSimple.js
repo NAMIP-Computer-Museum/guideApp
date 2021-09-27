@@ -12,7 +12,9 @@ class PageSimple extends React.Component{
           <Text style = {styles.text}>{props.titre}</Text>
         </View>
         <View style = {styles.reste}>
-          <Image style = {styles.image} source = {imagesPage[props.id]}/>
+          {imagesPage[props.id] != undefined &&
+            <Image style = {styles.image} source = {imagesPage[props.id]}/>
+          }
           <Text style = {styles.description}>{props.description}</Text>
         </View>
       </View>
@@ -22,14 +24,15 @@ class PageSimple extends React.Component{
 
 const styles = StyleSheet.create({
   main:{
-    flex : 1,
     backgroundColor : 'black',
   },
   titre:{
-    flex : 1,
     justifyContent : 'center',
+    height : 80,
     alignItems : 'center',
-    borderWidth : 2,
+    borderLeftWidth : 2,
+    borderRightWidth :2,
+    borderBottomWidth : 2,
     borderColor : 'white'
   },
   text:{
@@ -39,20 +42,16 @@ const styles = StyleSheet.create({
     fontSize : 30,
     margin : 5,
   },
-  reste : {
-    flex : 9
-  },
   image : {
     resizeMode : 'contain',
     alignSelf : 'center',
-    margin : 5,
-    width : 100,
-    height : 100
+    margin : 10,
   },
   description : {
     color : 'white',
     fontSize : 20,
-    marginHorizontal : 5
+    marginHorizontal : 5,
+    marginBottom : 10
   }
 })
 export default PageSimple

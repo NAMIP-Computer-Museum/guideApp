@@ -167,18 +167,7 @@ class Frise extends React.Component{
   }
 
     onEventPress = (data) => {
-      if(data.TYPE === 'MICRO'){
-        this.props.navigation.navigate("Detail",{dataOrdinateur: data})
-      }
-      else if(data.TYPE === 'CPU'){
-        this.props.navigation.navigate("Detail",{dataOrdinateur: data})
-      }
-      else if(data.TYPE === 'APP'){
-        this.props.navigation.navigate("Detail",{dataOrdinateur: data})
-      }
-      else if(data.TYPE === 'OS'){
-        this.props.navigation.navigate("Detail",{dataOrdinateur: data})
-      }
+      this.props.navigation.navigate("Detail",{dataOrdinateur: data})
     }
 
     render(){
@@ -306,16 +295,16 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent : 'center',
     alignItems : 'center',
-    padding : 10,
-    height : 105,
-    width : 105,
+    padding : 5,
+    height : "100%",
+    width : "20%",
     borderWidth : 2,
     borderColor : 'white'
   },
   image:{
     resizeMode : 'contain',
-    height : 100,
-    width : 100,
+    height : "100%",
+    width : "100%",
   }
 })
 

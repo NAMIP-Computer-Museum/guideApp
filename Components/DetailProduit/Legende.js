@@ -135,13 +135,29 @@ class Legende extends React.Component{
        </View>
       )
      break;
+    case 'IHM':
+    return(
+    <View style = {styles.main}>
+     <View style = {styles.legende}>
+       <View style = {styles.item}>
+         <Image style = {styles.icon} source = {require('../../assets/Detail/annual.png')}/>
+         <Text style = {styles.text}>{this.props.time}</Text>
+       </View>
+       <View style = {styles.item}>
+         <Image style = {styles.icon} source = {require('../../assets/Detail/LegendeIHM/engineer.png')}/>
+         <Text style = {styles.text}>{this.state.data.Inventeur}</Text>
+       </View>
+      </View>
+    </View>
+    )
+    break;
     }
   }
 
   fetchLegendeData = async(type,id) =>{
     let requete;
     switch (type) {
-      case 'Micro':
+      case 'MICRO':
         requete = "Select Fabricant,Pays,CPU,RAM,ROM,OS from MICRO m WHERE m.ID = ?";
         break;
       case 'CPU' :
@@ -152,6 +168,9 @@ class Legende extends React.Component{
         break;
       case 'OS' :
         requete = "SELECT Fabricant,Licence,Langage,Plateforme from OS o WHERE o.ID = ?"
+        break;
+      case 'IHM' :
+        requete = "SELECT Inventeur from IHM i WHERE i.ID = ?"
         break;
     }
     let dirInfo;

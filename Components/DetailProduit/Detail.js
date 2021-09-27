@@ -10,7 +10,8 @@ class Detail extends React.Component{
     super(props);
     this.state={
       video:false,
-      dataVideo : []
+      dataVideo : [],
+      ordinateur : this.props.navigation.state.params.dataOrdinateur != undefined ? this.props.navigation.state.params.dataOrdinateur : null
     }
     this.testDonneeVideo();
   }
@@ -27,20 +28,18 @@ class Detail extends React.Component{
   }
 
   render(){
-    const ordinateur = this.props.navigation.state.params.dataOrdinateur;
     return(
       <View style = {styles.main}>
         <ScrollView>
-          <View style={styles.ligne}/>
-          <TouchableOpacity style={styles.photo} onPress = {() => {this.props.navigation.navigate("Image",{id : ordinateur.id})}}>
-            <Image style={styles.image} source = {images[ordinateur.id]}/>
+          <TouchableOpacity style={styles.photo} onPress = {() => {this.props.navigation.navigate("Image",{id : this.state.ordinateur.id})}}>
+            <Image style={styles.image} source = {images[this.state.ordinateur.id]}/>
           </TouchableOpacity>
           <View style={styles.ligne}/>
-          <Text style = {styles.titre}>{ordinateur.title}</Text>
-          <Legende id = {ordinateur.id} type={ordinateur.TYPE} time = {ordinateur.time}/>
+          <Text style = {styles.titre}>{this.state.ordinateur.title}</Text>
+          <Legende id = {this.state.ordinateur.id} type={this.state.ordinateur.TYPE} time = {this.state.ordinateur.time}/>
           <View style={styles.ligne}/>
           <View style = {styles.text}>
-            <Text style = {styles.description}>{ordinateur.description}</Text>
+            <Text style = {styles.description}>{this.state.ordinateur.description}</Text>
           </View>
           <View style={styles.ligne}/>
           {this.state.video &&
