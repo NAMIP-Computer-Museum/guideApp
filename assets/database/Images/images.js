@@ -57,6 +57,8 @@ export default images = {
     303 : require("./IHM/MacintoshUI.jpg"),
     300 : require("./IHM/sourisenglebart.jpg"),
     304 : require("./IHM/Windows1.jpg"),
+    306 : require("./IHM/xeroxstar.jpg"),
+    307 : require("./IHM/XWindow.jpg"),
     402 : require("./APP/DBase.jpg"),
     401 : require("./APP/deluxepaint.jpg"),
     409 : require("./APP/hypercard.jpg"),
