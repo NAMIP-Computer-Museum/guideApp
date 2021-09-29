@@ -83,6 +83,26 @@ class Frise extends React.Component{
     return typeString;
   }
 
+  getRequete = () =>{
+    let typeString = this.concatenerTypeToString();
+    let requete;
+    switch(i18n.locale){
+      case "en":
+        requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescEN as description FROM GENERAL "+
+                  "WHERE Annee >= ? and Annee < ? and TYPE REGEXP '"+typeString+"' ORDER BY Annee ASC,Nom ASC";
+        break;
+      case "nl-NL":
+        requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescNL as description FROM GENERAL "+
+                  "WHERE Annee >= ? and Annee < ? and TYPE REGEXP '"+typeString+"' ORDER BY Annee ASC,Nom ASC"
+        break;
+      default:
+        requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescFR as description FROM GENERAL "+
+                  "WHERE Annee >= ? and Annee < ? and TYPE REGEXP '"+typeString+"' ORDER BY Annee ASC,Nom ASC";
+        break;
+    }
+    return requete;
+  }
+
   fetchDataBD = async() =>{
     let dirInfo;
     try {
@@ -96,9 +116,7 @@ class Frise extends React.Component{
     await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/NAMIP.db")).uri,
     `${FileSystem.documentDirectory}SQLite/NAMIP.db`);
     db = SQLite.openDatabase("NAMIP.db");
-    let typeString = this.concatenerTypeToString();
-    let requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescFR as description FROM GENERAL "+
-                  "WHERE Annee >= ? and Annee < ? and TYPE REGEXP '"+typeString+"' ORDER BY Annee ASC,Nom ASC"
+    let requete = this.getRequete();
     db.transaction((tx) => {
         tx.executeSql(requete,[this.state.dateBasse,this.state.dateHaute],
           (tx,results)=>{

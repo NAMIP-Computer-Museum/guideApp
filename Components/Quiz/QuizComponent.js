@@ -58,7 +58,7 @@ class QuizComponent extends React.Component{
       questionSuivante : false,
       derniereQuestion : false,
     })
-    questions = this.randomQuestions(quiz,3);
+    questions = this.randomQuestions(quiz,5);
   }
 
   render(){

@@ -90,7 +90,7 @@ export default quiz = [
       questionType : 'multiple',
       question : "Quel fabricant de micro-ordinateur avait un grand centre de distribution dans la région de Namur durant les années 1980 ?",
       answer : 'Tandy Radio Shark',
-      allChoices : ['Apple','Commodore','IBM,','Tandy Radio Shark']
+      allChoices : ['Apple','Commodore','IBM','Tandy Radio Shark']
     },
     {
       id : 14,
@@ -116,26 +116,19 @@ export default quiz = [
     {
       id : 17,
       questionType : 'multiple',
-      question : "L'IBM PC/AT utilisait quel processeur d'Intel ?",
-      answer : '80286',
-      allChoices : ['8086', '80286','80386','80486']
-    },
-    {
-      id : 18,
-      questionType : 'multiple',
       question : "Quelle format de disquette n'existe pas:",
       answer : '4 pouces',
       allChoices : ['3 pouces','3 pouces 1/2','4 pouces','5 pouces 1/4','8 pouces']
     },
     {
-      id : 19,
+      id : 18,
       questionType : 'multiple',
       question : "Un micro-ordinateur du début des années 80 disposait généralement de",
       answer : "16 à 64 ko (milliers d'octets)",
       allChoices : ["16 à 64 ko (milliers d'octets)","1 à 4 Mo (millions d'octets)","1 à 4 Go (milliards d'octets)"]
     },
     {
-      id : 20,
+      id : 19,
       questionType : 'multiple',
       question : "The Operating System (TOS) était en fait destiné aux micro-ordinateurs :",
       answer : 'Atari ST',

@@ -72,17 +72,18 @@ const styles = StyleSheet.create({
   },
   icon:{
     marginBottom : 10,
-    marginLeft: 5,
-    width:50,
-    height:35,
+    marginHorizontal : 5,
+    width:60,
+    height:40,
     borderWidth : 3,
     borderColor : 'white',
-    borderRadius : 25
+    borderRadius : 25,
   },
   image:{
-    width:40,
-    height:30,
-    resizeMode : 'contain'
+    width : 50,
+    height : 35,
+    resizeMode : 'contain',
+    alignSelf : 'center'
   },
   main_bottom:{
     flex : 3,
