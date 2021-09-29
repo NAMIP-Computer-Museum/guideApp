@@ -18,7 +18,7 @@ class QuizComponent extends React.Component{
       questionSuivante : false,
       derniereQuestion : false
     }
-    questions = this.randomQuestions(quiz,5);
+    questions = this.randomQuestions(quiz,5); // TODO remoe hardcoded constant
   }
 
   randomQuestions = (quizData,numberQuestions) =>{
