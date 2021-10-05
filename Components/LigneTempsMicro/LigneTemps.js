@@ -3,11 +3,10 @@ import React from 'react';
 import {StyleSheet, Text, View,Image,TouchableOpacity} from 'react-native';
 import Timeline from 'react-native-timeline-flatlist'
 import {Picker} from '@react-native-picker/picker'
-import CheckBox from '@react-native-community/checkbox'
 import GeneralCheckbox from '../Utilitaires/GeneralCheckbox'
+import * as SQLite from 'expo-sqlite'
 import * as FileSystem from 'expo-file-system'
 import {Asset} from 'expo-asset'
-import * as SQLite from 'expo-sqlite'
 import i18n from '../../Language/Translate'
 import images from '../../assets/database/Images/images.js'
 
@@ -25,8 +24,11 @@ class Frise extends React.Component{
       isSimple : false,
       //type
       typeData : ["MICRO"],
+      //motCle
+      tabMotCle :[]
     }
-    this.fetchDataBD()
+    this.fetchMotCle();
+    this.fetchDataBD();
   }
 
   setDatePicker = () =>{
@@ -88,15 +90,15 @@ class Frise extends React.Component{
     let requete;
     switch(i18n.locale){
       case "en":
-        requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescEN as description FROM GENERAL "+
+        requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescEN as description,DescMotEN as descMotCle FROM GENERAL "+
                   "WHERE Annee >= ? and Annee < ? and TYPE REGEXP '"+typeString+"' ORDER BY Annee ASC,Nom ASC";
         break;
       case "nl-NL":
-        requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescNL as description FROM GENERAL "+
+        requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescNL as description,DescMotNL as descMotCle FROM GENERAL "+
                   "WHERE Annee >= ? and Annee < ? and TYPE REGEXP '"+typeString+"' ORDER BY Annee ASC,Nom ASC"
         break;
       default:
-        requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescFR as description FROM GENERAL "+
+        requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescFR as description,DescMotFR as descMotCle FROM GENERAL "+
                   "WHERE Annee >= ? and Annee < ? and TYPE REGEXP '"+typeString+"' ORDER BY Annee ASC,Nom ASC";
         break;
     }
@@ -104,17 +106,6 @@ class Frise extends React.Component{
   }
 
   fetchDataBD = async() =>{
-    let dirInfo;
-    try {
-      dirInfo = await FileSystem.getInfoAsync(`${FileSystem.documentDirectory}SQLite`);
-    } catch(err) { Sentry.captureException(err) };
-    if (!dirInfo.exists) {
-      try {
-        await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}SQLite`, { intermediates: true });
-      } catch(err) { Sentry.captureException(err) }
-    };
-    await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/NAMIP.db")).uri,
-    `${FileSystem.documentDirectory}SQLite/NAMIP.db`);
     db = SQLite.openDatabase("NAMIP.db");
     let requete = this.getRequete();
     db.transaction((tx) => {
@@ -127,6 +118,38 @@ class Frise extends React.Component{
               tableau.push(data)
             }
             this.setState({data : tableau})
+          },
+          (tx,error)=>{
+            console.log('error',error)
+          }
+        )
+      })
+    }
+
+    fetchMotCle = async() =>{
+      let dirInfo;
+      try {
+        dirInfo = await FileSystem.getInfoAsync(`${FileSystem.documentDirectory}SQLite`);
+      } catch(err) { Sentry.captureException(err) };
+      if (!dirInfo.exists) {
+        try {
+          await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}SQLite`, { intermediates: true });
+        } catch(err) { Sentry.captureException(err) }
+      };
+      await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/NAMIP.db")).uri,
+      `${FileSystem.documentDirectory}SQLite/NAMIP.db`);
+      db = SQLite.openDatabase("NAMIP.db");
+      let requeteMotCle = "SELECT DISTINCT IDObjetDesc,IDMotCle,MotCle from MOTCLE"
+      tableauMotCle = []
+      db.transaction((tx) => {
+        tx.executeSql(requeteMotCle,[],
+          (tx,results)=>{
+            var tailleMotCle = results.rows.length
+            let tableauMotCle = []
+            for(let j=0;j<tailleMotCle;j++){
+              tableauMotCle.push(results.rows.item(j));
+            }
+            this.setState({tabMotCle : tableauMotCle})
           },
           (tx,error)=>{
             console.log('error',error)
@@ -185,7 +208,7 @@ class Frise extends React.Component{
   }
 
     onEventPress = (data) => {
-      this.props.navigation.navigate("Detail",{dataOrdinateur: data})
+      this.props.navigation.navigate("Detail",{dataOrdinateur: data,motCle : this.state.tabMotCle})
     }
 
     render(){

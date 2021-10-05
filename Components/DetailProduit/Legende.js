@@ -1,8 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet, Text, View,Image} from 'react-native';
-import * as FileSystem from 'expo-file-system'
-import {Asset} from 'expo-asset'
 import * as SQLite from 'expo-sqlite'
 
 class Legende extends React.Component{
@@ -154,7 +152,7 @@ class Legende extends React.Component{
     }
   }
 
-  fetchLegendeData = async(type,id) =>{
+  getRequete = (type) =>{
     let requete;
     switch (type) {
       case 'MICRO':
@@ -173,18 +171,12 @@ class Legende extends React.Component{
         requete = "SELECT Inventeur from IHM i WHERE i.ID = ?"
         break;
     }
-    let dirInfo;
-    try {
-      dirInfo = await FileSystem.getInfoAsync(`${FileSystem.documentDirectory}SQLite`);
-    } catch(err) { Sentry.captureException(err) };
-    if (!dirInfo.exists) {
-      try {
-        await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}SQLite`, { intermediates: true });
-      } catch(err) { Sentry.captureException(err) }
-    };
-    await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/NAMIP.db")).uri,
-    `${FileSystem.documentDirectory}SQLite/NAMIP.db`);
-    db = SQLite.openDatabase("NAMIP.db");
+    return requete;
+  }
+
+  fetchLegendeData = async(type,id) =>{
+    db = SQLite.openDatabase('NAMIP.db')
+    let requete = this.getRequete(type);
     const data = [];
     db.transaction((tx) => {
         tx.executeSql(requete,[id],

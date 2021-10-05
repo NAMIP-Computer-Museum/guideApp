@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import {View, Text, StyleSheet, Button,Pressable,Image} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import * as FileSystem from 'expo-file-system'
-import {Asset} from 'expo-asset'
 import * as SQLite from 'expo-sqlite'
 import i18n from '../../Language/Translate'
 
+let db;
 
 export default function QRCode({navigation:{ navigate }}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  let db;
 
   useEffect(() => {
     (async () => {
@@ -34,9 +32,8 @@ export default function QRCode({navigation:{ navigate }}) {
     };
     await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/NAMIP.db")).uri,
     `${FileSystem.documentDirectory}SQLite/NAMIP.db`);
-    db = SQLite.openDatabase("NAMIP.db")
-    let requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescFR as description FROM GENERAL "+
-                  "WHERE ID = ? AND TYPE REGEXP 'Micro|CPU'"
+    db = SQLite.openDatabase('NAMIP.db')
+    let requete = "A REMPLIR"
     db.transaction((tx) => {
         tx.executeSql(requete,[id],
           (tx,results)=>{

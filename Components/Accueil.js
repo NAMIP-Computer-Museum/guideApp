@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet,ScrollView, Text, View ,Pressable,ImageBackground,TouchableOpacity,Image} from 'react-native';
+import * as SQLite from 'expo-sqlite'
 import i18n from '../Language/Translate'
 
 class Acceuil extends React.Component{
