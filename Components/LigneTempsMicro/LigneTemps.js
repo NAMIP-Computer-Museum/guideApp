@@ -10,8 +10,6 @@ import {Asset} from 'expo-asset'
 import i18n from '../../Language/Translate'
 import images from '../../assets/database/Images/images.js'
 
-let db;
-
 class Frise extends React.Component{
   constructor(props){
     super(props)
@@ -106,7 +104,7 @@ class Frise extends React.Component{
   }
 
   fetchDataBD = async() =>{
-    db = SQLite.openDatabase("NAMIP.db");
+    let db = SQLite.openDatabase("namip.db");
     let requete = this.getRequete();
     db.transaction((tx) => {
         tx.executeSql(requete,[this.state.dateBasse,this.state.dateHaute],
@@ -127,20 +125,9 @@ class Frise extends React.Component{
     }
 
     fetchMotCle = async() =>{
-      let dirInfo;
-      try {
-        dirInfo = await FileSystem.getInfoAsync(`${FileSystem.documentDirectory}SQLite`);
-      } catch(err) { Sentry.captureException(err) };
-      if (!dirInfo.exists) {
-        try {
-          await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}SQLite`, { intermediates: true });
-        } catch(err) { Sentry.captureException(err) }
-      };
-      await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/NAMIP.db")).uri,
-      `${FileSystem.documentDirectory}SQLite/NAMIP.db`);
-      db = SQLite.openDatabase("NAMIP.db");
+      let db = SQLite.openDatabase("namip.db");
       let requeteMotCle = "SELECT DISTINCT IDObjetDesc,IDMotCle,MotCle from MOTCLE"
-      tableauMotCle = []
+      let tableauMotCle = []
       db.transaction((tx) => {
         tx.executeSql(requeteMotCle,[],
           (tx,results)=>{

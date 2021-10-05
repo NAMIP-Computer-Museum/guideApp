@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet, Text, View,Image} from 'react-native';
 import * as SQLite from 'expo-sqlite'
+import * as FileSystem from 'expo-file-system'
+import {Asset} from 'expo-asset'
 
 class Legende extends React.Component{
   constructor(props){
@@ -175,7 +177,7 @@ class Legende extends React.Component{
   }
 
   fetchLegendeData = async(type,id) =>{
-    db = SQLite.openDatabase('NAMIP.db')
+    db = SQLite.openDatabase("namip.db");
     let requete = this.getRequete(type);
     const data = [];
     db.transaction((tx) => {

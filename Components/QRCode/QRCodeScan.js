@@ -21,18 +21,7 @@ export default function QRCode({navigation:{ navigate }}) {
     setScanned(true);
     const pieces = data.split("-");
     const id = parseInt(pieces[2]);
-    let dirInfo;
-    try {
-      dirInfo = await FileSystem.getInfoAsync(`${FileSystem.documentDirectory}SQLite`);
-    } catch(err) { Sentry.captureException(err) };
-    if (!dirInfo.exists) {
-      try {
-        await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}SQLite`, { intermediates: true });
-      } catch(err) { Sentry.captureException(err) }
-    };
-    await FileSystem.downloadAsync(Asset.fromModule(require("../../assets/database/NAMIP.db")).uri,
-    `${FileSystem.documentDirectory}SQLite/NAMIP.db`);
-    db = SQLite.openDatabase('NAMIP.db')
+    db = SQLite.openDatabase('namip.db')
     let requete = "A REMPLIR"
     db.transaction((tx) => {
         tx.executeSql(requete,[id],

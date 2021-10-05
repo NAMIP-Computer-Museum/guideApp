@@ -3,6 +3,8 @@ import React from 'react';
 import {StyleSheet,Modal,ScrollView, Text, View,Pressable,Image,TouchableOpacity,ImageBackground} from 'react-native';
 import Legende from './Legende.js'
 import * as SQLite from 'expo-sqlite'
+import * as FileSystem from 'expo-file-system'
+import {Asset} from 'expo-asset'
 import images from '../../assets/database/Images/images.js'
 import videos from '../../assets/database/Videos/ListeVideosFr.js'
 import i18n from '../../Language/Translate'
@@ -75,7 +77,7 @@ class Detail extends React.Component{
   }
 
   showModal = async(index) =>{
-    db = SQLite.openDatabase('NAMIP.db')
+    db = SQLite.openDatabase("namip.db");
     let requete = this.getRequete()
     tableauMotCle = []
     db.transaction((tx) => {

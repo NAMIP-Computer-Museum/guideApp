@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet,ScrollView, Text, View ,Pressable,ImageBackground,TouchableOpacity,Image} from 'react-native';
 import * as SQLite from 'expo-sqlite'
+import * as FileSystem from 'expo-file-system'
+import {Asset} from 'expo-asset'
 import i18n from '../Language/Translate'
 
 class Acceuil extends React.Component{
@@ -9,6 +11,18 @@ class Acceuil extends React.Component{
     super(props)
     this.state = {
       locale : i18n.locale
+    }
+    this.clearDB()
+  }
+
+  clearDB = async() => {
+    await FileSystem.deleteAsync(FileSystem.documentDirectory + "SQLite/",{idempotent : true})
+    const internalDbName = "namip.db"; // Call whatever you want
+    const sqlDir = FileSystem.documentDirectory + "SQLite/";
+    if (!(await FileSystem.getInfoAsync(sqlDir + internalDbName)).exists) {
+        await FileSystem.makeDirectoryAsync(sqlDir, {intermediates: true});
+        const asset = Asset.fromModule(require("../assets/database/NAMIP.db"));
+        await FileSystem.downloadAsync(asset.uri, sqlDir + internalDbName);
     }
   }
 
