@@ -23,7 +23,7 @@ export default quiz = [
     },
     {
       id : 4,
-      questionType : 'writing',
+      questionType : 'multiple',
       question : "En quelle année est sorti l'iMAc G3 ?",
       answer : '1997',
       allChoices : ['1977','1983','1987','1997'],

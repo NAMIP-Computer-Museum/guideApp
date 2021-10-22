@@ -1,5 +1,6 @@
 import i18n from 'i18n-js'
 
+//Definition des différentes locales avec traductions
 i18n.translations = {
   "fr-FR" : {
     accueilTitre : "Exposition Micro-Ordinateur NAM-IP",

@@ -20,6 +20,7 @@ class WritingQuestion extends React.Component{
     }
   }
 
+  //Fonction qui valide la réponse et transfère le score au composant principal
   validateAnswer = async() => {
     await this.setState({reponseFinal : this.state.textEcrit,desactiveEditable : false,reponseQuestion : this.props.question.answer},
     () => {
@@ -33,6 +34,7 @@ class WritingQuestion extends React.Component{
     this.props.continue(this.state.score);
   }
 
+  //Fonction qui met à jour les variables du state lors d'un changement de question
   componentDidUpdate(){
     if(this.state.idQuestion != this.props.question.id){
       this.setState({

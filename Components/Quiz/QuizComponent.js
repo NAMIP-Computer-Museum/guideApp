@@ -18,9 +18,11 @@ class QuizComponent extends React.Component{
       questionSuivante : false,
       derniereQuestion : false
     }
-    questions = this.randomQuestions(quiz,5); // TODO remoe hardcoded constant
+    let numberfive = (((quiz.length + quiz.length+1)+9)/2)-quiz.length;
+    questions = this.randomQuestions(quiz,numberfive);
   }
 
+  //Fonction qui picohe des questions de manière aléatoire dans la liste de questions
   randomQuestions = (quizData,numberQuestions) =>{
     const reponse = [];
     const questions = [...quizData];
@@ -32,6 +34,7 @@ class QuizComponent extends React.Component{
     return reponse;
   }
 
+  //Fonction qui mets à jour le score et valide l'affichage des boutons suivant ou score
   continue = (score) =>{
     this.setState({score : score});
     if(this.state.indexQuestion+1 == questions.length){
@@ -42,14 +45,17 @@ class QuizComponent extends React.Component{
     }
   }
 
+  //Fonction qui change l'index de la question courante pour passer à la question suivante
   changeQuestion = async() =>{
     this.setState({indexQuestion : this.state.indexQuestion+1,questionSuivante:false})
   }
 
+  //Fonction qui valide l'affiche du score
   afficheScore = () =>{
     this.setState({afficheScore : true});
   }
 
+  //Fonction qui reset les variables du state et retire d'autres questions
   resetQuiz = () =>{
     this.setState({
       indexQuestion : 0,
@@ -58,6 +64,7 @@ class QuizComponent extends React.Component{
       questionSuivante : false,
       derniereQuestion : false,
     })
+    let numberfive = (((quiz.length + quiz.length+1)+9)/2)-quiz.length;
     questions = this.randomQuestions(quiz,5);
   }
 

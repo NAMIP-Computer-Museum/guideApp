@@ -15,9 +15,10 @@ class Acceuil extends React.Component{
     this.clearDB()
   }
 
+  //Fonction de transfert du fichier de la BD vers les fichiers permanents
   clearDB = async() => {
-    await FileSystem.deleteAsync(FileSystem.documentDirectory + "SQLite/",{idempotent : true})
-    const internalDbName = "namip.db"; // Call whatever you want
+    await FileSystem.deleteAsync(FileSystem.documentDirectory + "SQLite/namip.db",{idempotent : true})
+    const internalDbName = "namip.db";
     const sqlDir = FileSystem.documentDirectory + "SQLite/";
     if (!(await FileSystem.getInfoAsync(sqlDir + internalDbName)).exists) {
         await FileSystem.makeDirectoryAsync(sqlDir, {intermediates: true});
@@ -26,12 +27,14 @@ class Acceuil extends React.Component{
     }
   }
 
+  //Fonction qui change la locale et donc la langue de l'aplication
   changeLangue = (locale) =>{
     i18n.locale = locale;
     this.setState({locale : i18n.locale})
   }
 
 
+  //Fonction render() : le visuel de la page
   render(){
     return (
         <ImageBackground style={styles.ImageBackground} resizeMode = 'contain' source = {require('../assets/Accueil/affiche.jpg')}>
@@ -70,6 +73,7 @@ class Acceuil extends React.Component{
   }
 }
 
+//Page de style
 const styles = StyleSheet.create({
   ImageBackground:{
     flex : 1,

@@ -12,6 +12,7 @@ import Introduction from '../Components/Information/Introduction'
 import ModeEmploi from '../Components/Information/ModeEmploi'
 import Quiz from '../Components/Quiz/QuizComponent'
 
+//Stack Navigator ou sont définis toutes nos pages
 const Navigation = createStackNavigator({
     Accueil:{
       screen: Accueil,

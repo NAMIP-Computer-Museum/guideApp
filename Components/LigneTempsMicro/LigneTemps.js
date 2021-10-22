@@ -3,7 +3,7 @@ import React from 'react';
 import {StyleSheet, Text, View,Image,TouchableOpacity} from 'react-native';
 import Timeline from 'react-native-timeline-flatlist'
 import {Picker} from '@react-native-picker/picker'
-import GeneralCheckbox from '../Utilitaires/GeneralCheckbox'
+import GeneralCheckbox from './GeneralCheckbox'
 import * as SQLite from 'expo-sqlite'
 import * as FileSystem from 'expo-file-system'
 import {Asset} from 'expo-asset'
@@ -29,6 +29,7 @@ class Frise extends React.Component{
     this.fetchDataBD();
   }
 
+  //Fonction qui met à jour les deux dates utilisés comme argument dans la requete pour la BD
   setDatePicker = () =>{
     switch(this.state.pickerValue){
       case 'debut':
@@ -50,6 +51,7 @@ class Frise extends React.Component{
     this.fetchDataBD();
   }
 
+  //Fonction qui stock les différents types à afficher dans tableau utilisé pour la requete SQL et les enlèves si on ne veut plus les afficher
   actualiserType = async(checkValue,typeName) =>{
     let tableau = [...this.state.typeData];
     if(checkValue){
@@ -63,11 +65,13 @@ class Frise extends React.Component{
     this.fetchDataBD();
   }
 
+  //Fonction qui modifie si oui ou non l'affichage doit être compacter
   simplifierEtiquette = async(checkValue,name) =>{
     await this.setState({isSimple : checkValue})
     this.fetchDataBD();
   }
 
+  //Fonction qui utilise le tableau des types et le transforme en une chaine de caractères pour la requete SQL
   concatenerTypeToString = () =>{
     let typeString = "";
     let tableau = [...this.state.typeData]
@@ -83,6 +87,7 @@ class Frise extends React.Component{
     return typeString;
   }
 
+  //Fonction qui renvoie la requete à utiliser en fonction de la locale
   getRequete = () =>{
     let typeString = this.concatenerTypeToString();
     let requete;
@@ -103,6 +108,7 @@ class Frise extends React.Component{
     return requete;
   }
 
+  //Fonction qui a chercher les données des objets dans la BD
   fetchDataBD = async() =>{
     let db = SQLite.openDatabase("namip.db");
     let requete = this.getRequete();
@@ -124,6 +130,7 @@ class Frise extends React.Component{
       })
     }
 
+    //Fonction qui récupère tous les mots-clés utilisés dans la description de la page Détail
     fetchMotCle = async() =>{
       let db = SQLite.openDatabase("namip.db");
       let requeteMotCle = "SELECT DISTINCT IDObjetDesc,IDMotCle,MotCle from MOTCLE"
@@ -145,33 +152,32 @@ class Frise extends React.Component{
       })
     }
 
+    //Fonction qui permet d'ajouter aux objets les attributs de couleurs pour l'affichage + la vue compacter
     addVisuelData = (data) => {
       const date = parseInt(data.time);
       switch(true){
         case date < 1973 :
           data['lineColor'] = 'rgb(29,41,219)'
           data['circleColor'] = 'rgb(29,41,219)'
-          data['Simplifie'] = this.state.isSimple;
           break;
         case date >= 1973 && date < 1977 :
           data['lineColor'] = 'rgb(47,250,141)'
           data['circleColor'] = 'rgb(47,250,141)'
-          data['Simplifie'] = this.state.isSimple;
           break;
         case date >= 1977 && date < 1992 :
           data['lineColor'] = 'rgb(248,50,185)'
           data['circleColor'] = 'rgb(248,50,185)'
-          data['Simplifie'] = this.state.isSimple;
           break;
         case date >= 1992 :
           data['lineColor'] = 'rgb(250,190,27)'
           data['circleColor'] = 'rgb(250,190,27)'
-          data['Simplifie'] = this.state.isSimple;
           break;
       }
+      data['Simplifie'] = this.state.isSimple;
       return data;
     }
 
+    //Rendu custom de la partie texte et image de chaque objets
     renderDetail = (rowData,sectionID, rowID) =>{
       let title = <Text style = {styles.title}>{rowData.title}</Text>
       var desc = null
@@ -194,8 +200,9 @@ class Frise extends React.Component{
     )
   }
 
+    //Fonction qui gère les clicks sur chaque objet
     onEventPress = (data) => {
-      this.props.navigation.navigate("Detail",{dataOrdinateur: data,motCle : this.state.tabMotCle})
+      //this.props.navigation.navigate("Detail",{dataOrdinateur: data,motCle : this.state.tabMotCle})
     }
 
     render(){

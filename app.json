@@ -6,9 +6,9 @@
     "orientation": "portrait",
     "icon": "./assets/old-computer.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/old-computer.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

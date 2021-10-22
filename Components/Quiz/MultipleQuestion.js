@@ -16,6 +16,7 @@ class MultipleQuestion extends React.Component{
     }
   }
 
+  //Fonction qui valide la réponse et transfère le score au composant principal
   validerReponse = async(option) =>{
     await this.setState({optionChoisie : option,desactiveReponse : true,reponse : this.props.question.answer},
     () => {
@@ -26,6 +27,7 @@ class MultipleQuestion extends React.Component{
     this.props.continue(this.state.score);
   }
 
+  //Fonction qui met à jour les variables du state lors d'un changement de question
   componentDidUpdate(){
     if(this.state.idQuestion != this.props.question.id){
       this.setState({

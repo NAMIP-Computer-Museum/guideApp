@@ -25,6 +25,7 @@ class Detail extends React.Component{
     this.testDonneeVideo();
   }
 
+  //Fonction qui vérifie si une vidéo est disponible pour l'objet
   testDonneeVideo = () =>{
     const ordinateurID = this.props.navigation.state.params.dataOrdinateur.id;
     for(let i = 0;i<videos.length;i++){
@@ -36,6 +37,7 @@ class Detail extends React.Component{
     }
   }
 
+  //Fonction qui gère l'affichage de la description en traitant les potentiels mots clés
   traiterDescription = (description,index) =>{
     if(isNaN(description) == true){
       return <Text key = {index} style = {styles.description}>{description}</Text>
@@ -57,6 +59,7 @@ class Detail extends React.Component{
     }
   }
 
+  //Renvoie la requete à executer pour récupérer les données du mot clé cliqué
   getRequete = () =>{
     let requete;
     switch(i18n.locale){
@@ -76,10 +79,10 @@ class Detail extends React.Component{
     return requete;
   }
 
+  //Fonction qui récupére les données du mot clé cliqué
   showModal = async(index) =>{
     db = SQLite.openDatabase("namip.db");
     let requete = this.getRequete()
-    tableauMotCle = []
     db.transaction((tx) => {
       tx.executeSql(requete,[index],
         (tx,results)=>{
@@ -93,6 +96,7 @@ class Detail extends React.Component{
     this.setState({modal : true})
   }
 
+  //Fonction qui renvoie vers la page Détail du mot clé
   changerPage = () =>{
     this.setState({modal : false})
     this.props.navigation.push("Detail",{dataOrdinateur : this.state.donneesModal,motCle : this.state.motCle,precedantPage : this.state.ordinateur.title})

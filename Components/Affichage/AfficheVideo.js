@@ -62,6 +62,7 @@ class AfficheVideo extends React.Component{
   }
 }
 
+//Fonction qui gère le plein écran pour les vidéos utilisant le composant Vidéo
 const onFullscreenUpdate = async ({fullscreenUpdate}: VideoFullscreenUpdateEvent) => {
     switch (fullscreenUpdate) {
         case Video.FULLSCREEN_UPDATE_PLAYER_DID_PRESENT:

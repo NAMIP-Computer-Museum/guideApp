@@ -19,9 +19,11 @@ export default function QRCode({navigation:{ navigate }}) {
 
   const handleBarCodeScanned = async({ type, data }) => {
     setScanned(true);
-    const pieces = data.split("-");
-    const id = parseInt(pieces[2]);
-    db = SQLite.openDatabase('namip.db')
+    ///Partie qui récupère l'ID si le texte dans les QRCode sont de la forme TYPE-Annee-ID (Code à changer dans d'autres cas)
+    ///const pieces = data.split("-");
+    ///const id = parseInt(pieces[2]);
+    ///
+    db = SQLite.openDatabase('"nom".db')
     let requete = "A REMPLIR"
     db.transaction((tx) => {
         tx.executeSql(requete,[id],

@@ -8,6 +8,7 @@ import i18n from '../../Language/Translate'
 
 class ListeVideo extends React.Component{
 
+  //Fonction qui renvoie les objets vidéos en fonction de la langue
   testLocale(){
     if(i18n.locale === 'fr-FR'){
       return (listeFr)
@@ -15,6 +16,7 @@ class ListeVideo extends React.Component{
     return (listeEn)
   }
 
+  //Fonction qui permet la navigation vers la page qui affiche les vidéos
   lireVideo = (videoUrl) =>{
     this.props.navigation.navigate("AfficheVideo",{videoUrl : videoUrl})
   }
