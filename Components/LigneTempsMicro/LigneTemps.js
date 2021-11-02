@@ -208,9 +208,6 @@ class Frise extends React.Component{
     render(){
       return(
         <View style = {styles.main}>
-          <View style = {styles.titre}>
-            <Text style = {styles.text}>{i18n.t('friseTexte')}</Text>
-          </View>
           <View style = {styles.legendeHaut}>
             <Picker
               style = {styles.picker}
@@ -253,14 +250,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor : 'black'
   },
-  //Titre
-  titre:{
-    flex : 1,
-    justifyContent : 'center',
-    alignItems : 'center',
-    borderWidth : 2,
-    borderColor : 'white'
-  },
   text:{
     textAlign : 'center',
     color : 'white',
@@ -276,9 +265,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent : 'center',
     alignItems : 'center',
-    borderBottomWidth : 2,
-    borderLeftWidth : 2,
-    borderRightWidth : 2,
+    borderWidth : 2,
     borderColor : 'white'
   },
   legendeBas:{

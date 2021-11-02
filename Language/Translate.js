@@ -31,7 +31,6 @@ i18n.translations = {
     "Chaque dimension est expliquée via une fiche spécifique illustrée par une photo zoomable et parfois une petite vidéo.\n\n"+
     "A terme, l'application sera disponible en trois langues avec un sous-titrage correspondants des vidéos diffusées.\n\n"+
     "Un petit quiz est aussi disponible pour tester vos connaissances.",
-    friseTexte :  "Ligne du Temps",
     Picker1 : "Frise Entière",
     DebutDev : "Début",
     Phase1 : "Phase 1",
@@ -87,7 +86,6 @@ i18n.translations = {
     "Each dimension is explained via a specific sheet illustrated by a zoomable photo and sometimes a small video.\n" +
     "Eventually the application will be available in three languages ​​with corresponding subtitles of the videos broadcast.\n\n" +
     "A small quiz is also available to test your knowledge.",
-    friseTexte : "Timeline",
     Picker1 : "All Timeline",
     DebutDev : "Beginning",
     Phase1 : "Phase 1",
@@ -143,7 +141,6 @@ i18n.translations = {
     "Elke dimensie wordt uitgelegd via een specifiek blad geïllustreerd door een zoombare foto en soms een kleine video.\n" +
     "Uiteindelijk zal de applicatie beschikbaar zijn in drie talen met bijbehorende ondertitels van de uitgezonden video's.\n\n" +
     "Er is ook een kleine quiz beschikbaar om je kennis te testen.",
-    friseTexte : "Tijdlijn",
     Picker1 : "Alle tijdlijn",
     DebutDev : "Begin",
     Phase1 : "Fase 1",

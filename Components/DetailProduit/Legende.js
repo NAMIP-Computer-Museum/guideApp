@@ -101,7 +101,7 @@ class Legende extends React.Component{
             </View>
             <View style = {styles.item}>
               <Image style = {styles.icon} source = {require('../../assets/Detail/LegendeAPP/old-computer.png')}/>
-              <Text style = {styles.text}>{this.state.data.Environement}</Text>
+              <Text style = {styles.text}>{this.state.data.Environnement}</Text>
             </View>
           </View>
         </View>
@@ -165,7 +165,7 @@ class Legende extends React.Component{
         requete = "SELECT Transistors,Bits,Fréquence,Marque from CPU c WHERE c.ID = ?"
         break;
       case 'APP' :
-        requete = "SELECT TypeApp,Developpeur,Langage,Environement from APP a WHERE a.ID = ?"
+        requete = "SELECT TypeApp,Developpeur,Langage,Environnement from APP a WHERE a.ID = ?"
         break;
       case 'OS' :
         requete = "SELECT Fabricant,Licence,Langage,Plateforme from OS o WHERE o.ID = ?"
