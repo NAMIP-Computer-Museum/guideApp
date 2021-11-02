@@ -116,23 +116,24 @@ i18n.translations = {
   },
   "nl-NL" : {
     accueilTitre : "NAM-IP MicroComputer Blootstelling",
-    accueilBoutonIntro : "Invoering",
+    accueilBoutonIntro : "Inleiding",
     accueilBoutonFrise : "Tijdlijn",
     accueilBoutonVideo : "Videos",
     accueilBoutonQRCode : "QR-code scannen",
-    accueilBoutonContact : "Over ons",
+    accueilBoutonContact : "Meer uitleg",
     accueilBoutonQuiz : "Quiz",
     TitreIntroduction : "Invoering",
-    DescriptionIntroduction : "Deze applicatie is ontworpen om u door de tijdelijke tentoonstelling 'microcomputer, meg @ revolution' te leiden. Het maakt deel uit van de cyclus 'Van oude computers naar kwantumcomputers'.\n\n"+
-    "De tentoonstelling traceert de geschiedenis, van de jaren '70 tot het midden van de jaren '90,"+
-    "de opkomst van interactief, persoonlijk, gebruiksvriendelijk en op de eindgebruiker gericht computergebruik. "+
-    "Hij kan voor het eerst zijn pc aanschaffen, in tegenstelling tot de vorige tentoonstelling"+
-    "toegewijd aan zeer dure computers uit de jaren zestig en gereserveerd voor organisaties die ze kunnen betalen.\n\n"+
-    "De tentoonstelling richt zich niet alleen op de technische ontwikkeling van microcomputers, maar illustreert ook"+
-    "Tegelijkertijd de opkomst van grafische gebruikersinterfaces en hun integratie in deze algemene openbare machines.",
-    boutonModeEmploi : 'Handmatig',
-    TitreModeEmploi : "Handmatig",
-    DescriptionModeEmploi : "De applicatie is gestructureerd volgens een tijdlijn die het verloop van de tentoonstelling volgt.\n"+
+    DescriptionIntroduction : "Deze applicatie is ontworpen om u door de tijdelijke tentoonstelling 'microcomputer, meg@revolutie' te leiden."+
+    "Ze maakt deel uit van de cyclus 'Van oude computers naar kwantumcomputers'.\n\n"+
+    "De tentoonstelling schetst de geschiedenis van de opkomst van interactief persoonlijk, gebruiksvriendelijk en op de eindgebruiker gericht computergebruik, "+
+    "vanaf de jaren '70 tot het midden van de jaren '90."+
+    "Idereen kan voor het eerst zijn PC aanschaffen, in tegenstelling tot de vorige tentoonstelling"+
+    "toegewijd aan zeer dure computers uit de jaren zestig en voorbehouden aan organisaties die die kunnen betalen.\n\n"+
+    "De tentoonstelling richt zich niet alleen op de technische ontwikkeling van microcomputers, maar illustreert "+
+    "tegelijkertijd de opkomst van grafische gebruikersinterfaces en hun integratie in deze algemene openbare machines.",
+    boutonModeEmploi : 'Gebruiksaanwijzing',
+    TitreModeEmploi : "Gebruiksaanwijzing",
+    DescriptionModeEmploi : "De applicatie is gestructureerd volgens een tijdlijn die het parcours van de tentoonstelling volgt.\n"+
     "Om je gemakkelijk in een bepaalde fase of thema te kunnen situeren, maakt de tentoonstelling het mogelijk om eenvoudig te filteren"+
     "volgens een van de temporele fasen of het geheel. Voor de betreffende periode kunnen we ook filteren op:\n\n"+
     "- de microcomputers gepresenteerd in de tentoonstelling\n"+
@@ -140,36 +141,35 @@ i18n.translations = {
     "- de ontwikkeling van grafische interfaces\n" +
     "- besturingssystemen\n" +
     "- belangrijke toepassingen\n\n"+
-    "Elke dimensie wordt uitgelegd via een specifiek blad geïllustreerd door een zoombare foto en soms een kleine video.\n" +
+    "Elk thema wordt uitgelegd via een specifiek fiche geïllustreerd door een zoombare foto en soms een kleine video.\n" +
     "Uiteindelijk zal de applicatie beschikbaar zijn in drie talen met bijbehorende ondertitels van de uitgezonden video's.\n\n" +
     "Er is ook een kleine quiz beschikbaar om je kennis te testen.",
     friseTexte : "Tijdlijn",
-    Picker1 : "Alle tijdlijn",
+    Picker1 : "Alle tijdlijnen",
     DebutDev : "Begin",
-    Phase1 : "Fase 1",
-    Phase2 : "Fase 2",
-    Phase3: "Fase 3",
+    Phase1 : "Periode 1",
+    Phase2 : "Periode 2",
+    Phase3: "Periode 3",
     SimpleCheck : "Compacte weergave",
     MoreDetail : "Bekijk Meer",
     listeVideoTexte : "Videolijst",
     permissionCamera : "Cameratoestemming aanvragen",
     refusCamera : "Geen toegang tot camera",
     erreurScan : "Geen ID-overeenkomst",
-    scanAgain : "Scan opnieuw",
+    scanAgain : "Opnieuw scanen",
     questionQuiz : "Vragen",
     continueQuiz : "Doorgaan met",
     scoreQuiz : "Scoren",
     resultatQuiz : "Score Quiz",
     resetQuiz : "Resetten",
-    backAccueil : "Ontvangst",
+    backAccueil : "Onthaal",
     reponseWritingQuestion : "Antwoord : ",
-    validerReponse : "Bevestig Antwoord",
-    TitreApropos : "Over ons",
+    validerReponse : "Antwoord Bevestigen",
+    TitreApropos : "Meer uitleg",
     DescriptionApropos : "Deze applicatie is ontwikkeld door de vrijwilligers van het NAM-IP museum ter ondersteuning van het bezoek." +
-    "Een completere papieren gids is te koop in de museumwinkel.\n\n" +
+    "Een uitgebreide papieren gids is te koop in de museumwinkel.\n\n" +
     "Uw opmerkingen voor verbetering zijn welkom door feedback te geven aan de receptie.\n\n" +
     "(C) 2021 NAM-IP"
-
   }
 }
 
