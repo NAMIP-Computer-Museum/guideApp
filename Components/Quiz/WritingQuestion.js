@@ -113,16 +113,19 @@ const styles = StyleSheet.create({
     textDecorationLine : 'underline'
   },
   image:{
-    flex : 1,
+    flex : 2,
     alignItems : 'center',
     justifyContent : 'center',
+    alignSelf : 'center',
+    padding : 5,
+    height : "50%",
+    width : "60%",
+    borderWidth : 2,
+    borderColor : 'white'
   },
   images : {
-    flex : 1,
-    borderWidth : 2,
-    borderColor : 'white',
-    height : "10%",
-    width : "50%",
+    height : "100%",
+    width : "100%",
     resizeMode : 'contain'
   },
   textInput : {

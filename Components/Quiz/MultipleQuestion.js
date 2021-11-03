@@ -102,13 +102,16 @@ const styles = StyleSheet.create({
     flex : 2,
     alignItems : 'center',
     justifyContent : 'center',
-  },
-  images : {
-    flex : 1,
-    borderWidth : 2,
-    borderColor : 'white',
+    alignSelf : 'center',
+    padding : 5,
     height : "50%",
     width : "60%",
+    borderWidth : 2,
+    borderColor : 'white'
+  },
+  images : {
+    height : "100%",
+    width : "100%",
     resizeMode : 'contain'
   },
   reponse : {
