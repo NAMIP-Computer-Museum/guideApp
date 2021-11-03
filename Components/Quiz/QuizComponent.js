@@ -64,7 +64,6 @@ class QuizComponent extends React.Component{
       questionSuivante : false,
       derniereQuestion : false,
     })
-    let numberfive = (((quiz.length + quiz.length+1)+9)/2)-quiz.length;
     questions = this.randomQuestions(quiz,quizMax);
   }
 
