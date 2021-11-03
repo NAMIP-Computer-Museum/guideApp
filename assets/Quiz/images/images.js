@@ -23,7 +23,7 @@ export default images = {
   23 : require('./Altair8800.jpg'),
   26 : require('./macos.jpg'),
   27 : require('./LINUX.jpg'),
-  28 : require('./ALTO.jpg'),
+  28 : require('./alto.jpg'),
   29 : require('./windows-logo.png'),
   30 : require('./Intel80386.jpg')
 }

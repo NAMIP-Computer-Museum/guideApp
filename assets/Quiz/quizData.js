@@ -157,22 +157,14 @@ export default quiz = [
       question : "Les amigas ont été fabriqués par:",
       answer : 'Commodore',
       allChoices : ['Amstrad','Commodore','IBM','Sinclair'],
-      idImage : 19
-    },
-    {
-      id : 20,
-      questionType : 'multiple',
-      question : "L'Amstrad CPC 464 intègre un :",
-      answer : 'Cassettes audio',
-      allChoices : ['Disque dur','Lecteur de cassettes audio','Lecteur de disquettes'],
       idImage : 20
     },
     {
       id : 21,
       questionType : 'multiple',
-      question : "Les amigas ont été fabriqués par:",
-      answer : 'Commodore',
-      allChoices : ['Amstrad','Commodore','IBM','Sinclair'],
+      question : "L'Amstrad CPC 464 intègre un :",
+      answer : 'Cassettes audio',
+      allChoices : ['Disque dur','Lecteur de cassettes audio','Lecteur de disquettes'],
       idImage : 21
     },
     {
