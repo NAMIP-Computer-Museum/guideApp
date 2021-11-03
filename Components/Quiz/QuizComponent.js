@@ -5,6 +5,7 @@ import MultipleQuestion from './MultipleQuestion';
 import WritingQuestion from './WritingQuestion';
 import i18n from '../../Language/Translate'
 import quiz from '../../assets/Quiz/quizData';
+import quizMax from '../../assets/Quiz/quizMax.js'
 
 let questions;
 
@@ -18,8 +19,7 @@ class QuizComponent extends React.Component{
       questionSuivante : false,
       derniereQuestion : false
     }
-    let numberfive = (((quiz.length + quiz.length+1)+9)/2)-quiz.length;
-    questions = this.randomQuestions(quiz,numberfive);
+    questions = this.randomQuestions(quiz,quizMax);
   }
 
   //Fonction qui picohe des questions de manière aléatoire dans la liste de questions
@@ -65,7 +65,7 @@ class QuizComponent extends React.Component{
       derniereQuestion : false,
     })
     let numberfive = (((quiz.length + quiz.length+1)+9)/2)-quiz.length;
-    questions = this.randomQuestions(quiz,5);
+    questions = this.randomQuestions(quiz,quizMax);
   }
 
   render(){

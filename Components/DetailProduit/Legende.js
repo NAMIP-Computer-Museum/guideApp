@@ -165,7 +165,7 @@ class Legende extends React.Component{
         requete = "SELECT Transistors,Bits,Fréquence,Marque from CPU c WHERE c.ID = ?"
         break;
       case 'APP' :
-        requete = "SELECT TypeApp,Developpeur,Langage,Environement from APP a WHERE a.ID = ?"
+        requete = "SELECT TypeApp,Developpeur,Langage,Environnement from APP a WHERE a.ID = ?"
         break;
       case 'OS' :
         requete = "SELECT Fabricant,Licence,Langage,Plateforme from OS o WHERE o.ID = ?"
