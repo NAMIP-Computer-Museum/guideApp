@@ -101,7 +101,7 @@ class Legende extends React.Component{
             </View>
             <View style = {styles.item}>
               <Image style = {styles.icon} source = {require('../../assets/Detail/LegendeAPP/old-computer.png')}/>
-              <Text style = {styles.text}>{this.state.data.Environement}</Text>
+              <Text style = {styles.text}>{this.state.data.Environnement}</Text>
             </View>
           </View>
         </View>
