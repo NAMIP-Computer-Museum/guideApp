@@ -150,5 +150,109 @@ export default quiz = [
       answer : 'Atari ST',
       allChoices : ['Atari ST','Amiga','IBM','Sinclair'],
       idImage : 19
+    },
+    {
+      id : 20,
+      questionType : 'multiple',
+      question : "Les amigas ont été fabriqués par:",
+      answer : 'Commodore',
+      allChoices : ['Amstrad','Commodore','IBM','Sinclair'],
+      idImage : 19
+    },
+    {
+      id : 20,
+      questionType : 'multiple',
+      question : "L'Amstrad CPC 464 intègre un :",
+      answer : 'Cassettes audio',
+      allChoices : ['Disque dur','Lecteur de cassettes audio','Lecteur de disquettes'],
+      idImage : 20
+    },
+    {
+      id : 21,
+      questionType : 'multiple',
+      question : "Les amigas ont été fabriqués par:",
+      answer : 'Commodore',
+      allChoices : ['Amstrad','Commodore','IBM','Sinclair'],
+      idImage : 21
+    },
+    {
+      id : 22,
+      questionType : 'multiple',
+      question : "Le DAI Imagination Machine est originaire de :",
+      answer : 'Belgique',
+      allChoices : ['Belgique','France','USA'],
+      idImage : 22
+    },
+    {
+      id : 22,
+      questionType : 'multiple',
+      question : "Le DAI disposait de graphiques:",
+      answer : 'couleurs 528x240',
+      allChoices : ['monochrome 512x342', 'couleurs 528x240','couleurs 800x600'],
+      idImage : 22
+    },
+    {
+      id : 23,
+      questionType : 'multiple',
+      question : "L'ALTAIR 8080 dispose d'une interface de saisie via :",
+      answer : 'des interrupteurs',
+      allChoices : ['des interrupteurs', 'un clavier', 'la reconnaissance vocale'],
+      idImage : 23
+    },
+    {
+      id : 24,
+      questionType : 'multiple',
+      question : "L'ALTAIR 8080 dispose d'un processeur :",
+      answer : '8 bits',
+      allChoices : ['4 bits', '8 bits', '16 bits', '32 bits'],
+      idImage : 23
+    },
+    {
+      id : 25,
+      questionType : 'multiple',
+      question : "Le BASIC de l'ALTAIR a été programmé par :",
+      answer : 'Bill Gates',
+      allChoices : ['Bill Gates', 'Steve Jobs', 'Clive Sinclair'],
+      idImage : 23
+    },
+    {
+      id : 26,
+      questionType : 'multiple',
+      question : "MacOS est un système d'exploitation conçu par:",
+      answer : 'Apple',
+      allChoices : ['Apple', 'IBM', 'Microsoft'],
+      idImage : 26
+    },
+    {
+      id : 27,
+      questionType : 'multiple',
+      question : "LINUX est apparenté à:",
+      answer : 'UNIX',
+      allChoices : ['MacOS', 'MS-DOS', 'UNIX'],
+      idImage : 27
+    },
+    {
+      id : 28,
+      questionType : 'multiple',
+      question : "Le XEROX ALTO était innovant pour :",
+      answer : 'ces trois innovations',
+      allChoices : ['Son interface graphique', 'Sa programmation orientée-objet', 'Sa mise en réseau via Ethernet', 'ces trois innovations'],
+      idImage : 28
+    },
+    {
+      id : 29,
+      questionType : 'multiple',
+      question : "La première version de Windows a être un succès commercial a été :",
+      answer : 'Windows 3',
+      allChoices : ['Windows 1', 'Windows 2', 'Windows 3', 'Windows 95'],
+      idImage : 29
+    },
+    {
+      id : 30,
+      questionType : 'multiple',
+      question : "Le mode protégé d'un processeur comme le 80386 signifie qu'il isole:",
+      answer : 'les tâches en execution simultanées',
+      allChoices : ['de la chaleur', 'des rayons cosmiques', 'les tâches en execution simultanées', 'des hackeurs'],
+      idImage : 30
     }
 ]

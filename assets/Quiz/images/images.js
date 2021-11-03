@@ -16,5 +16,14 @@ export default images = {
   16 : require('./WarMouse.jpg'),
   17 : require('./floppies.jpg'),
   18 : require('./RAM.jpg'),
-  19 : require('./tos.jpg')
+  19 : require('./tos.jpg'),
+  20 : require('./Amiga500.jpg'),
+  21 : require('./AmstradCPC464.jpg'),
+  22 : require('./DAI.jpg'),
+  23 : require('./Altair8800.jpg'),
+  26 : require('./macos.jpg'),
+  27 : require('./LINUX.jpg'),
+  28 : require('./ALTO.jpg'),
+  29 : require('./windows-logo.png'),
+  30 : require('./Intel80386.jpg')
 }
