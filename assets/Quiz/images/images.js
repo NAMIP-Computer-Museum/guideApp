@@ -10,7 +10,7 @@ export default images = {
   10 : require('./applelisa.jpg'),
   11 : require('./Windows1.jpg'),
   12 : require('./Lotus123.jpg'),
-  13 : require('./tandy-nannine.jpg'),
+  13 : require('./tandyNannine.jpg'),
   14 : require('./cpu.jpg'),
   15 : require('./cpu387.jpg'),
   16 : require('./WarMouse.jpg'),
@@ -24,6 +24,6 @@ export default images = {
   26 : require('./macos.jpg'),
   27 : require('./LINUX.jpg'),
   28 : require('./alto.jpg'),
-  29 : require('./windows-logo.png'),
+  29 : require('./windowsLogo.png'),
   30 : require('./Intel80386.jpg')
 }

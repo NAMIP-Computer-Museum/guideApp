@@ -163,7 +163,7 @@ export default quiz = [
       id : 21,
       questionType : 'multiple',
       question : "L'Amstrad CPC 464 intègre un :",
-      answer : 'Cassettes audio',
+      answer : 'Lecteur de cassettes audio',
       allChoices : ['Disque dur','Lecteur de cassettes audio','Lecteur de disquettes'],
       idImage : 21
     },
