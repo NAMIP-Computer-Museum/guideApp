@@ -75,15 +75,7 @@ class Frise extends React.Component{
   concatenerTypeToString = () =>{
     let typeString = "";
     let tableau = [...this.state.typeData]
-    if(tableau.length > 1){
-      for(let i = 0;i<tableau.length-1;i++){
-        typeString += tableau[i]+"|"
-      }
-      typeString += tableau[tableau.length-1];
-    }
-    else if (tableau.length == 1){
-      typeString += tableau[tableau.length-1];
-    }
+    typeString = tableau.join("|")
     return typeString;
   }
 
