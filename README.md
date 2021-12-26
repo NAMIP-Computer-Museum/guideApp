@@ -13,6 +13,7 @@ The current scope is computing heritage and its validation is still on-going in 
 The framework is designed in two main components:
 * a knowledge base back-end to structure all the relevant information, a conceptual model was developed based on different standards (SEM, DOLCE/Spatial History Ontlogy, Constructed Past Theory, DBPedia) and accessed through queries and/or a specific API to extract a relevant timeline
 <img src="https://github.com/NAMIP-Computer-Museum/guideApp/blob/main/assets/Illustrations/metamodel4.png?raw=true" height="400" />
+
 * a navigation front-end, currently based on ReactNative and that can easily be deployed as mobile application
 <img src="https://github.com/NAMIP-Computer-Museum/guideApp/blob/main/assets/Illustrations/protonav.jpg?raw=true" width="800" />
 
