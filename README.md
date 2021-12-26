@@ -1,4 +1,4 @@
-# Guide Mobile App
+# Trajectware - timeline-based navigation across computing heritage
 
 ## Goal and Scope
 
