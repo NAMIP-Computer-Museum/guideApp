@@ -1,13 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet,View,Pressable,Text,Image} from 'react-native';
+import {StyleSheet,View,Pressable,Text,Image,Animated, Modal} from 'react-native';
 import MultipleQuestion from './MultipleQuestion';
 import WritingQuestion from './WritingQuestion';
 import i18n from '../../Language/Translate'
-import quiz from '../../assets/Quiz/quizData';
+//import quiz from '../../assets/Quiz/quizData';
+import quiz from '../../assets/Quiz/quizDataKids.js';
 import quizMax from '../../assets/Quiz/quizMax.js'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 let questions;
+let progress;
 
 class QuizComponent extends React.Component{
   constructor(props){
@@ -17,21 +20,28 @@ class QuizComponent extends React.Component{
       score : 0,
       afficheScore : false,
       questionSuivante : false,
-      derniereQuestion : false
+      derniereQuestion : false,
+      progress: new Animated.Value(0)
     }
-    questions = this.randomQuestions(quiz,quizMax);
+    questions = this.randomQuestions(quiz,10);
+    progress = this.state.progress.interpolate({
+      inputRange: [0, questions.length],
+      outputRange: ['10%', '100%']
+    });
   }
 
-  //Fonction qui picohe des questions de manière aléatoire dans la liste de questions
+  //Fonction qui pioche des questions de manière aléatoire dans la liste de questions
   randomQuestions = (quizData,numberQuestions) =>{
-    const reponse = [];
-    const questions = [...quizData];
+    const questionsSelected = [];
+    //Copie des données du tableau
+    const questionsList = [...quizData];
     for(let i = 0;i<numberQuestions;i++){
-      let random = Math.floor(Math.random()*questions.length);
-      reponse.push(questions[random]);
-      questions.splice(random,1);
+      let random = Math.floor(Math.random()*questionsList.length);
+      questionsSelected.push(questionsList[random]);
+      //Splice ajoute ou supprime des données dans un tableau
+      questionsList.splice(random,1);
     }
-    return reponse;
+    return questionsSelected;
   }
 
   //Fonction qui mets à jour le score et valide l'affichage des boutons suivant ou score
@@ -47,7 +57,12 @@ class QuizComponent extends React.Component{
 
   //Fonction qui change l'index de la question courante pour passer à la question suivante
   changeQuestion = async() =>{
-    this.setState({indexQuestion : this.state.indexQuestion+1,questionSuivante:false})
+    this.setState({indexQuestion : this.state.indexQuestion+1,questionSuivante:false});
+    Animated.timing(this.state.progress,{
+      toValue: this.state.indexQuestion+2,
+      duration: 1000,
+      useNativeDriver: false
+    }).start();
   }
 
   //Fonction qui valide l'affiche du score
@@ -62,16 +77,26 @@ class QuizComponent extends React.Component{
       score : 0,
       afficheScore : false,
       questionSuivante : false,
-      derniereQuestion : false,
+      derniereQuestion : false
     })
     questions = this.randomQuestions(quiz,quizMax);
+    Animated.timing(this.state.progress,{
+      toValue: 0,
+      duration: 1000,
+      useNativeDriver: false
+    }).start();
   }
 
   render(){
     if(!this.state.afficheScore){
      return(
       <View style = {styles.main}>
-        <Text style = {styles.enCours}>{i18n.t("questionQuiz")} : {this.state.indexQuestion+1} / {questions.length}</Text>
+        <View style = {styles.progressBar}>
+          <Animated.View style = {[styles.animationProgressBar, {width: progress}]}>
+
+          </Animated.View>
+        </View>
+        <Text style = {styles.enCours}>{this.state.indexQuestion+1} / {questions.length}</Text>
         {questions[this.state.indexQuestion].questionType === "multiple" &&
           <View style = {styles.question}>
             <MultipleQuestion continue = {this.continue} question = {questions[this.state.indexQuestion]} score={this.state.score}/>
@@ -84,14 +109,14 @@ class QuizComponent extends React.Component{
         }
         {this.state.questionSuivante && !this.state.derniereQuestion &&
           <View style = {styles.continue}>
-            <Pressable style={styles.button} onPress = {() => {this.changeQuestion()}}>
+            <Pressable disabled={false} style={styles.buttonNext} onPress = {() => {this.changeQuestion()}}>
               <Text style={styles.text_button}>{i18n.t("continueQuiz")}</Text>
             </Pressable>
           </View>
         }
         {this.state.derniereQuestion &&
           <View style = {styles.continue}>
-            <Pressable style={styles.button} onPress = {() => {this.afficheScore()}}>
+            <Pressable disabled={false} style={styles.buttonNext} onPress = {() => {this.afficheScore()}}>
               <Text style={styles.text_button}>{i18n.t("scoreQuiz")}</Text>
             </Pressable>
           </View>
@@ -105,15 +130,28 @@ class QuizComponent extends React.Component{
           <View style = {styles.titre}>
             <Text style = {styles.text}>{i18n.t("scoreQuiz")}</Text>
           </View>
-          <View style = {styles.affiche}>
-            <Text style = {styles.textScore}>{i18n.t("resultatQuiz")} : {this.state.score} / {questions.length}</Text>
-            <Image style = {styles.image} source = {this.state.score/questions.length >= 0.5 ? require('../../assets/Quiz/congratulation.png') : require('../../assets/Quiz/fail.png')}/>
-            <Pressable style={styles.button} onPress = {() => {this.resetQuiz()}}>
-              <Text style={styles.text_button}>{i18n.t("resetQuiz")}</Text>
-            </Pressable>
-            <Pressable style={styles.button} onPress = {() => {this.props.navigation.goBack()}}>
-              <Text style={styles.text_button}>{i18n.t("backAccueil")}</Text>
-            </Pressable>
+          <View style={styles.centeredView}>
+            <Modal
+              animationType="none"
+              transparent={false}
+              visible={true}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>{i18n.t("resultatQuiz")}</Text>
+                  <View>
+                    <Text style = {styles.textScore}> {this.state.score} / {questions.length}</Text>
+                    <Text style = {styles.modalText}> {this.state.score / questions.length == 1 ? i18n.t("quizPerfect") : this.state.score / questions.length > 0.5 ? i18n.t("quizWin") : this.state.score / questions.length == 0.5 ? i18n.t("quizDraw") : i18n.t("quizLose")}</Text>
+                    <Pressable style={styles.button} onPress = {() => {this.resetQuiz()}}>
+                      <Text style={styles.text_button}>{i18n.t("resetQuiz")}</Text>
+                    </Pressable>
+                    <Pressable style={styles.button} onPress = {() => {this.props.navigation.goBack()}}>
+                      <Text style={styles.text_button}>{i18n.t("backAccueil")}</Text>
+                    </Pressable>
+                  </View>
+                </View>
+              </View>
+            </Modal>
           </View>
         </View>
       )
@@ -124,38 +162,48 @@ class QuizComponent extends React.Component{
 const styles = StyleSheet.create({
   main : {
     flex : 1,
-    backgroundColor : 'black',
+    backgroundColor : '#242c4a',
   },
   enCours: {
-    flex : 0.8,
-    color : 'white',
-    fontWeight : 'bold',
-    fontSize : 20,
-    textAlign : 'center',
-    marginTop : 5,
-    textDecorationLine : 'underline'
+    flex : 0.5,
+    color : 'lightgrey',
+    fontSize : 13,
+    textAlign : 'left',
+    marginLeft: 10
   },
   question:{
-    flex : 10
+    flex : 18,
+    marginTop: 7
   },
   continue : {
     flex : 1,
     justifyContent : 'center',
     alignItems : 'center'
   },
-  button:{
-    backgroundColor : 'white',
-    borderRadius : 10,
+  buttonNext:{
+    backgroundColor : '#00C5EC',
+    borderRadius : 4,
     width : 200,
     height : 45,
     marginVertical : 5,
     justifyContent : 'center',
-    alignItems : 'center'
+    alignItems : 'center',
+    marginBottom: 100
+  },
+  button:{
+    backgroundColor : '#00C5EC',
+    borderRadius : 15,
+    width : 200,
+    height : 45,
+    marginVertical : 5,
+    justifyContent : 'center',
+    alignItems : 'center',
+    marginTop: 10
   },
   text_button:{
     textAlign : 'center',
     fontSize : 20,
-    fontWeight : 'bold'
+    color : 'white'
   },
   titre:{
     flex : 1,
@@ -170,28 +218,60 @@ const styles = StyleSheet.create({
     textAlign : 'center',
     color : 'white',
     fontWeight: 'bold',
-    fontSize : 30,
+    fontSize : 20,
     margin : 5,
-  },
-  affiche:{
-    flex : 9,
-    justifyContent : 'center',
-    alignItems : 'center'
   },
   textScore:{
     textAlign : 'center',
-    color : 'white',
+    color : 'black',
     fontWeight: 'bold',
-    fontSize : 30,
-    margin : 5,
-    borderBottomWidth : 2,
-    borderBottomColor : 'white'
+    fontSize : 20,
   },
-  image : {
-    margin : 10,
-    width : "30%",
-    height : "15%",
-    resizeMode : 'contain',
+  progressBar : {
+    marginTop: 15,
+    marginBottom: 5,
+    marginLeft: 10,
+    marginRight: 10,
+    width: progress,
+    height: 17,
+    borderRadius: 10,
+    backgroundColor: "#141929"
+  },
+  animationProgressBar : {
+    height : 17,
+    borderRadius : 10,
+    backgroundColor: "#00C5EC"
+  },
+
+  centeredView: {
+  flex: 5,
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: 22,
+  backgroundColor : "#242c4a"
+},
+ modalView: {
+  margin: 20,
+  backgroundColor: "white",
+  borderRadius: 20,
+  padding: 35,
+  alignItems: "center",
+  shadowColor: "#0000",
+  shadowOffset: {
+    width: 0,
+    height: 3
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 4,
+  elevation: 5
+},
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    color : 'black',
+    fontWeight: 'bold',
+    fontSize : 30
+
   }
 })
 

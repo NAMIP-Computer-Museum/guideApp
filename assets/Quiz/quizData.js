@@ -132,7 +132,7 @@ export default quiz = [
       questionType : 'multiple',
       question : "Quelle format de disquette n'existe pas:",
       answer : '4 pouces',
-      allChoices : ['3 pouces','3 pouces 1/2','4 pouces','5 pouces 1/4','8 pouces'],
+      allChoices : ['3 pouces','3 pouces 1/2','4 pouces','5 pouces 1/4'],
       idImage : 17
     },
     {

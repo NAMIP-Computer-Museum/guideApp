@@ -26,6 +26,7 @@ class Detail extends React.Component{
   }
 
   //Fonction qui vérifie si une vidéo est disponible pour l'objet
+  //Parcours des objets du tableau vidéos à la recherche d'une possédant le même id que l'objet courant
   testDonneeVideo = () =>{
     const ordinateurID = this.props.navigation.state.params.dataOrdinateur.id;
     for(let i = 0;i<videos.length;i++){
@@ -80,6 +81,7 @@ class Detail extends React.Component{
   }
 
   //Fonction qui récupére les données du mot clé cliqué
+  //Le modal ne peut se monter et s'afficher qu'après cet appel car il ne peut être null
   showModal = async(index) =>{
     db = SQLite.openDatabase("namip.db");
     let requete = this.getRequete()

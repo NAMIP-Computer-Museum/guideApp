@@ -177,7 +177,9 @@ class Legende extends React.Component{
     return requete;
   }
 
-  //Fonction qui récuère les données pour la légende
+  //Fonction qui récupère les données pour la légende
+  //Récupération de la requête qui change en fonction du type de l’objet
+  //L'argument correspond à l’ID de l’objet à récupérer dans la table
   fetchLegendeData = async(type,id) =>{
     db = SQLite.openDatabase("namip.db");
     let requete = this.getRequete(type);

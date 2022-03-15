@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet,View,TextInput,Text,Pressable,Image} from 'react-native';
-import images from '../../assets/Quiz/images/images'
+//import images from '../../assets/Quiz/images/images'
+import images from '../../assets/Quiz/images/imageskids';
 import i18n from '../../Language/Translate'
 
 class WritingQuestion extends React.Component{

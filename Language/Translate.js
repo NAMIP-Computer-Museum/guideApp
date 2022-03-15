@@ -55,7 +55,11 @@ i18n.translations = {
     DescriptionApropos : "\nCette application a été développée par les bénévoles du musée NAM-IP à des fins de support pour la visite. "+
     "Un guide papier plus complet est en vente à la boutique du musée.\n\n"+
     "Vos commentaires d'amélioration sont les bienvenus en donnant un retour à la réception.\n\n"+
-    "(C) 2021 NAM-IP"
+    "(C) 2021 NAM-IP",
+    quizPerfect: "Parfait !",
+    quizWin: "Félicitations !",
+    quizDraw: "Tout juste",
+    quizLose: "Réessaye !"
   },
   "en" : {
     accueilTitre : "NAM-IP MicroComputer Exposure",
@@ -111,7 +115,11 @@ i18n.translations = {
     DescriptionApropos : "This application was developed by the volunteers of the NAM-IP museum for the purpose of support for the visit." +
     "A more complete paper guide is on sale at the museum shop.\n\n" +
     "Your comments for improvement are welcome by giving feedback to the front desk.\n\n" +
-    "(C) 2021 NAM-IP"
+    "(C) 2021 NAM-IP",
+    quizPerfect: "Perfect !",
+    quizWin: "Congratulations !",
+    quizDraw: "Just right !",
+    quizLose: "Try again !"
   },
   "nl-NL" : {
     accueilTitre : "NAM-IP MicroComputer Blootstelling",
@@ -168,7 +176,11 @@ i18n.translations = {
     DescriptionApropos : "Deze applicatie is ontwikkeld door de vrijwilligers van het NAM-IP museum ter ondersteuning van het bezoek." +
     "Een uitgebreide papieren gids is te koop in de museumwinkel.\n\n" +
     "Uw opmerkingen voor verbetering zijn welkom door feedback te geven aan de receptie.\n\n" +
-    "(C) 2021 NAM-IP"
+    "(C) 2021 NAM-IP",
+    quizPerfect: "Perfect !",
+    quizWin: "Gefeliciteerd ! ",
+    quizDraw: "Zo ongeveer !",
+    quizLose: "Probeer het opnieuw"
   }
 }
 

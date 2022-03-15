@@ -22,7 +22,6 @@ export default function QRCode({navigation:{ navigate }}) {
     ///Partie qui récupère l'ID si le texte dans les QRCode sont de la forme TYPE-Annee-ID (Code à changer dans d'autres cas)
     ///const pieces = data.split("-");
     ///const id = parseInt(pieces[2]);
-    ///
     db = SQLite.openDatabase('"nom".db')
     let requete = "A REMPLIR"
     db.transaction((tx) => {

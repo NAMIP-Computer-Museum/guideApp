@@ -29,8 +29,11 @@ class ListeVideo extends React.Component{
           </View>
           <View style = {styles.flatlist}>
             <FlatList
+                //Données récupérées à partir d'une fonction qui renvoie un tableau avec les objets vidéos
+                //Correspond aux objets en français si la locale est en français sinon en anglais
                 data={this.testLocale()}
                 keyExtractor={(item) => item.id.toString()}
+                // pour chaque item, un appel au composant VidéoItem est effectué avec pour props l’item et une fonction lireVidéo pour naviguer à la page de visualisation..
                 renderItem= {({item}) => <VideoItem video={item} lireVideo = {this.lireVideo}/>}
             />
           </View>
