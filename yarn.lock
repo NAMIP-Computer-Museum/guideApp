@@ -5456,6 +5456,13 @@
   dependencies:
     "localized-strings" "^0.2.0"
 
+"react-native-check-box@^2.1.7":
+  "integrity" "sha512-dPVOoz4jKs2je2HSHp7+XJXNyZFq8Kij7IHutigrQKzB550Dko6ZAQu/1mG1FzdUMFxxkZ2nX59KmbR0Co0T8Q=="
+  "resolved" "https://registry.npmjs.org/react-native-check-box/-/react-native-check-box-2.1.7.tgz"
+  "version" "2.1.7"
+  dependencies:
+    "prop-types" "^15.5.7"
+
 "react-native-elements@^3.4.2":
   "integrity" "sha512-m0eAWOn7JuR1wNTNY0WHuaqst4LI/gFE4N5Bbyfsc4DiryWsMST7aAg5w/Gos4IexWIzhLKCIkPxthND1m/8Xg=="
   "resolved" "https://registry.npmjs.org/react-native-elements/-/react-native-elements-3.4.2.tgz"
@@ -5681,7 +5688,7 @@
   dependencies:
     "events" "^3.2.0"
 
-"react-native@*", "react-native@^*", "react-native@^0.64", "react-native@>= 0.58.2", "react-native@>= 0.62", "react-native@>=0.14.0", "react-native@>=0.40", "react-native@>=0.40.0", "react-native@>=0.42.0", "react-native@>=0.50.0", "react-native@>=0.57", "react-native@>=0.60", "react-native@>=0.60 <=0.64", "react-native@>=0.60.0-rc.0 <1.0.x", "react-native@>=0.62.0-rc.0 <0.64.0", "react-native@https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz":
+"react-native@*", "react-native@^*", "react-native@^0.64", "react-native@>= 0.58.2", "react-native@>= 0.62", "react-native@>=0.14.0", "react-native@>=0.20.0", "react-native@>=0.40", "react-native@>=0.40.0", "react-native@>=0.42.0", "react-native@>=0.50.0", "react-native@>=0.57", "react-native@>=0.60", "react-native@>=0.60 <=0.64", "react-native@>=0.60.0-rc.0 <1.0.x", "react-native@>=0.62.0-rc.0 <0.64.0", "react-native@https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz":
   "integrity" "sha512-qWR6pcG4yDu/Rthm+DvAS017rL38LbZFnJv/k4HL4ZUH/WhKuqC+stD7TlpaOBb3N2bkydm9s+GCa14T41MLEg=="
   "resolved" "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz"
   "version" "0.63.2"

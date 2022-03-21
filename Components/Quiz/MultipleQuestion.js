@@ -1,8 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet,View,Text,TouchableOpacity,Image} from 'react-native';
-//import images from '../../assets/Quiz/images/images';
-import images from '../../assets/Quiz/images/imageskids.js';
+import images from '../../assets/Quiz/images/images';
+import imagesKids from '../../assets/Quiz/images/imageskids.js';
+//import QuizComponent from './QuizComponent';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class MultipleQuestion extends React.Component{
@@ -17,7 +19,8 @@ class MultipleQuestion extends React.Component{
       nbEssais: 0,
       nbEssaisMax: (this.props.question.allChoices).length-1,
       dernieresReponses: [],
-      score : this.props.score
+      score : this.props.score,
+      niveau : this.props.niveau
     }
 
   }
@@ -52,12 +55,14 @@ class MultipleQuestion extends React.Component{
         nbEssaisMax: (this.props.question.allChoices).length-1,
         desactiveReponse : false,
         dernieresReponses: [],
-        score : this.props.score
+        score : this.props.score,
+        niveau : this.props.niveau
       })
     }
   }
 
   render(){
+    console.log("Valeur de this.state.niveau à l'entrée du render de MultipleQuestion : " + this.state.niveau)
     const question = this.props.question;
     return(
       <View style = {styles.main}>
@@ -66,7 +71,9 @@ class MultipleQuestion extends React.Component{
         </View>
         {this.state.image &&
           <View style = {styles.image}>
-            <Image style = {styles.images} source = {images[question.idImage]}/>
+            { this.state.niveau == "facile" ?
+            <Image style = {styles.images} source = {imagesKids[question.idImage]}/>:
+            <Image style = {styles.images} source = {images[question.idImage]}/>}
           </View>
         }
         <View style = {styles.reponse}>

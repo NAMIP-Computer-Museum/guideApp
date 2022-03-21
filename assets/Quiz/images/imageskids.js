@@ -1,4 +1,4 @@
-export default images = {
+export default imagesKids = {
   1 : require('./microprocesseur.jpg'),
   2 : require('./byte.jpg'),
   3 : require('./octet.jpg'),

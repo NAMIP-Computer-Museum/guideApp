@@ -11,6 +11,7 @@ import APropos from '../Components/Information/APropos'
 import Introduction from '../Components/Information/Introduction'
 import ModeEmploi from '../Components/Information/ModeEmploi'
 import Quiz from '../Components/Quiz/QuizComponent'
+import QuizChoiceLevel from '../Components/Quiz/QuizChoiceLevel'
 
 //Stack Navigator ou sont définis toutes nos pages
 const Navigation = createStackNavigator({
@@ -111,6 +112,19 @@ const Navigation = createStackNavigator({
       navigationOptions:{
         title : "",
         headerStyle:{
+          backgroundColor: 'black',
+          borderBottomWidth : 2,
+          borderBottomColor : 'white'
+        },
+        headerTintColor:'white'
+      }
+    },
+    QuizChoiceLevel : {
+      screen : QuizChoiceLevel,
+      navigationOptions:{
+        title : "",
+        headerStyle:{
+
           backgroundColor: 'black',
           borderBottomWidth : 2,
           borderBottomColor : 'white'

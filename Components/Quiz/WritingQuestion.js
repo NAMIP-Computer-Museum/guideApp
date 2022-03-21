@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet,View,TextInput,Text,Pressable,Image} from 'react-native';
-//import images from '../../assets/Quiz/images/images'
-import images from '../../assets/Quiz/images/imageskids';
+import images from '../../assets/Quiz/images/images'
+import imagesKids from '../../assets/Quiz/images/imageskids';
 import i18n from '../../Language/Translate'
+//import QuizComponent from './QuizComponent';
 
 class WritingQuestion extends React.Component{
   constructor(props){
@@ -17,7 +18,8 @@ class WritingQuestion extends React.Component{
       reponseQuestion : null,
       reponseFausse : false,
       desactiveEditable : true,
-      score : this.props.score
+      score : this.props.score,
+      niveau : this.props.niveau
     }
   }
 
@@ -47,12 +49,14 @@ class WritingQuestion extends React.Component{
         reponseQuestion : null,
         reponseFausse : false,
         desactiveEditable : true,
-        score : this.props.score
+        score : this.props.score,
+        niveau : this.props.niveau
       })
     }
   }
 
   render(){
+    console.log("Valeur de this.state.niveau à l'entrée du render de " + this.state.niveau)
     const question = this.props.question;
     return(
       <View style = {styles.main}>
@@ -61,7 +65,9 @@ class WritingQuestion extends React.Component{
         </View>
         {this.state.image &&
           <View style = {styles.image}>
-            <Image style = {styles.images} source = {images[question.idImage]}/>
+            { this.state.niveau == "facile" ?
+            <Image style = {styles.images} source = {imagesKids[question.idImage]}/>:
+            <Image style = {styles.images} source = {images[question.idImage]}/>}
           </View>
         }
         <View style = {styles.textInput}>

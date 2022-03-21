@@ -61,7 +61,7 @@ class Acceuil extends React.Component{
           <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("ListeVideo")}}>
             <Text style={styles.text_button}> {i18n.t('accueilBoutonVideo')} </Text>
           </Pressable>
-          <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("Quiz")}}>
+          <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("QuizChoiceLevel")}}>
             <Text style={styles.text_button}> {i18n.t('accueilBoutonQuiz')} </Text>
           </Pressable>
           <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("APropos")}}>

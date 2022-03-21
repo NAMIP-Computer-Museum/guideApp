@@ -4,13 +4,14 @@ import {StyleSheet,View,Pressable,Text,Image,Animated, Modal} from 'react-native
 import MultipleQuestion from './MultipleQuestion';
 import WritingQuestion from './WritingQuestion';
 import i18n from '../../Language/Translate'
-//import quiz from '../../assets/Quiz/quizData';
-import quiz from '../../assets/Quiz/quizDataKids.js';
+import quiz from '../../assets/Quiz/quizData';
+import quizKids from '../../assets/Quiz/quizDataKids.js';
 import quizMax from '../../assets/Quiz/quizMax.js'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 let questions;
 let progress;
+let niveau;
 
 class QuizComponent extends React.Component{
   constructor(props){
@@ -21,19 +22,26 @@ class QuizComponent extends React.Component{
       afficheScore : false,
       questionSuivante : false,
       derniereQuestion : false,
-      progress: new Animated.Value(0)
+      progress: new Animated.Value(0),
+      niveau : this.props.navigation.state.params.levelQuiz
     }
-    questions = this.randomQuestions(quiz,10);
+    niveau = this.props.navigation.state.params.levelQuiz;
+    if(niveau === "difficile"){
+      questions = this.randomQuestions(quiz,10);
+    }
+    else {
+    questions = this.randomQuestions(quizKids,10);
+  }
     progress = this.state.progress.interpolate({
       inputRange: [0, questions.length],
       outputRange: ['10%', '100%']
     });
+    console.log("this.state.niveau : " + this.state.niveau)
   }
 
   //Fonction qui pioche des questions de manière aléatoire dans la liste de questions
   randomQuestions = (quizData,numberQuestions) =>{
     const questionsSelected = [];
-    //Copie des données du tableau
     const questionsList = [...quizData];
     for(let i = 0;i<numberQuestions;i++){
       let random = Math.floor(Math.random()*questionsList.length);
@@ -77,7 +85,8 @@ class QuizComponent extends React.Component{
       score : 0,
       afficheScore : false,
       questionSuivante : false,
-      derniereQuestion : false
+      derniereQuestion : false,
+      niveau : null
     })
     questions = this.randomQuestions(quiz,quizMax);
     Animated.timing(this.state.progress,{
@@ -88,23 +97,23 @@ class QuizComponent extends React.Component{
   }
 
   render(){
+    console.log("Valeur this.state.niveau à l'entrée du render de QuizComponent : " + this.state.niveau)
     if(!this.state.afficheScore){
      return(
       <View style = {styles.main}>
         <View style = {styles.progressBar}>
           <Animated.View style = {[styles.animationProgressBar, {width: progress}]}>
-
           </Animated.View>
         </View>
         <Text style = {styles.enCours}>{this.state.indexQuestion+1} / {questions.length}</Text>
         {questions[this.state.indexQuestion].questionType === "multiple" &&
           <View style = {styles.question}>
-            <MultipleQuestion continue = {this.continue} question = {questions[this.state.indexQuestion]} score={this.state.score}/>
+            <MultipleQuestion continue = {this.continue} question = {questions[this.state.indexQuestion]} score={this.state.score} niveau={this.state.niveau}/>
           </View>
         }
         {questions[this.state.indexQuestion].questionType === "writing" &&
           <View style = {styles.question}>
-            <WritingQuestion continue = {this.continue} question = {questions[this.state.indexQuestion]} score={this.state.score}/>
+            <WritingQuestion continue = {this.continue} question = {questions[this.state.indexQuestion]} score={this.state.score} niveau={this.state.niveau}/>
           </View>
         }
         {this.state.questionSuivante && !this.state.derniereQuestion &&
@@ -145,7 +154,7 @@ class QuizComponent extends React.Component{
                     <Pressable style={styles.button} onPress = {() => {this.resetQuiz()}}>
                       <Text style={styles.text_button}>{i18n.t("resetQuiz")}</Text>
                     </Pressable>
-                    <Pressable style={styles.button} onPress = {() => {this.props.navigation.goBack()}}>
+                    <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("Accueil")}}>
                       <Text style={styles.text_button}>{i18n.t("backAccueil")}</Text>
                     </Pressable>
                   </View>

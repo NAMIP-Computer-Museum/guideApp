@@ -1,4 +1,4 @@
-export default quiz = [
+export default quizKids = [
     {
       id : 1,
       questionType : 'multiple',
