@@ -74,7 +74,7 @@ export default quiz = [
     {
       id : 10,
       questionType : 'multiple',
-      question : "Quelle ordinateur Apple déjà doté d'une interface graphique et d'une souris a précédé le Macintosh ?",
+      question : "Quel ordinateur Apple déjà doté d'une interface graphique et d'une souris a précédé le Macintosh ?",
       answer : 'LISA',
       allChoices : ['Apple II','STAR','LISA','ZX81'],
       idImage : 10
@@ -114,7 +114,7 @@ export default quiz = [
     {
       id : 15,
       questionType : 'multiple',
-      question : "Les co-processeurs de type 80x87 était destiné à gérer:",
+      question : "Les co-processeurs de type 80x87 étaient destiné à gérer:",
       answer : 'les opérations en virgule flottante',
       allChoices : ['les opérations en virgule flottante','le rendu graphique','les entrées-sorties'],
       idImage : 15
@@ -122,15 +122,15 @@ export default quiz = [
     {
       id : 16,
       questionType : 'multiple',
-      question : "Sur les premiers Macintosh, la souris diposait de :",
-      answer : '1 bouton',
-      allChoices : ['1 bouton', '2 boutons','3 boutons'],
+      question : "Sur les premiers Macintosh, la souris diposait de combien de bouton ?",
+      answer : '1',
+      allChoices : ['1', '2','3'],
       idImage : 16
     },
     {
       id : 17,
       questionType : 'multiple',
-      question : "Quelle format de disquette n'existe pas:",
+      question : "Quel format de disquette n'existe pas ?",
       answer : '4 pouces',
       allChoices : ['3 pouces','3 pouces 1/2','4 pouces','5 pouces 1/4'],
       idImage : 17

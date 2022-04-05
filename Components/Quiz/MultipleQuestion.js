@@ -3,6 +3,7 @@ import React from 'react';
 import {StyleSheet,View,Text,TouchableOpacity,Image} from 'react-native';
 import images from '../../assets/Quiz/images/images';
 import imagesKids from '../../assets/Quiz/images/imageskids.js';
+import i18n from '../../Language/Translate'
 //import QuizComponent from './QuizComponent';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -67,7 +68,9 @@ class MultipleQuestion extends React.Component{
     return(
       <View style = {styles.main}>
         <View style = {styles.question}>
-          <Text style = {styles.styleQuestion}>{question.question}</Text>
+        {this.state.niveau == "facile" ?
+          <Text style = {styles.styleQuestion}>{i18n.t("quizDataKids" + question.id)}</Text>:
+          <Text style = {styles.styleQuestion}>{i18n.t("quizData" + question.id)}</Text>}
         </View>
         {this.state.image &&
           <View style = {styles.image}>

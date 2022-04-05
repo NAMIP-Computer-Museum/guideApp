@@ -130,7 +130,7 @@ export default quizKids = [
     {
       id : 17,
       questionType : 'multiple',
-      question : 'Que signifie le NAM de NAM-IP?',
+      question : 'Que signifie le NAM de NAM-IP ?',
       answer : 'Numerical Artefact Muséum',
       allChoices : ['Numerical Artefact Muséum', 'Namur', 'New America Muséum'],
       idImage : 17
