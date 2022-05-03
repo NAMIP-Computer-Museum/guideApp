@@ -41,6 +41,7 @@ class Detail extends React.Component{
   //Fonction qui gère l'affichage de la description en traitant les potentiels mots clés
   traiterDescription = (description,index) =>{
     if(isNaN(description) == true){
+      console.log("Description : " + description);
       return <Text key = {index} style = {styles.description}>{description}</Text>
     }
     else{
@@ -63,6 +64,7 @@ class Detail extends React.Component{
   //Renvoie la requete à executer pour récupérer les données du mot clé cliqué
   getRequete = () =>{
     let requete;
+    console.log("Requête detail");
     switch(i18n.locale){
       case "en":
         requete = "SELECT ID as id,TYPE,Annee as 'time',Nom as title,DescEN as description,DescMotEN as descMotCle FROM GENERAL "+
@@ -83,6 +85,7 @@ class Detail extends React.Component{
   //Fonction qui récupére les données du mot clé cliqué
   //Le modal ne peut se monter et s'afficher qu'après cet appel car il ne peut être null
   showModal = async(index) =>{
+    console.log("showModal");
     db = SQLite.openDatabase("namip.db");
     let requete = this.getRequete()
     db.transaction((tx) => {
@@ -108,7 +111,7 @@ class Detail extends React.Component{
     return(
       <View style = {{
         flex:1,
-        backgroundColor : 'black',
+        backgroundColor : '#b42e32',
         opacity : this.state.modal == true ? 0.7:1.0
       }}>
         {this.state.donneesModal != null &&
@@ -136,10 +139,8 @@ class Detail extends React.Component{
           <TouchableOpacity style={styles.photo} onPress = {() => {this.props.navigation.navigate("Image",{id : this.state.ordinateur.id})}}>
             <Image style={styles.image} source = {images[this.state.ordinateur.id]}/>
           </TouchableOpacity>
-          <View style={styles.ligne}/>
           <Text style = {styles.titre}>{this.state.ordinateur.title}</Text>
           <Legende id = {this.state.ordinateur.id} type={this.state.ordinateur.TYPE} time = {this.state.ordinateur.time}/>
-          <View style={styles.ligne}/>
           <View>
             <Text style = {styles.text}>
             {
@@ -147,7 +148,6 @@ class Detail extends React.Component{
             }
             </Text>
           </View>
-          <View style={styles.ligne}/>
           {this.state.video &&
             <View style={styles.multimedia}>
               <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("AfficheVideo",{videoUrl : this.state.dataVideo.videoURL})}}>
@@ -208,31 +208,32 @@ const styles = StyleSheet.create({
     justifyContent : 'center',
     alignItems : 'center'
   },
-  ligne:{
-    borderWidth:1,
-    borderColor:'white',
-  },
   photo:{
+    resizeMode: 'contain',
     alignItems : 'center',
   },
   image:{
     resizeMode : 'contain',
-    height : 180
+    height : 275
   },
   titre:{
-    margin : 5,
+    margin : 20,
+    textAlign : 'center',
     fontSize : 25,
     fontWeight : 'bold',
-    textDecorationLine : 'underline',
     fontStyle : 'italic',
-    color : 'white'
+    color : 'white',
+    borderBottomWidth: 1,
+    borderColor: 'white'
   },
   text:{
-    margin : 5
+    margin : 20,
+    borderTopWidth: 1,
+    borderColor: 'white'
   },
   description:{
     fontSize : 20,
-    color : 'white'
+    color : 'white',
   },
   MotCle:{
     fontSize : 20,

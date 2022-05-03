@@ -9,9 +9,7 @@ class Contact extends React.Component{
   render(){
     return(
       <View style = {styles.main}>
-       <ScrollView>
         <PageSimple titre = {i18n.t("TitreApropos")} id = {2} description = {i18n.t("DescriptionApropos")}/>
-       </ScrollView>
       </View>
     )
   }
@@ -20,7 +18,6 @@ class Contact extends React.Component{
 const styles = StyleSheet.create({
     main : {
       flex : 1,
-      backgroundColor : 'black'
     },
 })
 

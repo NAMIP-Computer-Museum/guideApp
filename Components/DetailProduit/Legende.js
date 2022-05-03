@@ -199,13 +199,14 @@ class Legende extends React.Component{
 
 const styles = StyleSheet.create({
   main:{
-    flex : 4
+    flex : 4,
   },
   legende:{
     flex:1,
     flexDirection: 'row',
     flexWrap : 'wrap',
-    marginVertical : 5
+    marginVertical : 5,
+    marginHorizontal: 10
   },
   item:{
     margin : 5,

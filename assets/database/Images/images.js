@@ -70,5 +70,23 @@ export default images = {
     400 : require("./APP/visicalc.jpg"),
     405 : require("./APP/word.jpg"),
     406 : require("./APP/Wordperfect.jpg"),
-    404 : require("./APP/wordstar.jpg")
+    404 : require("./APP/wordstar.jpg"),
+    //Exposition permanente
+    1 : require("./MECA/TabulatriceHollerith.jpg"),
+    2 : require("./MECA/TabulatingMachineCompany.jpg"),
+    3 : require("./MECA/ComputingTabulatingRecordingCorporation.png"),
+    4 : require("./MECA/TabulatriceBS120.jpg"),
+    5 : require("./MECA/PelerodSerie150.jpg"),
+    6 : require("./MAINFRAME/IBM370.jpg"),
+    7 : require("./MINI/PDP8.png"),
+    8 : require("./MICRO/DAI.jpg"),
+    9 : require("./MICRO/Osborne1.jpg"),
+    10 : require("./MICRO/LISA.jpeg"),
+    11 : require("./MICRO/Microsoft.jpg"),
+    12 : require("./MICRO/AppleComputer.jpg"),
+    13 : require("./MICRO/XeroxPaloAltoResearchCenter.jpg"),
+    14 : require("./MODERNE/PremiereGuerreMondiale.jpg"),
+    15 : require("./MODERNE/DeuxiemeGuerreMondiale.jpg"),
+    16 : require("./MODERNE/ExpositionUniverselleBruxelles.jpg"),
+
 }

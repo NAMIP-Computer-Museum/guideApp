@@ -1,8 +1,13 @@
+import React from 'react'
+import { Button } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import {createAppContainer} from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import Accueil from '../Components/Accueil'
+import Search from '../Components/Search'
 import Ligne from '../Components/LigneTempsMicro/LigneTemps'
 import Detail from '../Components/DetailProduit/Detail'
+import DetailExpop from '../Components/DetailProduit/DetailExpop'
 import AfficheImage from '../Components/Affichage/AfficheImage'
 import ListeVideo from '../Components/Videos/ListeVideo'
 import AfficheVideo from '../Components/Affichage/AfficheVideo'
@@ -12,6 +17,8 @@ import Introduction from '../Components/Information/Introduction'
 import ModeEmploi from '../Components/Information/ModeEmploi'
 import Quiz from '../Components/Quiz/QuizComponent'
 import QuizChoiceLevel from '../Components/Quiz/QuizChoiceLevel'
+import LigneTempsChoix from '../Components/LigneTempsPerma/LigneTempsChoix'
+import LigneTempsPerma from '../Components/LigneTempsPerma/LigneTempsPerma'
 
 //Stack Navigator ou sont définis toutes nos pages
 const Navigation = createStackNavigator({
@@ -23,34 +30,74 @@ const Navigation = createStackNavigator({
     },
     Frise:{
       screen : Ligne,
+      navigationOptions:({navigation}) => {
+        const {navigate} = navigation
+        return {
+          headerRight: () => <Icon name="home" size={30} color="white" style={{paddingRight: 10}} onPress={() => navigate('Accueil')} />,
+          title:"",
+          headerStyle:{
+            backgroundColor: '#822125'
+          },
+        }
+      },
+    },
+    LigneTempsPerma:{
+      screen : LigneTempsPerma,
+      navigationOptions:({navigation}) => {
+        const {navigate} = navigation
+        return {
+          headerRight: () => <Icon name="home" size={30} color="white" style={{paddingRight: 10}} onPress={() => navigate('Accueil')} />,
+          title:"",
+          headerStyle:{
+            backgroundColor: '#822125'
+          },
+        }
+      },
+    },
+    LigneTempsChoix:{
+      screen : LigneTempsChoix,
       navigationOptions:{
         title : "",
         headerStyle:{
-          backgroundColor: 'black'
+          backgroundColor: '#822125',
+          borderBottomWidth : 2,
+          borderBottomColor : 'white'
         },
-        headerTintColor:'white'
       }
     },
     Detail:{
       screen : Detail,
-      navigationOptions:{
-        title : "",
-        headerStyle:{
-          backgroundColor: 'black',
-          borderBottomWidth : 2,
-          borderBottomColor : 'white'
-        },
-        headerTintColor:'white'
-      }
+      navigationOptions:({navigation}) => {
+        const {navigate} = navigation
+        return {
+          headerRight: () => <Icon name="home" size={30} color="white" style={{paddingRight: 10}} onPress={() => navigate('Accueil')} />,
+          title:"",
+          headerStyle:{
+            backgroundColor: '#822125'
+          },
+        }
+      },
+    },
+    DetailExpop:{
+      screen : DetailExpop,
+      navigationOptions:({navigation}) => {
+        const {navigate} = navigation
+        return {
+          headerRight: () => <Icon name="home" size={30} color="white" style={{paddingRight: 10}} onPress={() => navigate('Accueil')} />,
+          title:"",
+          headerStyle:{
+            backgroundColor: '#822125'
+          },
+        }
+      },
     },
     Image:{
       screen : AfficheImage,
       navigationOptions:{
         title : "",
         headerStyle:{
-          backgroundColor: 'black'
+          backgroundColor: '#822125'
         },
-        headerTintColor:'white'
       }
     },
     ListeVideo:{
@@ -58,9 +105,10 @@ const Navigation = createStackNavigator({
       navigationOptions:{
         title : "",
         headerStyle:{
-          backgroundColor: 'black'
+          backgroundColor: '#822125',
+          borderBottomWidth : 2,
+          borderBottomColor : 'white'
         },
-        headerTintColor:'white'
       }
     },
     AfficheVideo:{
@@ -68,9 +116,8 @@ const Navigation = createStackNavigator({
       navigationOptions:{
         title : "",
         headerStyle:{
-          backgroundColor: 'black'
+          backgroundColor: '#822125'
         },
-        headerTintColor:'white'
       }
     },
     QRCodeScan:{
@@ -78,9 +125,8 @@ const Navigation = createStackNavigator({
       navigationOptions:{
         title : "",
         headerStyle:{
-          backgroundColor: 'black'
+          backgroundColor: '#822125'
         },
-        headerTintColor:'white'
       }
     },
     APropos:{
@@ -88,11 +134,10 @@ const Navigation = createStackNavigator({
       navigationOptions:{
         title : "",
         headerStyle:{
-          backgroundColor: 'black',
+          backgroundColor: '#822125',
           borderBottomWidth : 2,
           borderBottomColor : 'white'
         },
-        headerTintColor:'white'
       }
     },
     Introduction:{
@@ -100,23 +145,34 @@ const Navigation = createStackNavigator({
       navigationOptions:{
         title : "",
         headerStyle:{
-          backgroundColor: 'black',
+          backgroundColor: '#822125',
           borderBottomWidth : 2,
           borderBottomColor : 'white'
         },
-        headerTintColor:'white'
       }
     },
     ModeEmploi : {
       screen : ModeEmploi,
+      navigationOptions:({navigation}) => {
+        const {navigate} = navigation
+        return {
+          headerRight: () => <Icon name="home" size={30} color="white" style={{paddingRight: 10}} onPress={() => navigate('Accueil')} />,
+          title:"",
+          headerStyle:{
+            backgroundColor: '#822125'
+          },
+        }
+      },
+    },
+    Search : {
+      screen : Search,
       navigationOptions:{
         title : "",
         headerStyle:{
-          backgroundColor: 'black',
+          backgroundColor: '#822125',
           borderBottomWidth : 2,
           borderBottomColor : 'white'
         },
-        headerTintColor:'white'
       }
     },
     QuizChoiceLevel : {
@@ -124,25 +180,24 @@ const Navigation = createStackNavigator({
       navigationOptions:{
         title : "",
         headerStyle:{
-
-          backgroundColor: 'black',
+          backgroundColor: '#822125',
           borderBottomWidth : 2,
           borderBottomColor : 'white'
         },
-        headerTintColor:'white'
       }
     },
     Quiz:{
       screen : Quiz,
-      navigationOptions:{
-        title : "",
-        headerStyle:{
-          backgroundColor: 'black',
-          borderBottomWidth : 2,
-          borderBottomColor : 'white'
-        },
-        headerTintColor:'white'
-      }
+      navigationOptions:({navigation}) => {
+        const {navigate} = navigation
+        return {
+          headerRight: () => <Icon name="home" size={30} color="white" style={{paddingRight: 10}} onPress={() => navigate('Accueil')} />,
+          title:"",
+          headerStyle:{
+            backgroundColor: '#822125'
+          },
+        }
+      },
     }
 })
 

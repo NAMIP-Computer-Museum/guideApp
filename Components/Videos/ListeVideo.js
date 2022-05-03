@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet, Text, View,FlatList} from 'react-native';
+import {StyleSheet, Text, View,FlatList, ImageBackground} from 'react-native';
 import VideoItem from './VideoItem Liste'
 import listeFr from '../../assets/database/Videos/ListeVideosFr.js'
 import listeEn from '../../assets/database/Videos/ListeVideosEn.js'
@@ -24,6 +24,7 @@ class ListeVideo extends React.Component{
     render(){
       return (
         <View style={styles.main}>
+        <ImageBackground style={styles.ImageBackground} resizeMode = 'cover' source = {require('../../assets/Accueil/binaryBackground.png')}>
           <View style = {styles.titre}>
             <Text style={styles.text}>{i18n.t('listeVideoTexte')}</Text>
           </View>
@@ -37,6 +38,7 @@ class ListeVideo extends React.Component{
                 renderItem= {({item}) => <VideoItem video={item} lireVideo = {this.lireVideo}/>}
             />
           </View>
+          </ImageBackground>
         </View>
       )
     }
@@ -47,12 +49,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor : 'black'
     },
+    ImageBackground:{
+      flex : 1,
+      backgroundColor : 'black'
+    },
   titre:{
     flex : 1,
     justifyContent : 'center',
     alignItems : 'center',
-    borderWidth : 2,
-    borderColor : 'white'
+    borderBottomWidth : 2,
+    borderColor : 'white',
+    backgroundColor: '#b42e32'
   },
   text:{
     textAlign : 'center',

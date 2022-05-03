@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import {StyleSheet,View,Pressable,Text, Modal} from 'react-native';
+import {StyleSheet,View,Pressable,Text, Modal, ImageBackground} from 'react-native';
 import i18n from '../../Language/Translate'
 
 class QuizChoiceLevel extends React.Component {
@@ -11,6 +11,7 @@ class QuizChoiceLevel extends React.Component {
   render() {
     return(
       <View style = {styles.main}>
+      <ImageBackground style={styles.ImageBackground} resizeMode = 'cover' source = {require('../../assets/Accueil/binaryBackground.png')}>
         <View style={styles.centeredView}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
@@ -26,6 +27,7 @@ class QuizChoiceLevel extends React.Component {
               </View>
             </View>
         </View>
+        </ImageBackground>
       </View>
     )
   }
@@ -34,7 +36,11 @@ class QuizChoiceLevel extends React.Component {
 const styles = StyleSheet.create({
   main : {
     flex : 1,
-    backgroundColor : '#242c4a',
+  },
+  ImageBackground:{
+    flex : 1,
+    backgroundColor : 'black'
+
   },
   buttonNext:{
     backgroundColor : '#00C5EC',
@@ -47,7 +53,7 @@ const styles = StyleSheet.create({
     marginBottom: 100
   },
   button:{
-    backgroundColor : '#00C5EC',
+    backgroundColor : '#F25053',
     borderRadius : 15,
     width : 200,
     height : 45,
@@ -82,7 +88,6 @@ const styles = StyleSheet.create({
   justifyContent: "center",
   alignItems: "center",
   marginTop: 22,
-  backgroundColor : "#242c4a"
 },
  modalView: {
   margin: 20,

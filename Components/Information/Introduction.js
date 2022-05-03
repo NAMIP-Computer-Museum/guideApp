@@ -10,7 +10,9 @@ class Introduction extends React.Component{
     return(
       <View style = {styles.main}>
        <ScrollView>
+       <View style={styles.text_introduction}>
         <PageSimple titre = {i18n.t("TitreIntroduction")} id = {1} description = {i18n.t("DescriptionIntroduction")}/>
+      </View>
         <View style={{borderTopWidth : 2,borderColor : 'white'}}>
           <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("ModeEmploi")}}>
             <Text style={styles.text_button}> {i18n.t('boutonModeEmploi')} </Text>
@@ -25,7 +27,12 @@ class Introduction extends React.Component{
 const styles = StyleSheet.create({
     main : {
       flex : 1,
-      backgroundColor : 'black'
+      backgroundColor : '#b42e32'
+    },
+    text_introduction:{
+      textAlign : 'center',
+      fontSize : 20,
+      fontWeight : 'bold'
     },
     button:{
       backgroundColor : 'white',

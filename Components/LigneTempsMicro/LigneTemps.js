@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet, Text, View,Image,TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View,Image,TouchableOpacity, ImageBackground} from 'react-native';
 import Timeline from 'react-native-timeline-flatlist'
 import {Picker} from '@react-native-picker/picker'
 import GeneralCheckbox from './GeneralCheckbox'
@@ -200,6 +200,7 @@ class Frise extends React.Component{
     render(){
       return(
         <View style = {styles.main}>
+        <ImageBackground style={styles.ImageBackground} resizeMode = 'cover' source = {require('../../assets/Accueil/binaryBackground.png')}>
           <View style = {styles.legendeHaut}>
             <Picker
               style = {styles.picker}
@@ -231,6 +232,7 @@ class Frise extends React.Component{
             onEventPress = {this.onEventPress}
             renderDetail = {this.renderDetail}
             />
+            </ImageBackground>
         </View>
       )
     }
@@ -240,7 +242,12 @@ const styles = StyleSheet.create({
   //Page Entiere
   main:{
     flex: 1,
+    backgroundColor : '#242c4a'
+  },
+  ImageBackground:{
+    flex : 1,
     backgroundColor : 'black'
+
   },
   text:{
     textAlign : 'center',
@@ -257,8 +264,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent : 'center',
     alignItems : 'center',
-    borderWidth : 2,
-    borderColor : 'white'
+    borderWidth : 1,
+    borderColor : 'white',
+    backgroundColor: '#b42e32'
   },
   legendeBas:{
     flex:1,
@@ -267,10 +275,11 @@ const styles = StyleSheet.create({
     alignItems : 'center',
     flexWrap : 'wrap',
     alignContent : 'center',
-    borderBottomWidth : 2,
-    borderLeftWidth : 2,
-    borderRightWidth : 2,
-    borderColor : 'white'
+    borderBottomWidth : 1,
+    borderLeftWidth : 1,
+    borderRightWidth : 1,
+    borderColor : 'white',
+    backgroundColor: '#b42e32'
   },
   picker:{
     flex : 1,
@@ -303,23 +312,25 @@ const styles = StyleSheet.create({
     paddingLeft : 10
   },
   description:{
-    color:'lightgray',
+    color:'white',
   },
   images_content:{
-    flex:1,
+    aspectRatio : 1,
+    flex : 1,
     justifyContent : 'center',
     alignItems : 'center',
-    padding : 5,
-    height : "100%",
-    width : "20%",
-    borderWidth : 2,
-    borderColor : 'white'
-  },
-  image:{
-    resizeMode : 'contain',
     height : "100%",
     width : "100%",
+    borderRadius : 45,
+    overflow : 'hidden',
+  },
+  image:{
+    aspectRatio : 1,
+    resizeMode : 'cover',
+    height : '129%',
+    width : '129%',
   }
 })
+
 
 export default Frise

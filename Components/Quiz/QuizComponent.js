@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet,View,Pressable,Text,Image,Animated, Modal} from 'react-native';
+import {StyleSheet,View,Pressable,Text,Image,Animated, Modal, ImageBackground} from 'react-native';
 import MultipleQuestion from './MultipleQuestion';
 import WritingQuestion from './WritingQuestion';
 import i18n from '../../Language/Translate'
@@ -101,6 +101,7 @@ class QuizComponent extends React.Component{
     if(!this.state.afficheScore){
      return(
       <View style = {styles.main}>
+        <ImageBackground style={styles.ImageBackground} resizeMode = 'cover' source = {require('../../assets/Accueil/binaryBackground.png')}>
         <View style = {styles.progressBar}>
           <Animated.View style = {[styles.animationProgressBar, {width: progress}]}>
           </Animated.View>
@@ -130,6 +131,7 @@ class QuizComponent extends React.Component{
             </Pressable>
           </View>
         }
+        </ImageBackground>
       </View>
      )
     }
@@ -145,6 +147,7 @@ class QuizComponent extends React.Component{
               transparent={false}
               visible={true}
             >
+            <ImageBackground style={styles.ImageBackground} resizeMode = 'cover' source = {require('../../assets/Accueil/binaryBackground.png')}>
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                   <Text style={styles.modalText}>{i18n.t("resultatQuiz")}</Text>
@@ -160,6 +163,7 @@ class QuizComponent extends React.Component{
                   </View>
                 </View>
               </View>
+              </ImageBackground>
             </Modal>
           </View>
         </View>
@@ -171,7 +175,9 @@ class QuizComponent extends React.Component{
 const styles = StyleSheet.create({
   main : {
     flex : 1,
-    backgroundColor : '#242c4a',
+  },
+  ImageBackground:{
+    flex : 1,
   },
   enCours: {
     flex : 0.5,
@@ -190,7 +196,7 @@ const styles = StyleSheet.create({
     alignItems : 'center'
   },
   buttonNext:{
-    backgroundColor : '#00C5EC',
+    backgroundColor : '#F25053',
     borderRadius : 4,
     width : 200,
     height : 45,
@@ -200,7 +206,7 @@ const styles = StyleSheet.create({
     marginBottom: 100
   },
   button:{
-    backgroundColor : '#00C5EC',
+    backgroundColor : '#F25053',
     borderRadius : 15,
     width : 200,
     height : 45,
@@ -249,7 +255,7 @@ const styles = StyleSheet.create({
   animationProgressBar : {
     height : 17,
     borderRadius : 10,
-    backgroundColor: "#00C5EC"
+    backgroundColor: "#FEE600"
   },
 
   centeredView: {
@@ -257,7 +263,6 @@ const styles = StyleSheet.create({
   justifyContent: "center",
   alignItems: "center",
   marginTop: 22,
-  backgroundColor : "#242c4a"
 },
  modalView: {
   margin: 20,

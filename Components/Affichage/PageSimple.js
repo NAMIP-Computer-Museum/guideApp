@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet,View,Text,Image} from 'react-native';
+import {StyleSheet,View,Text,Image,ImageBackground} from 'react-native';
 import imagesPage from '../../assets/PageSimple/imagesPages.js'
 
 class PageSimple extends React.Component{
   render(){
     const props = this.props;
     return(
-      <View style  = {styles.main}>
+      <ImageBackground style={styles.ImageBackground} resizeMode = 'cover' source = {require('../../assets/Accueil/binaryBackground.png')}>
         <View style = {styles.titre}>
           <Text style = {styles.text}>{props.titre}</Text>
         </View>
@@ -17,29 +17,25 @@ class PageSimple extends React.Component{
           }
           <Text style = {styles.description}>{props.description}</Text>
         </View>
-      </View>
+      </ImageBackground>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  main:{
-    backgroundColor : 'black',
+  ImageBackground:{
+    flex : 1,
   },
   titre:{
     justifyContent : 'center',
-    height : 80,
+    height : 100,
     alignItems : 'center',
-    borderLeftWidth : 2,
-    borderRightWidth :2,
-    borderBottomWidth : 2,
-    borderColor : 'white'
   },
   text:{
     textAlign : 'center',
-    color : 'white',
+    color : '#FEE600',
     fontWeight: 'bold',
-    fontSize : 30,
+    fontSize : 40,
     margin : 5,
   },
   image : {
@@ -51,7 +47,8 @@ const styles = StyleSheet.create({
     color : 'white',
     fontSize : 20,
     marginHorizontal : 5,
-    marginBottom : 10
+    marginBottom : 10,
+    textAlign : 'center'
   }
 })
 export default PageSimple

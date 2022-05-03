@@ -85,8 +85,8 @@ class MultipleQuestion extends React.Component{
               <TouchableOpacity
               style =
               {{
-                backgroundColor : answer == this.state.reponse && this.state.desactiveReponse ? '#8AD75B' + 40 : answer == this.state.optionChoisie || this.state.dernieresReponses.includes(answer) ? '#F92424' + 40 : '#3C4A7C',
-                borderColor: answer == this.state.reponse && this.state.desactiveReponse ? '#B9E79C' : answer == this.state.optionChoisie || this.state.dernieresReponses.includes(answer) ? '#FA4C4C' : '#495A97',
+                backgroundColor : answer == this.state.reponse && this.state.desactiveReponse ? '#8AD75B' + 40 : answer == this.state.optionChoisie || this.state.dernieresReponses.includes(answer) ? '#F92424' + 40 : '#b42e32',
+                borderColor: answer == this.state.reponse && this.state.desactiveReponse ? '#B9E79C' : answer == this.state.optionChoisie || this.state.dernieresReponses.includes(answer) ? '#FA4C4C' : '#822125',
                 borderWidth : 3,
                 borderRadius : 12,
                 flexDirection : 'row',
