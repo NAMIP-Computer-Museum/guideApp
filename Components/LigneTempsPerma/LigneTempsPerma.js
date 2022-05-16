@@ -9,7 +9,6 @@ import * as FileSystem from 'expo-file-system'
 import {Asset} from 'expo-asset'
 import i18n from '../../Language/Translate'
 import images from '../../assets/database/Images/images.js'
-import DropShadow from "react-native-drop-shadow";
 
 
 class LigneTempsPerma extends React.Component{
@@ -19,14 +18,13 @@ class LigneTempsPerma extends React.Component{
       data:[],
       //Aspect Frise
       pickerValue : 'tout',
-      dateBasse : 0,
-      dateHaute : 2021,
       isSimple : false,
       //type
       typeData : ["MACHINE"],
       //motCle
       //tabMotCle : []
     }
+    console.log(this.state.data);
     //this.fetchMotCle();
     this.fetchDataBD();
   }
@@ -34,20 +32,23 @@ class LigneTempsPerma extends React.Component{
   //Fonction qui met à jour les deux dates utilisés comme argument dans la requete pour la BD
   setDatePicker = () =>{
     switch(this.state.pickerValue){
-      case 'Micro':
-        this.setState({dateBasse:0,dateHaute:1973});
-        break;
-      case 'Meca':
-        this.setState({dateBasse:1973,dateHaute:1977});
-        break;
-      case 'Mainframe':
-        this.setState({dateBasse:1977,dateHaute:1992});
-        break;
-      case 'Mini':
-        this.setState({dateBasse:1992,dateHaute:2021});
-        break;
       case 'tout':
-        this.setState({dateBasse:0,dateHaute:2021});
+        this.setState({pickerValue : 'tout'});
+        break;
+      case 'MECA':
+        this.setState({pickerValue : "MECA"});
+        break;
+      case 'MAINFRAME':
+        this.setState({pickerValue : "MAINFRAME"});
+        break;
+      case 'MINI':
+        this.setState({pickerValue : "MINI"});
+        break;
+      case 'MICRO':
+        this.setState({pickerValue : "MICRO"});
+        break;
+      case 'MODERNE':
+        this.setState({pickerValue : "MODERNE"});
         break;
     }
     this.fetchDataBD();
@@ -84,7 +85,16 @@ class LigneTempsPerma extends React.Component{
   //Fonction qui renvoie la requete à utiliser en fonction de la locale
   getRequete = () =>{
     let typeString = this.concatenerTypeToString();
+    let periodechoice = this.state.pickerValue;
+    let condition;
     let requete;
+
+    if(periodechoice != "tout"){
+      condition = "WHERE PERIODE = '" + periodechoice + "' AND TYPE REGEXP '"+typeString+"' ORDER BY Annee ASC,Nom ASC";
+    }else{
+      condition = "WHERE TYPE REGEXP '"+typeString+"' ORDER BY Annee ASC,Nom ASC";
+    }
+
     switch(i18n.locale){
       case "en":
         requete = "SELECT ID as id,PERIODE, Annee as time,Nom as title,DescEN as description, DescMotEN as descMotCle FROM GENERAL "+
@@ -95,8 +105,8 @@ class LigneTempsPerma extends React.Component{
                   "WHERE Annee >= ? and Annee < ? and PERIODE REGEXP '"+typeString+"' ORDER BY Annee ASC,Nom ASC";
         break;
       default:
-        requete = "SELECT ID as id,TYPE, Annee as time,Nom as title,DescFR as description, DescMotFR as descMotCle FROM GENERAL "+
-                  "WHERE Annee >= ? and Annee < ? and TYPE REGEXP '"+typeString+"' ORDER BY Annee ASC,Nom ASC";
+        requete = "SELECT ID as id,TYPE, PERIODE, Annee as time,Nom as title,DescFR as description, DescMotFR as descMotCle FROM GENERAL "+
+                  condition;
         break;
     }
     return requete;
@@ -107,7 +117,7 @@ class LigneTempsPerma extends React.Component{
     let db = SQLite.openDatabase("expop-v1.db");
     let requete = this.getRequete();
     db.transaction((tx) => {
-        tx.executeSql(requete,[this.state.dateBasse,this.state.dateHaute],
+        tx.executeSql(requete,[],
           (tx,results)=>{
             var taille = results.rows.length
             let tableau = []
@@ -128,21 +138,25 @@ class LigneTempsPerma extends React.Component{
     //Fonction qui permet d'ajouter aux objets les attributs de couleurs pour l'affichage + la vue compacter
     addVisuelData = (data) => {
       const date = parseInt(data.time);
-      switch(true){
-        case date >= 1850 && date < 1970 :
+      switch(this.state.pickerValue){
+        case "MECA" :
           data['lineColor'] = 'rgb(29,41,219)'
           data['circleColor'] = 'rgb(29,41,219)'
           break;
-        case date >= 1975 && date < 1976 :
+        case "MAINFRAME" :
           data['lineColor'] = 'rgb(47,250,141)'
           data['circleColor'] = 'rgb(47,250,141)'
           break;
-        case date >= 1977 && date < 1982 :
+        case "MINI":
           data['lineColor'] = 'rgb(248,50,185)'
           data['circleColor'] = 'rgb(248,50,185)'
           break;
-        case date >= 1982 :
+        case "MICRO" :
           data['lineColor'] = 'rgb(250,190,27)'
+          data['circleColor'] = 'rgb(250,190,27)'
+          break;
+        case "MODERNE" :
+          data['lineColor'] = 'yellow'
           data['circleColor'] = 'rgb(250,190,27)'
           break;
       }
@@ -175,12 +189,13 @@ class LigneTempsPerma extends React.Component{
 
   //Fonction qui gère les clicks sur chaque objet
    onEventPress = (data) => {
-    console.log("Valeur data dans lignePerma : ")
-    console.log(data)
+    //console.log("Valeur data dans lignePerma : ")
+    //console.log(data)
     this.props.navigation.navigate("DetailExpop",{dataOrdinateur: data})
   }
 
     render(){
+      console.log(this.state.data);
       return(
         <View style = {styles.main}>
           <View style = {styles.legendeHaut}>
@@ -193,11 +208,11 @@ class LigneTempsPerma extends React.Component{
               onValueChange={(itemValue,itemIndex) => this.setState({pickerValue : itemValue},() => {this.setDatePicker()})}
             >
               <Picker.Item label={i18n.t('Picker1')} color='lightgray' value='tout'/>
-              <Picker.Item label={i18n.t('Micro')} color='rgb(29,41,219)' value='Micro'/>
-              <Picker.Item label={i18n.t('Meca')} color='rgb(47,250,141)' value='Meca'/>
-              <Picker.Item label={i18n.t('Mainframe')} color='rgb(248,50,185)' value='Mainframe'/>
-              <Picker.Item label={i18n.t('Mini')} color='rgb(250,190,27)' value='Mini'/>
-              <Picker.Item label={i18n.t('Moderne')} color='rgb(250,190,27)' value='Moderne'/>
+              <Picker.Item label='MECA' color='rgb(29,41,219)' value='MECA'/>
+              <Picker.Item label='MAINFRAME' color='rgb(47,250,141)' value='MAINFRAME'/>
+              <Picker.Item label='MINI' color='rgb(248,50,185)' value='MINI'/>
+              <Picker.Item label='MICRO' color='rgb(250,190,27)' value='MICRO'/>
+              <Picker.Item label='MODERNE' color='black' value='MODERNE'/>
             </Picker>
             <GeneralCheckbox name={i18n.t("SimpleCheck")} value={false} actualiserType={this.simplifierEtiquette}/>
           </View>

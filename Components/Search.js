@@ -1,6 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Button, Text, FlatList } from 'react-native'
-import data from './Helpers'
+import { StyleSheet, View, TextInput, Button, Text, FlatList, Modal, ImageBackground } from 'react-native'
 import * as SQLite from 'expo-sqlite'
 import * as FileSystem from 'expo-file-system'
 import {Asset} from 'expo-asset'
@@ -81,17 +80,75 @@ class Search extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  main_container: {
-    flex: 1,
-    marginTop: 20
+  main : {
+    flex : 1,
   },
-  textinput: {
-    marginLeft: 5,
-    marginRight: 5,
-    height: 50,
-    borderColor: '#000000',
-    borderWidth: 1,
-    paddingLeft: 5
+  button:{
+    backgroundColor : '#822125',
+    borderRadius : 25,
+    width : 200,
+    height : 45,
+    marginVertical : 5,
+    justifyContent : 'center',
+    alignItems : 'center',
+    marginTop: 10
+  },
+  text_button:{
+    textAlign : 'center',
+    fontSize : 20,
+    color : 'white'
+  },
+  titre:{
+    flex : 1,
+    justifyContent : 'center',
+    alignItems : 'center',
+    borderBottomWidth : 2,
+    borderRightWidth : 2,
+    borderLeftWidth : 2,
+    borderColor : 'white'
+  },
+  text:{
+    textAlign : 'center',
+    color : 'white',
+    fontWeight: 'bold',
+    fontSize : 20,
+    margin : 5,
+  },
+  centeredView: {
+  flex: 5,
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: 22,
+},
+ modalView: {
+  margin: 20,
+  backgroundColor: "white",
+  borderRadius: 20,
+  padding: 35,
+  alignItems: "center",
+  shadowColor: "#0000",
+  shadowOffset: {
+    width: 0,
+    height: 3
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 4,
+  elevation: 5
+},
+ImageBackground:{
+  flex : 1,
+},
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    color : 'black',
+    fontWeight: 'bold',
+    fontSize : 30
+
+  },
+
+  TextInput:{
+
   }
 })
 

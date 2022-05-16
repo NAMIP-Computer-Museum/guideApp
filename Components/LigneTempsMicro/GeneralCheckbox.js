@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import CheckBox from '@react-native-community/checkbox'
+//import CheckBox from '@react-native-community/checkbox'
+import CheckBox from 'expo-checkbox';
 
 class GeneralCheckbox extends React.Component{
     constructor(props){

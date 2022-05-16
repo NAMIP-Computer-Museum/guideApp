@@ -194,6 +194,7 @@ class Frise extends React.Component{
 
     //Fonction qui gère les clicks sur chaque objet
     onEventPress = (data) => {
+      console.log(data);
       this.props.navigation.navigate("Detail",{dataOrdinateur: data,motCle : this.state.tabMotCle})
     }
 

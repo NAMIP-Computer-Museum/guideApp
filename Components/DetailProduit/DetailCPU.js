@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet,Modal,ScrollView, Text, View,Pressable,Image,TouchableOpacity,ImageBackground} from 'react-native';
+import {StyleSheet,Modal,ScrollView, Text, View,Pressable,Image,TouchableOpacity} from 'react-native';
 import Legende from './Legende.js'
 import * as SQLite from 'expo-sqlite'
 import * as FileSystem from 'expo-file-system'
@@ -9,26 +9,28 @@ import images from '../../assets/database/Images/images.js'
 import videos from '../../assets/database/Videos/ListeVideosFr.js'
 import i18n from '../../Language/Translate'
 
-class Detail extends React.Component{
+class DetailExpop extends React.Component{
   constructor(props){
     super(props);
     this.state={
       video:false,
       dataVideo : [],
-      ordinateur : this.props.navigation.state.params.dataOrdinateur,
-      description : this.props.navigation.state.params.dataOrdinateur.descMotCle.split("|"),
-      motCle : this.props.navigation.state.params.motCle,
+      data:[],
+      nomCPU : this.props.navigation.state.params.LienCPU,
       modal : false,
       donneesModal : null,
+      idFictif : 109,
       precedantPage : this.props.navigation.state.params.precedantPage,
     }
+    this.fetchDataBD();
     this.testDonneeVideo();
+    console.log("Nom du CPU reçu via la legende : " + this.state.nomCPU)
   }
 
   //Fonction qui vérifie si une vidéo est disponible pour l'objet
   //Parcours des objets du tableau vidéos à la recherche d'une possédant le même id que l'objet courant
   testDonneeVideo = () =>{
-    const ordinateurID = this.props.navigation.state.params.dataOrdinateur.id;
+    const ordinateurID = this.state.data.id;
     for(let i = 0;i<videos.length;i++){
       if(videos[i].id == ordinateurID){
         this.state.video = true
@@ -60,7 +62,23 @@ class Detail extends React.Component{
     }
   }
 
-
+  //Fonction qui renvoie la requete à utiliser en fonction de la locale
+  getRequete = () =>{
+    let requete;
+    let cpu = this.state.nomCPU
+    switch(i18n.locale){
+      case "en":
+        requete = "SELECT ID as id,TYPE, Annee as time,Nom as title,DescEN as description, DescMotEN as descMotCle FROM GENERAL ";
+        break;
+      case "nl-NL":
+        requete = "SELECT ID as id,TYPE, Annee as time,Nom as title,DescNL as description, DescMotNL as descMotCle FROM GENERAL ";
+        break;
+      default:
+        requete = "SELECT ID as id,TYPE, Annee as time,Nom as title,DescFR as description, DescMotFR as descMotCle FROM GENERAL WHERE Nom =" + this.state.nomCPU;
+        break;
+    }
+    return requete;
+  }
 
   //Fonction qui récupére les données du mot clé cliqué
   //Le modal ne peut se monter et s'afficher qu'après cet appel car il ne peut être null
@@ -80,19 +98,40 @@ class Detail extends React.Component{
     this.setState({modal : true})
   }
 
-  //Fonction qui renvoie vers la page Détail du mot clé
-  changerPage = () =>{
-    this.setState({modal : false})
-    this.props.navigation.push("Detail",{dataOrdinateur : this.state.donneesModal,motCle : this.state.motCle,precedantPage : this.state.ordinateur.title})
-  }
+  //Fonction qui a chercher les données des objets dans la BD
+  fetchDataBD = async() =>{
+    let db = SQLite.openDatabase("namip.db");
+    let requete = this.getRequete();
+    console.log( "Requete recue dans fetchDataBD :" + requete)
+    db.transaction((tx) => {
+        tx.executeSql(requete,[],
+          (tx,results)=>{
+            this.setState({data : results.rows.item(0)})
+            console.log(this.state.data);
+          },
+          (tx,error)=>{
+            console.log('error',error)
+          }
+        )
+      })
+      this.testDonneeVideo();
+    }
 
-  render(){
-    return(
-      <View style = {{
-        flex:1,
-        backgroundColor : '#b42e32',
-        opacity : this.state.modal == true ? 0.7:1.0
-      }}>
+    //Fonction qui renvoie vers la page Détail du mot clé
+    changerPage = () =>{
+      this.setState({modal : false})
+      this.props.navigation.push("Detail",{dataOrdinateur : this.state.donneesModal,motCle : this.state.motCle,precedantPage : this.state.ordinateur.title})
+    }
+
+    render(){
+      console.log("Donnees state entree render : " + this.state.data);
+      console.log("id ------------ " + this.state.data.id)
+      return(
+        <View style = {{
+          flex:1,
+          backgroundColor : '#b42e32',
+          opacity : this.state.modal == true ? 0.7:1.0
+        }}>
         {this.state.donneesModal != null &&
           <Modal
             animationType = "slide"
@@ -114,37 +153,36 @@ class Detail extends React.Component{
           </View>
           </Modal>
         }
-        <ScrollView>
-          <TouchableOpacity style={styles.photo} onPress = {() => {this.props.navigation.navigate("Image",{id : this.state.ordinateur.id})}}>
-            <Image style={styles.image} source = {images[this.state.ordinateur.id]}/>
-          </TouchableOpacity>
-          <Text style = {styles.titre}>{this.state.ordinateur.title}</Text>
-          <Legende id = {this.state.ordinateur.id} type={this.state.ordinateur.TYPE} time = {this.state.ordinateur.time} navigation={this.props.navigation}/>
-          <View>
-            <Text style = {styles.text}>
-            {
-              this.state.description.map((description,index) => this.traiterDescription(description,index))
-            }
-            </Text>
-          </View>
-          {this.state.video &&
-            <View style={styles.multimedia}>
-              <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("AfficheVideo",{videoUrl : this.state.dataVideo.videoURL})}}>
-                <Text style={styles.text_button}>Video</Text>
-              </Pressable>
+          <ScrollView>
+            <TouchableOpacity style={styles.photo} onPress = {() => {this.props.navigation.navigate("Image",{id : this.state.data.id})}}>
+              <Image style={styles.image} source = {images[this.state.data.id]}/>
+            </TouchableOpacity>
+            <View style={styles.ligne}/>
+            <Text style = {styles.titre}>{this.state.data.title}</Text>
+            <View style={styles.ligne}/>
+            <View>
+              <Text style = {styles.text}></Text>
             </View>
-          }
-        </ScrollView>
-      </View>
-    )
+            <Text style = {styles.description}>{this.state.data.description}</Text>
+            {this.state.video &&
+              <View style={styles.multimedia}>
+                <Pressable style={styles.button} onPress = {() => {this.props.navigation.navigate("AfficheVideo",{videoUrl : this.state.dataVideo.videoURL})}}>
+                  <Text style={styles.text_button}>Video</Text>
+                </Pressable>
+              </View>
+            }
+          </ScrollView>
+        </View>
+      )
+    }
   }
-}
 
 const styles = StyleSheet.create({
   main_modal : {
     flex : 1,
     justifyContent : 'center',
     alignItems : 'center',
+    backgroundColor: '#b42e32'
   },
   modal:{
     backgroundColor : 'white',
@@ -169,7 +207,7 @@ const styles = StyleSheet.create({
     marginHorizontal : 5,
     marginTop : 5,
     fontWeight : 'bold',
-    textDecorationLine : 'underline',
+    textDecorationLine: 'underline',
     fontStyle : 'italic',
   },
   modal_description :{
@@ -188,7 +226,7 @@ const styles = StyleSheet.create({
     alignItems : 'center'
   },
   photo:{
-    resizeMode: 'contain',
+    resizeMode : 'contain',
     alignItems : 'center',
   },
   image:{
@@ -197,27 +235,28 @@ const styles = StyleSheet.create({
   },
   titre:{
     margin : 20,
-    textAlign : 'center',
+    marginTop : 5,
     fontSize : 25,
     fontWeight : 'bold',
     fontStyle : 'italic',
     color : 'white',
+    textAlign: 'center',
     borderBottomWidth: 1,
     borderColor: 'white'
   },
   text:{
-    margin : 20,
-    borderTopWidth: 1,
-    borderColor: 'white'
+    marginLeft : 10
   },
   description:{
-    fontSize : 20,
+    marginLeft : 20,
+    marginRight : 20,
+    fontSize : 17,
     color : 'white',
+    textAlign: 'center'
   },
   MotCle:{
     fontSize : 20,
     color : 'lightblue',
-    textDecorationLine : 'underline'
   },
   multimedia:{
     justifyContent : 'center',
@@ -239,4 +278,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Detail
+export default DetailExpop

@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet, Text, View,Image} from 'react-native';
+import {StyleSheet, Text, View,Image, Button, TouchableOpacity, Pressable} from 'react-native';
 import * as SQLite from 'expo-sqlite'
 import * as FileSystem from 'expo-file-system'
 import {Asset} from 'expo-asset'
+import { useNavigation } from '@react-navigation/native';
 
 class Legende extends React.Component{
   constructor(props){
@@ -12,7 +13,9 @@ class Legende extends React.Component{
       data:[]
     }
     this.fetchLegendeData(this.props.type,this.props.id);
+    console.log(this.state.data)
   }
+
   render(){
     switch(this.props.type){
       case 'MICRO' :
@@ -33,11 +36,15 @@ class Legende extends React.Component{
             </View>
             <View style = {styles.item}>
               <Image style = {styles.icon} source = {require('../../assets/Detail/LegendeMicro/os.png')}/>
-              <Text style = {styles.text}>{this.state.data.OS}</Text>
+              <Pressable onPress = {() => this.props.navigation.navigate("DetailCPU",{LienOS : this.state.data.OS})}>
+               <Text style = {styles.text}>{this.state.data.OS}</Text>
+              </Pressable>
             </View>
             <View style = {styles.item}>
               <Image style = {styles.icon} source = {require('../../assets/Detail/LegendeMicro/cpu.png')}/>
-              <Text style = {styles.text}>{this.state.data.CPU}</Text>
+              <Pressable onPress = {() => this.props.navigation.navigate("DetailCPU",{LienCPU : this.state.data.CPU})}>
+               <Text style = {styles.text}>{this.state.data.CPU}</Text>
+              </Pressable>
             </View>
             <View style = {styles.item}>
               <Image style = {styles.icon} source = {require('../../assets/Detail/LegendeMicro/ram.png')}/>
@@ -159,7 +166,7 @@ class Legende extends React.Component{
     let requete;
     switch (type) {
       case 'MICRO':
-        requete = "Select Fabricant,Pays,CPU,RAM,ROM,OS from MICRO m WHERE m.ID = ?";
+        requete = "SELECT Fabricant,Pays,CPU,RAM,ROM,OS from MICRO m WHERE m.ID = ?";
         break;
       case 'CPU' :
         requete = "SELECT Transistors,Bits,Fréquence,Marque from CPU c WHERE c.ID = ?"

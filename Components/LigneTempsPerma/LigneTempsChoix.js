@@ -13,7 +13,6 @@ class LigneTempsChoix extends React.Component {
       <View style = {styles.main}>
         <ImageBackground style={styles.ImageBackground} resizeMode = 'cover' source = {require('../../assets/Accueil/binaryBackground.png')}>
         <View style={styles.centeredView}>
-            <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>Lignes du temps</Text>
                 <View>
@@ -25,7 +24,6 @@ class LigneTempsChoix extends React.Component {
                 </Pressable>
                 </View>
               </View>
-            </View>
         </View>
         </ImageBackground>
       </View>
@@ -37,18 +35,8 @@ const styles = StyleSheet.create({
   main : {
     flex : 1,
   },
-  buttonNext:{
-    backgroundColor : '#F25053',
-    borderRadius : 4,
-    width : 200,
-    height : 45,
-    marginVertical : 5,
-    justifyContent : 'center',
-    alignItems : 'center',
-    marginBottom: 100
-  },
   button:{
-    backgroundColor : '#F25053',
+    backgroundColor : '#822125',
     borderRadius : 15,
     width : 200,
     height : 45,

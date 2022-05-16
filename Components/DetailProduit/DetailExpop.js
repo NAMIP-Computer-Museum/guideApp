@@ -20,8 +20,6 @@ class DetailExpop extends React.Component{
       donneesModal : null,
       precedantPage : this.props.navigation.state.params.precedantPage
     }
-    console.log("Valeur de la props ordinateur : ")
-    console.log(this.state.ordinateur)
     this.testDonneeVideo();
   }
 
