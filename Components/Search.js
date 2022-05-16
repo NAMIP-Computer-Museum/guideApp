@@ -1,10 +1,11 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Button, Text, FlatList, Modal, ImageBackground } from 'react-native'
+import { StyleSheet, View, TextInput, Button, Text, FlatList, Modal, ImageBackground, Pressable } from 'react-native'
 import * as SQLite from 'expo-sqlite'
 import * as FileSystem from 'expo-file-system'
 import {Asset} from 'expo-asset'
 import i18n from '../Language/Translate'
 import DetailExpop from './DetailProduit/DetailExpop'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 class Search extends React.Component {
 
@@ -67,13 +68,25 @@ class Search extends React.Component {
 
   render() {
     return (
-      <View style={styles.main_container}>
-        <TextInput
-          style={styles.textinput}
-          placeholder='Rechercher...'
-          onChangeText={(text) => this._searchTextInputChanged(text)}
-        />
-        <Button title='Rechercher' onPress={() => this.fetchDataBD()}/>
+      <View style = {styles.main}>
+        <ImageBackground style={styles.ImageBackground} resizeMode = 'cover' source = {require('../assets/Accueil/binaryBackground.png')}>
+        <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Rechercher :</Text>
+                <View>
+                <TextInput
+                  style={styles.textinput}
+                  placeholder='Ex : LISA'
+                  onChangeText={(text) => this._searchTextInputChanged(text)}
+                  />
+                <Pressable style={styles.button} title='Rechercher' onPress = {() => this.fetchDataBD()}>
+                   <Icon name="search" size={30} color="white">
+                   </Icon>
+                </Pressable>
+                </View>
+              </View>
+        </View>
+        </ImageBackground>
       </View>
     )
   }
@@ -85,7 +98,7 @@ const styles = StyleSheet.create({
   },
   button:{
     backgroundColor : '#822125',
-    borderRadius : 25,
+    borderRadius : 15,
     width : 200,
     height : 45,
     marginVertical : 5,
@@ -144,10 +157,6 @@ ImageBackground:{
     color : 'black',
     fontWeight: 'bold',
     fontSize : 30
-
-  },
-
-  TextInput:{
 
   }
 })

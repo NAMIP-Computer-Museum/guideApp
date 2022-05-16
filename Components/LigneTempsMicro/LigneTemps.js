@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   //Page Entiere
   main:{
     flex: 1,
-    backgroundColor : '#242c4a'
+    //backgroundColor : '#242c4a'7
   },
   ImageBackground:{
     flex : 1,

@@ -43,7 +43,7 @@ class Legende extends React.Component{
             <View style = {styles.item}>
               <Image style = {styles.icon} source = {require('../../assets/Detail/LegendeMicro/cpu.png')}/>
               <Pressable onPress = {() => this.props.navigation.navigate("DetailCPU",{LienCPU : this.state.data.CPU})}>
-               <Text style = {styles.text}>{this.state.data.CPU}</Text>
+               <Text style = {styles.textClick}>{this.state.data.CPU}</Text>
               </Pressable>
             </View>
             <View style = {styles.item}>
@@ -229,6 +229,13 @@ const styles = StyleSheet.create({
   },
   text:{
     fontSize : 20,
+    fontWeight : 'bold',
+    color:'white',
+    marginLeft : 2
+  },
+  textClick:{
+    fontSize : 20,
+    textDecorationLine : 'underline',
     fontWeight : 'bold',
     color:'white',
     marginLeft : 2
