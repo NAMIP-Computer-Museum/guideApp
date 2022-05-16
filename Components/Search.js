@@ -43,7 +43,6 @@ class Search extends React.Component {
     fetchDataBD = async() =>{
       let db = SQLite.openDatabase("expop-v1.db");
       let requete = this.getRequete();
-      console.log(requete)
       db.transaction((tx) => {
           tx.executeSql(requete,[],
             (tx,results)=>{

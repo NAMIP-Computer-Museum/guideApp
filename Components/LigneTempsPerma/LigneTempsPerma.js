@@ -24,8 +24,6 @@ class LigneTempsPerma extends React.Component{
       //motCle
       //tabMotCle : []
     }
-    console.log(this.state.data);
-    //this.fetchMotCle();
     this.fetchDataBD();
   }
 
@@ -189,13 +187,10 @@ class LigneTempsPerma extends React.Component{
 
   //Fonction qui gère les clicks sur chaque objet
    onEventPress = (data) => {
-    //console.log("Valeur data dans lignePerma : ")
-    //console.log(data)
     this.props.navigation.navigate("DetailExpop",{dataOrdinateur: data})
   }
 
     render(){
-      console.log(this.state.data);
       return(
         <View style = {styles.main}>
           <View style = {styles.legendeHaut}>

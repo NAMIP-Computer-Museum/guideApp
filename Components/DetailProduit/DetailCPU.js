@@ -24,7 +24,6 @@ class DetailExpop extends React.Component{
     }
     this.fetchDataBD();
     this.testDonneeVideo();
-    console.log("Nom du CPU reçu via la legende : " + this.state.nomCPU)
   }
 
   //Fonction qui vérifie si une vidéo est disponible pour l'objet
@@ -102,12 +101,11 @@ class DetailExpop extends React.Component{
   fetchDataBD = async() =>{
     let db = SQLite.openDatabase("namip.db");
     let requete = this.getRequete();
-    console.log( "Requete recue dans fetchDataBD :" + requete)
+
     db.transaction((tx) => {
         tx.executeSql(requete,[],
           (tx,results)=>{
             this.setState({data : results.rows.item(0)})
-            console.log(this.state.data);
           },
           (tx,error)=>{
             console.log('error',error)
@@ -124,8 +122,6 @@ class DetailExpop extends React.Component{
     }
 
     render(){
-      console.log("Donnees state entree render : " + this.state.data);
-      console.log("id ------------ " + this.state.data.id)
       return(
         <View style = {{
           flex:1,

@@ -63,7 +63,6 @@ class MultipleQuestion extends React.Component{
   }
 
   render(){
-    console.log("Valeur de this.state.niveau à l'entrée du render de MultipleQuestion : " + this.state.niveau)
     const question = this.props.question;
     return(
       <View style = {styles.main}>

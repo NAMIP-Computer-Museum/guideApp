@@ -56,7 +56,6 @@ class WritingQuestion extends React.Component{
   }
 
   render(){
-    console.log("Valeur de this.state.niveau à l'entrée du render de " + this.state.niveau)
     const question = this.props.question;
     return(
       <View style = {styles.main}>

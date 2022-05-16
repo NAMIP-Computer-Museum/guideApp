@@ -36,7 +36,6 @@ class QuizComponent extends React.Component{
       inputRange: [0, questions.length],
       outputRange: ['10%', '100%']
     });
-    console.log("this.state.niveau : " + this.state.niveau)
   }
 
   //Fonction qui pioche des questions de manière aléatoire dans la liste de questions
@@ -97,7 +96,6 @@ class QuizComponent extends React.Component{
   }
 
   render(){
-    console.log("Valeur this.state.niveau à l'entrée du render de QuizComponent : " + this.state.niveau)
     if(!this.state.afficheScore){
      return(
       <View style = {styles.main}>

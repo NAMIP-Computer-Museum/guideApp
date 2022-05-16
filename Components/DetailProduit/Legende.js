@@ -13,7 +13,6 @@ class Legende extends React.Component{
       data:[]
     }
     this.fetchLegendeData(this.props.type,this.props.id);
-    console.log(this.state.data)
   }
 
   render(){
